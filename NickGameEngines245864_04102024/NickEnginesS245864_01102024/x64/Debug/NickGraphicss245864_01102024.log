@@ -1,0 +1,10 @@
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (NickGraphicss245864_01102024.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  Game.cpp
+C:\Users\Games\Desktop\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.h(6,7): warning C4099: 'SDL_Window': type name first seen using 'struct' now seen using 'class'
+C:\Users\Games\Desktop\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.h(7,7): warning C4099: 'SDL_Renderer': type name first seen using 'struct' now seen using 'class'
+  Input.cpp
+  Master.cpp
+C:\Users\Games\Desktop\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.h(6,7): warning C4099: 'SDL_Window': type name first seen using 'struct' now seen using 'class'
+C:\Users\Games\Desktop\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.h(7,7): warning C4099: 'SDL_Renderer': type name first seen using 'struct' now seen using 'class'
+  Generating Code...
+  NickGraphicss245864_01102024.vcxproj -> C:\Users\Games\Desktop\NickGameEngines245864_04102024\x64\Debug\NickEnginesS245864_01102024.exe
