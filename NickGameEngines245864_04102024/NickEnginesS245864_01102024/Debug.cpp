@@ -2,35 +2,25 @@
 
 #include "Debug.h" 
 
+#include <cstdio>  // For FILE, fopen, fprintf, fclose
+
 void DeBug()
 {
-    FILE* DebugFile;
-    DebugFile = fopen("DebugLogger.txt");
-    return ;
-};
+    // Open the file in append mode to add logs at the end of the file
+    FILE* DebugFile = fopen("DebugLogger.txt", "a");
 
-/* FEOF example 
-#include <stdio.h>
-ifstream file;
-int main()
-{
-    FILE* pFile;
-    char buffer[100];
-
-    
-    if (pFile == NULL) perror("Error opening file");
-    else
+    // Check if the file was successfully opened
+    if (DebugFile == nullptr)
     {
-        while (!feof(pFile))
-        {
-            if (fgets(buffer, 100, pFile) == NULL) break;
-            fputs(buffer, stdout);
-        }
-        fclose(pFile);
+        // Handle the error, for example, by printing an error message
+        printf("Error: Unable to open DebugLogger.txt\n");
+        return;
     }
-   
- open(DebugLogger);
-    DebugLogger.open("example.txt");
-("DebugLogger.txt");
 
-}*/
+    // Write some debug information to the file
+    fprintf(DebugFile, "Debug log entry\n");
+
+    // Close the file
+    fclose(DebugFile);
+}
+
