@@ -1,5 +1,6 @@
 #pragma 
 #include <string>
+#include "SDL_ttf.h"
 
 struct SDL_Surface;
 struct SDL_Texture;
@@ -12,11 +13,15 @@ private:
 	SDL_Texture* m_pbitmapTexture;
 	SDL_Renderer* m_pbitmapRenderer;
 
-	int m_x, m_y;
 
 public:
-	Bitmap::Bitmap(SDL_Renderer* renderer, std::string fileName, int xpos, intypos, bool useTransparancy = false) :
-		~Bitmap();
+	~Bitmap();
+	Bitmap(SDL_Renderer* renderer, std::string fileName, int xpos, int ypos, bool useTransparancy = false);
+	
 	void draw();
 
+	int m_x, m_y;
 };
+
+
+//log4cplus
