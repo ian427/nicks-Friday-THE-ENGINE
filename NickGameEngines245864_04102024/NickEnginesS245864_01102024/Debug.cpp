@@ -1,26 +1,71 @@
-
-
+#include <string> 
 #include "Debug.h" 
+#include <cstdio>  
+#include <cstdarg>
+#define _CRT_SECURE_NO_WARNINGS
+DeBug::DeBug()
+{    
+    
+    // Open 
+    fopen_s(&DebugFile ,"DebugLogger.txt", "a");
 
-#include <cstdio>  // For FILE, fopen, fprintf, fclose
-
-void DeBug()
-{
-    // Open the file in append mode to add logs at the end of the file
-    FILE* DebugFile = fopen("DebugLogger.txt", "a");
-
-    // Check if the file was successfully opened
+    //error check
     if (DebugFile == nullptr)
     {
-        // Handle the error, for example, by printing an error message
+      
         printf("Error: Unable to open DebugLogger.txt\n");
         return;
     }
+  fprintf(DebugFile, "New  Log \n");
+    
+   
 
-    // Write some debug information to the file
-    fprintf(DebugFile, "Debug log entry\n");
+    
+}
+DeBug* DeBug::_Log = NULL;
 
-    // Close the file
-    fclose(DebugFile);
+DeBug* DeBug::Log()
+{
+    
+    if (!_Log)
+    {
+        _Log = new DeBug();
+        //_Log->Init();
+    }
+
+    return _Log;
 }
 
+
+ void DeBug::printDebug(std::string ERRORMSG, ...)//called to write log entry
+{
+     switch (Verbosity)
+     {
+     case 1 :
+
+     default:
+
+       break;
+     }:()
+
+     //format
+     va_list args_list;
+     va_start(args_list, ERRORMSG);
+     char MessageBuffer[256];
+     vsnprintf(MessageBuffer, 256, ERRORMSG.c_str(), args_list); 
+    va_end(args_list);
+
+
+
+    ERRORNUM++;
+    fprintf(DebugFile, "Error %d: %s \n", ERRORNUM, MessageBuffer);
+    printf("Error %d: %s \n",ERRORNUM, MessageBuffer);
+
+}
+
+
+ DeBug::~DeBug()
+ {
+     // Close the file
+     fclose(DebugFile);
+ }

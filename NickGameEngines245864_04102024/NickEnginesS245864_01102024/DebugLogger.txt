@@ -1,0 +1,25 @@
+
+Error 1: File name test! assets/monster.bmp, 100 
+Error 2: File name test! assets/monster.bmp, 100 
+Error 3: File name test! assets/monster.bmp, 100 
+Error 1: File name test! assets/monster.bmp, -2001503072 
+Error 2: File name test! assets/monster.bmp, -2001503072 
+Error 3: File name test! assets/monster.bmp, -2001503072 
+NewInstance 
+Error 1: File name test! assets/monster.bmp, 1 
+NewInstance 
+Error 2: File name test! assets/monster.bmp, 1 
+NewInstance 
+Error 3: File name test! assets/monster.bmp, 1 
+NewInstance 
+Error 1: File name test! assets/monster.bmp, 1 
+Error 2: File name test! assets/monster.bmp, 1 
+Error 3: File name test! assets/monster.bmp, 1 
+NewInstance 
+Error 1: File name test! assets/monster.bmp, 1 
+Error 2: File name test! assets/monster.bmp, 1 
+Error 3: File name test! assets/monster.bmp, 1 
+NewInstance 
+Error 1: File name test! assets/monster.bmp, 1 
+Error 2: File name test! assets/monster.bmp, 1 
+Error 3: File name test! assets/monster.bmp, 1 

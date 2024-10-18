@@ -4,16 +4,20 @@
 #include <cmath>
 #include "Game.h"
 #include "Input.h"
-
+#include "Debug.h"
 #undef main 
 
 using namespace std;
 
 
 int main(int argc, char* argv[])
-{
+{	
+	
+
+	
 	Game* game = new Game(); // creates new game
 	Input* input = new Input();
+	
 	if (game && input)
 	{
 		Uint8 r = 50, g = 127 ,b = 50, a = 255;// background colour
@@ -38,8 +42,10 @@ int main(int argc, char* argv[])
 				if (b++ > 255) b = 0;
 
 			}
+
+			game->SetDisplayColour(r, g, b, a);//show display
+			game->Update();
 		}
-		game->SetDisplayColour(r,g,b,a);//show display
 		
 
 	}

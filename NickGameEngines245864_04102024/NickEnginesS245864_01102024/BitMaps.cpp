@@ -1,13 +1,15 @@
 #include "BitMaps.h"
 
 #include <string>
-
+#include "Debug.h" 
 #include "SDL.h"
 #include "SDL_render.h"
 using namespace std;
 
 Bitmap::Bitmap(SDL_Renderer* renderer, std::string fileName, int xpos, int ypos, bool useTransparancy)
 {
+	
+	DeBug::Log()->printDebug("File name test! %s, %d", fileName.c_str(), 1);
 
 	//store renderer
 	m_pbitmapRenderer = renderer;
@@ -19,6 +21,8 @@ Bitmap::Bitmap(SDL_Renderer* renderer, std::string fileName, int xpos, int ypos,
 	//error check
 		printf("Surface not loaded ,file\n", fileName.c_str());
 		printf("%\n", SDL_GetError());
+		
+
 	
 	}
 	else

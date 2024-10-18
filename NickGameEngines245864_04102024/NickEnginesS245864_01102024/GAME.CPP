@@ -49,20 +49,11 @@
     m_monsterTrans = new Bitmap(m_Renderer ,"assets/monster.bmp", 200, 100);
     m_monsterTransKeyed = new Bitmap(m_Renderer ,"assets/monster.bmp", 300, 100); 
 
-     //red in the font
-    m_pSmallFont = TTF_OpenFont("assets/DejavuSans.ttf",15); //04-02
-    m_pBigFont = TTF_OpenFont("assets/DejavuSans.ttf",50); //04-02    
+     //read in the font
+    m_pSmallFont = TTF_OpenFont("assets/DejaVuSans.ttf",15); //04-02
+    m_pBigFont = TTF_OpenFont("assets/DejaVuSans.ttf",50); //04-02    
 
-    // destroy in reverse creation order
-    if (m_Renderer)
-    {
-        SDL_DestroyRenderer(m_Renderer);
-    }
-    if (m_Window)
-    {
-        SDL_DestroyWindow(m_Window);
-
-    }
+    
    
 
  }
@@ -77,6 +68,16 @@
          delete m_monster;
      TTF_CloseFont(m_pBigFont);
      TTF_CloseFont(m_pSmallFont);
+     // destroy in reverse creation order
+    if (m_Renderer)
+    {
+        SDL_DestroyRenderer(m_Renderer);
+    }
+    if (m_Window)
+    {
+        SDL_DestroyWindow(m_Window);
+
+    }
 
  }
 
@@ -97,7 +98,7 @@
          //present whats drawn
          SDL_RenderPresent(m_Renderer);
          //pause 5 seconds
-         SDL_Delay(16);//milli seconds
+        // SDL_Delay(16);//milli seconds //may be needed back
        
 
 
@@ -130,8 +131,7 @@
              if (!texture)
              {
                  //error check
-                 printf("TEXTURE font not loaded ,file\n", fileName.c_str());/////
-                 ///////////////////////////////////////////////////////////////////
+                 printf("TEXTURE font not loaded ,file\n", msg.c_str());
                  printf("%\n", SDL_GetError());
 
              }
@@ -170,8 +170,8 @@
 
 
      //draw text
-     UpdateText("Small Red", 50, 10, m_pSmallFont, { 255,0,0 });
-     UpdateText("Small Blue", 50, 40, m_pSmallFont, { 0,0,255 });
+    UpdateText("Small Red", 50, 10, m_pSmallFont, { 255,0,0 });
+    UpdateText("Small Blue", 50, 40, m_pSmallFont, { 0,0,255 });
 
      char array[] = "Big White";
      UpdateText(array, 50, 140, m_pBigFont, { 0,255,0 });
