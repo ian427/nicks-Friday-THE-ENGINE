@@ -1,5 +1,5 @@
 #include "input.h"
-
+#include "Debug.h "//|2|
 void Input::Update(void)
 {
 	while (SDL_PollEvent(&m_event) != NULL)
@@ -20,6 +20,7 @@ void Input::Update(void)
 				break;
 			case SDLK_r:
 				m_keysPressed[KEY_R] = true;
+				DeBug::Log()->printDebug(DeBug::Verbosity::note, "Red key pressed %s, %d", 0);
 				break;
 			case SDLK_g:
 				m_keysPressed[KEY_G] = true;
@@ -58,7 +59,7 @@ void Input::Update(void)
 }
 bool Input::KeyIsPressed(KEYS_PRESSED_LIST key)
 {
-	return false;
+	return m_keysPressed[key];
 }
 Input::Input()//CONSTRUCTOR
 {

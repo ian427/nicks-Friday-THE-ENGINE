@@ -9,23 +9,24 @@ class DeBug
 	FILE* DebugFile;
 	std::string ERRORMSG = "NULL";
 	std::string ERRORFILE = "NULL";
-	enum Verbosity
-	{
-		none, // not classed
-		error_red, //system|game breaking/ could cause crash
-		error_yellow,//error visiable to player
-		error_green,// error not visiable to player
-		warning,// happened recovered from
-		note// thing has happened
-
-
-	};
+    
     DeBug();
 	~DeBug();
 public:
 	int ERRORNUM = 0;
 	static DeBug* Log();
-	void printDebug(std::string ERRORMSG, ...);
+	void printDebug( int Verbosity  ,std::string ERRORMSG, ...);
+	enum Verbosity
+	{
+		none, //|0| not classed 
+		red, // |1|system|game breaking/ could cause crash
+		yellow,// |2|error visiable to player
+		error_green,//  |3|error not visiable to player
+		warning,//  |4|happened recovered from
+		note// |5| thing has happened
+
+
+	};
 };
 	
 

@@ -1,7 +1,7 @@
 #include "BitMaps.h"
 
 #include <string>
-#include "Debug.h" 
+#include "Debug.h" //|2|
 #include "SDL.h"
 #include "SDL_render.h"
 using namespace std;
@@ -9,8 +9,8 @@ using namespace std;
 Bitmap::Bitmap(SDL_Renderer* renderer, std::string fileName, int xpos, int ypos, bool useTransparancy)
 {
 	
-	DeBug::Log()->printDebug("File name test! %s, %d", fileName.c_str(), 1);
-
+	//DeBug::Log()->printDebug(DeBug::Verbosity::red, "Surface not loaded %s, %d", fileName.c_str(), 1);
+	
 	//store renderer
 	m_pbitmapRenderer = renderer;
 
@@ -19,7 +19,7 @@ Bitmap::Bitmap(SDL_Renderer* renderer, std::string fileName, int xpos, int ypos,
 	if (!m_pbitmapSurface)
 	{
 	//error check
-		printf("Surface not loaded ,file\n", fileName.c_str());
+		DeBug::Log()->printDebug(DeBug::Verbosity::yellow, "Surface not loaded %s, %d", fileName.c_str(), 2);
 		printf("%\n", SDL_GetError());
 		
 
@@ -39,7 +39,8 @@ Bitmap::Bitmap(SDL_Renderer* renderer, std::string fileName, int xpos, int ypos,
 		if (!m_pbitmapTexture)
 		{
 			//error check
-			printf("TEXTURE not loaded ,file\n", fileName.c_str());
+			
+			DeBug::Log()->printDebug(DeBug::Verbosity::yellow, "TEXTURE not loaded %s, %d", fileName.c_str(), 3);
 			printf("%\n", SDL_GetError());
 
 		}

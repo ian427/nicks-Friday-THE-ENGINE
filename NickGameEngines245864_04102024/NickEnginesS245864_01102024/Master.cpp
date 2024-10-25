@@ -4,7 +4,7 @@
 #include <cmath>
 #include "Game.h"
 #include "Input.h"
-#include "Debug.h"
+#include "Debug.h"//|1|
 #undef main 
 
 using namespace std;
@@ -12,7 +12,7 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {	
-	
+	DeBug::Log()->printDebug(DeBug::Verbosity::red, "entered Main , %d",  1);
 
 	
 	Game* game = new Game(); // creates new game
@@ -23,12 +23,15 @@ int main(int argc, char* argv[])
 		Uint8 r = 50, g = 127 ,b = 50, a = 255;// background colour
 		
 		while (!input->KeyIsPressed(KEY_ESCAPE))
+			
 		{
+			input->Update();
+			//DeBug::Log()->printDebug(DeBug::Verbosity::red, "looping %s, %d", 0);
 			if (input->KeyIsPressed(KEY_R))
 			{
 				r++;
 					if (r++ > 255) r = 0;
-				
+					//DeBug::Log()->printDebug(DeBug::Verbosity::note, "Red pressed %s, %d",  1);
 			}
 			if (input->KeyIsPressed(KEY_G))
 			{
@@ -46,7 +49,7 @@ int main(int argc, char* argv[])
 			game->SetDisplayColour(r, g, b, a);//show display
 			game->Update();
 		}
-		
+		//destructors
 
 	}
 	delete input;

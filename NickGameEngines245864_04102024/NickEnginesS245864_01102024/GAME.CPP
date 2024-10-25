@@ -91,12 +91,12 @@
          
          int result = SDL_SetRenderDrawColor(
              m_Renderer, //target renderer
-             255, 0, 0, 255  //r,g,b,alpha
+             r, g, b, a  //r,g,b,alpha
              );
          //wipe display
          SDL_RenderClear(m_Renderer);
          //present whats drawn
-         SDL_RenderPresent(m_Renderer);
+        // SDL_RenderPresent(m_Renderer);
          //pause 5 seconds
         // SDL_Delay(16);//milli seconds //may be needed back
        

@@ -1,22 +1,5 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (NickGraphicss245864_01102024.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  BitMaps.cpp
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\BitMaps.cpp(22,54): warning C4474: 'printf' : too many arguments passed for format string
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\BitMaps.cpp(23,10): warning C4778: 'printf' : unterminated format string '%\n'
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\BitMaps.cpp(23,29): warning C4474: 'printf' : too many arguments passed for format string
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\BitMaps.cpp(42,55): warning C4474: 'printf' : too many arguments passed for format string
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\BitMaps.cpp(43,11): warning C4778: 'printf' : unterminated format string '%\n'
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\BitMaps.cpp(43,30): warning C4474: 'printf' : too many arguments passed for format string
-  Debug.cpp
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Debug.cpp(42,23): error C2059: syntax error: ')'
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Debug.cpp(43,6): error C2143: syntax error: missing ';' before '{'
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Debug.cpp(44,6): error C2046: illegal case
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Debug.cpp(46,6): error C2047: illegal default
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Debug.cpp(49,7): error C2059: syntax error: ':'
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Debug.cpp(53,6): error C2065: 'args_list': undeclared identifier
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Debug.cpp(55,54): error C2065: 'args_list': undeclared identifier
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Debug.cpp(56,5): error C2065: 'args_list': undeclared identifier
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Debug.cpp(48,8): error C2043: illegal break
   Master.cpp
 C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.h(6,7): warning C4099: 'SDL_Window': type name first seen using 'struct' now seen using 'class'
 C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.h(7,7): warning C4099: 'SDL_Renderer': type name first seen using 'struct' now seen using 'class'
-  Generating Code...
+  NickGraphicss245864_01102024.vcxproj -> C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\x64\Debug\NickEnginesS245864_01102024.exe
