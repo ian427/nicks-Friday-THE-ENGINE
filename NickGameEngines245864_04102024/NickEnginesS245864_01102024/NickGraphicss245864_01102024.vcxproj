@@ -137,7 +137,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BitMaps.cpp" />
+    <ClCompile Include="Components.cpp" />
     <ClCompile Include="Debug.cpp" />
+    <ClCompile Include="EventHandler.cpp" />
+    <ClCompile Include="MyEventTypes.hpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Master.cpp" />
@@ -145,7 +148,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BitMaps.h" />
+    <ClInclude Include="Components.h" />
     <ClInclude Include="Debug.h" />
+    <ClInclude Include="Entity2.hpp" />
+    <ClInclude Include="EventHandler.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="TextureManager.h" />

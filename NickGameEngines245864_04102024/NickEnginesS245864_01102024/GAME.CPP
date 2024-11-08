@@ -2,7 +2,7 @@
 #include <iostream>
 #include "Game.h"
 #include "BitMaps.h"
-
+#include "Debug.h" //|3|
 
  Game::Game()
 {  
@@ -25,8 +25,9 @@
     );
     if (!m_Window)
     {
-        printf("WINDOW initialsation FAILED\n"), SDL_GetError();
+        DeBug::Log()->printDebug(DeBug::Verbosity::red, "WINDOW initialsation FAILED %s, %d", 3);
         printf("PRESS ANY KEY\n");
+        
         getchar();
         return;
 
@@ -39,7 +40,8 @@
     );
     if (!m_Renderer)
     {
-        printf("RENDERER initialsation FAILED\n"), SDL_GetError();
+        printf("\n"), SDL_GetError();
+        DeBug::Log()->printDebug(DeBug::Verbosity::yellow, "RENDERER initialsation FAILED %s, %d", 3);
         printf("PRESS ANY KEY\n");
         getchar();
         return;
@@ -122,6 +124,7 @@
      {
          //error check
          printf("Surface font  not loaded ,file\n" );
+         DeBug::Log()->printDebug(DeBug::Verbosity::note, "WINDOW initialsation FAILED %s, %d", 3);
          printf("%\n", SDL_GetError());
 
      }
@@ -131,7 +134,8 @@
              if (!texture)
              {
                  //error check
-                 printf("TEXTURE font not loaded ,file\n", msg.c_str());
+                 
+                 DeBug::Log()->printDebug(DeBug::Verbosity::yellow, "TEXTURE font not loaded %s, %d", msg.c_str(), 3);
                  printf("%\n", SDL_GetError());
 
              }

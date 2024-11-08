@@ -1,5 +1,5 @@
 #include "input.h"
-#include "Debug.h "//|2|
+#include "Debug.h "//|3|
 void Input::Update(void)
 {
 	while (SDL_PollEvent(&m_event) != NULL)
@@ -17,10 +17,11 @@ void Input::Update(void)
 
 			case SDLK_ESCAPE:
 				m_keysPressed[KEY_ESCAPE] = true;
+				DeBug::Log()->printDebug(DeBug::Verbosity::note, "Shuting Down %s, %d", 3);
 				break;
 			case SDLK_r:
 				m_keysPressed[KEY_R] = true;
-				DeBug::Log()->printDebug(DeBug::Verbosity::note, "Red key pressed %s, %d", 0);
+				DeBug::Log()->printDebug(DeBug::Verbosity::note, "R key pressed %s, %d", 3);
 				break;
 			case SDLK_g:
 				m_keysPressed[KEY_G] = true;

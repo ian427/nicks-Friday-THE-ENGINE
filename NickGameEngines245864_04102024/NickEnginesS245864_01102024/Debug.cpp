@@ -3,6 +3,7 @@
 #include <cstdio>  
 #include <cstdarg>
 #include <string>
+
 #define _CRT_SECURE_NO_WARNINGS
 DeBug::DeBug()
 {    
@@ -18,10 +19,7 @@ DeBug::DeBug()
         return;
     }
   fprintf(DebugFile, "New  Log \n");
-    
-   
 
-    
 }
 DeBug* DeBug::_Log = NULL;
 

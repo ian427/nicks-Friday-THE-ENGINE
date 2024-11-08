@@ -1,5 +1,5 @@
 #include "TextureManager.h"
-
+#include "Debug.h" //|4|
 
 
 TextureManager::TextureManager()
@@ -44,7 +44,8 @@ SDL_Texture* TextureManager::Load(const std::string fileName, bool useTransparan
 		SDL_Surface* pTempSurface = SDL_LoadBMP(fileName.c_str());
 		if (!pTempSurface)
 		{
-			printf("SURFACE for bitmap '%s' not loaded\n", fileName.c_str());
+			
+			DeBug::Log()->printDebug(DeBug::Verbosity::yellow, "Surface for bitmap not loaded %s, %d", fileName.c_str(), 4);
 			printf("%s\n", SDL_GetError());
 		}
 		else
@@ -57,7 +58,8 @@ SDL_Texture* TextureManager::Load(const std::string fileName, bool useTransparan
 			m_pbitmapTexture = SDL_CreateTextureFromSurface(PRenderer, pTempSurface);
 			if (!m_pbitmapTexture)
 			{
-				printf("TEXTURE for bitmap '%s' not loaded!\n", fileName.c_str());
+				
+				DeBug::Log()->printDebug(DeBug::Verbosity::yellow, "Texture for bitmap not loaded %s, %d", fileName.c_str(), 4);
 				printf("%s\n", SDL_GetError());
 			}
 

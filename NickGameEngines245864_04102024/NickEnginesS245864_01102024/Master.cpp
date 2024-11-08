@@ -5,6 +5,10 @@
 #include "Game.h"
 #include "Input.h"
 #include "Debug.h"//|1|
+
+#include "EventHandler.h"
+#include "Entity2.hpp"
+
 #undef main 
 
 using namespace std;
@@ -12,8 +16,16 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {	
-	DeBug::Log()->printDebug(DeBug::Verbosity::red, "entered Main , %d",  1);
+	//DeBug::Log()->printDebug(DeBug::Verbosity::note, "entered Main , %d",  1);
 
+	Bird TestBird;
+	EventSystem eventSyetem;
+	eventSyetem.AddListener(&TestBird);
+
+	eventSyetem.AddEvent(TEST_EVENT, new Event("hello world"));
+
+
+	eventSyetem.HandelEvents();
 	
 	Game* game = new Game(); // creates new game
 	Input* input = new Input();
