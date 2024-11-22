@@ -18,6 +18,8 @@ private:
 		Bitmap* m_monsterTrans;
 		Bitmap* m_monsterTransKeyed;
 
+		Bird* Flappy;
+
 		TTF_Font* m_pSmallFont;
 		TTF_Font* m_pBigFont;
 public:

@@ -1,5 +1,69 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (NickGraphicss245864_01102024.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  Master.cpp
+  MyEventTypes.hpp
+  Game.cpp
 C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.h(6,7): warning C4099: 'SDL_Window': type name first seen using 'struct' now seen using 'class'
 C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.h(7,7): warning C4099: 'SDL_Renderer': type name first seen using 'struct' now seen using 'class'
-  NickGraphicss245864_01102024.vcxproj -> C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\x64\Debug\NickEnginesS245864_01102024.exe
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.h(21,7): error C2143: syntax error: missing ';' before '*'
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.h(21,3): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.h(21,15): error C2238: unexpected token(s) preceding ';'
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Components.h(21,20): warning C4227: anachronism used: qualifiers on reference are ignored
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(58,5): error C2065: 'Flappy': undeclared identifier
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(59,23): error C2065: 'Flappy': undeclared identifier
+  Master.cpp
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(68,20): error C2679: binary '[': no operator found which takes a right-hand operand of type 'std::_Vector_iterator<std::_Vector_val<std::_Simple_types<_Ty>>>' (or there is no acceptable conversion)
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(68,20): error C2679:         with
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(68,20): error C2679:         [
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(68,20): error C2679:             _Ty=Bitmap
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(68,20): error C2679:         ]
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(69,19): error C2679: binary '[': no operator found which takes a right-hand operand of type 'std::_Vector_iterator<std::_Vector_val<std::_Simple_types<_Ty>>>' (or there is no acceptable conversion)
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(69,19): error C2679:         with
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(69,19): error C2679:         [
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(69,19): error C2679:             _Ty=Bitmap
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(69,19): error C2679:         ]
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(70,9): error C2679: binary '[': no operator found which takes a right-hand operand of type 'std::_Vector_iterator<std::_Vector_val<std::_Simple_types<_Ty>>>' (or there is no acceptable conversion)
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(70,9): error C2679:         with
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(70,9): error C2679:         [
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(70,9): error C2679:             _Ty=Bitmap
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(70,9): error C2679:         ]
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(144,17): warning C4778: 'printf' : unterminated format string '%\n'
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(144,36): warning C4474: 'printf' : too many arguments passed for format string
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(155,25): warning C4778: 'printf' : unterminated format string '%\n'
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(155,44): warning C4474: 'printf' : too many arguments passed for format string
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(187,6): error C2065: 'Flappy': undeclared identifier
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(193,6): error C2065: 'Flappy': undeclared identifier
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(197,10): error C2039: 'CheckCollision': is not a member of 'Physics'
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(197,25): error C2065: 'Flappy': undeclared identifier
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(197,41): error C2275: 'std::vector<Bitmap,std::allocator<Bitmap>>': expected an expression instead of a type
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(197,56): error C2146: syntax error: missing ')' before identifier 'Entitys'
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(197,56): error C2146: syntax error: missing ';' before identifier 'Entitys'
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(197,63): error C2059: syntax error: ')'
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(197,56): error C2065: 'Entitys': undeclared identifier
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(200,14): error C2065: 'Flappy': undeclared identifier
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.h(6,7): warning C4099: 'SDL_Window': type name first seen using 'struct' now seen using 'class'
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.h(7,7): warning C4099: 'SDL_Renderer': type name first seen using 'struct' now seen using 'class'
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.h(21,7): error C2143: syntax error: missing ';' before '*'
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.h(21,3): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.h(21,15): error C2238: unexpected token(s) preceding ';'
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Components.h(21,20): warning C4227: anachronism used: qualifiers on reference are ignored
+  Physics.cpp
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Components.h(21,20): warning C4227: anachronism used: qualifiers on reference are ignored
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Physics.h(28,33): error C2061: syntax error: identifier 'vector'
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Physics.cpp(54,9): error C2065: 'rectA': undeclared identifier
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Physics.cpp(54,19): error C2065: 'rectB': undeclared identifier
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Physics.cpp(54,29): error C2065: 'rectB': undeclared identifier
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Physics.cpp(55,9): error C2065: 'rectA': undeclared identifier
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Physics.cpp(55,19): error C2065: 'rectA': undeclared identifier
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Physics.cpp(55,33): error C2065: 'rectB': undeclared identifier
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Physics.cpp(56,9): error C2065: 'rectA': undeclared identifier
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Physics.cpp(56,19): error C2065: 'rectB': undeclared identifier
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Physics.cpp(56,29): error C2065: 'rectB': undeclared identifier
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Physics.cpp(57,9): error C2065: 'rectA': undeclared identifier
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Physics.cpp(57,24): error C2065: 'rectA': undeclared identifier
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Physics.cpp(57,34): error C2065: 'rectB': undeclared identifier
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Physics.cpp(80,48): error C2061: syntax error: identifier 'vector'
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Physics.cpp(82,33): error C2065: 'Collider1': undeclared identifier
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Physics.cpp(82,22): error C2275: 'Collider': expected an expression instead of a type
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Physics.cpp(82,55): error C2065: 'Collider2': undeclared identifier
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Physics.cpp(82,44): error C2275: 'Collider': expected an expression instead of a type
+C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Physics.cpp(82,5): error C2660: 'Physics::AABBIntersection': function does not take 1 arguments
+  Generating Code...

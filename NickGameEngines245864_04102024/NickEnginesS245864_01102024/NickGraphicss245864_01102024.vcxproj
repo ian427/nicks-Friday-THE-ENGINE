@@ -144,6 +144,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Master.cpp" />
+    <ClCompile Include="Physics.cpp" />
     <ClCompile Include="TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -154,7 +155,9 @@
     <ClInclude Include="EventHandler.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="input.h" />
+    <ClInclude Include="Physics.h" />
     <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="Transform.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

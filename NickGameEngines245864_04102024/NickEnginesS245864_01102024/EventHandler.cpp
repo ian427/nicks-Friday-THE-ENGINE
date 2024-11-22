@@ -1,7 +1,7 @@
 #include "EventHandler.h"
 ////////////////////////
 #include "Game.h"
-#include "Entity.hpp"
+#include "Entity2.hpp"
 
 ////////////////////////
 #include "Debug.h" //|5|

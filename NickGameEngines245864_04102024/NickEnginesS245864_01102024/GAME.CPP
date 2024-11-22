@@ -1,8 +1,10 @@
 #include <SDL.h>
 #include <iostream>
 #include "Game.h"
-#include "BitMaps.h"
-#include "Debug.h" //|3|
+//#include "BitMaps.h"//nuke later
+#include "Debug.h" //|4|
+#include "Entity2.hpp"
+ #include "physics.h"
 
  Game::Game()
 {  
@@ -47,21 +49,35 @@
         return;
 
     }
-    m_monster = new Bitmap(m_Renderer , "assets/monster.bmp", 100, 100);
-    m_monsterTrans = new Bitmap(m_Renderer ,"assets/monster.bmp", 200, 100);
-    m_monsterTransKeyed = new Bitmap(m_Renderer ,"assets/monster.bmp", 300, 100); 
+    // create all objects
+    vector <Bitmap>Entitys;
+   m_monster = new Bitmap(m_Renderer , "assets/monster.bmp", 100, 100);
+   // m_monsterTrans = new Bitmap(m_Renderer ,"assets/monster.bmp", 200, 100);
+    //m_monsterTransKeyed = new Bitmap(m_Renderer ,"assets/monster.bmp", 300, 100); 
 
+    Flappy->Map = new Bitmap(m_Renderer, "assets/Flappy.png", 100, 100);
+    Entitys.push_back(Flappy);
      //read in the font
     m_pSmallFont = TTF_OpenFont("assets/DejaVuSans.ttf",15); //04-02
-    m_pBigFont = TTF_OpenFont("assets/DejaVuSans.ttf",50); //04-02    
+    m_pBigFont = TTF_OpenFont("assets/DejaVuSans.ttf",50); //04-02   
 
+    //for loop for every obj in scene
+    for (auto it = Entitys.begin(); it != Entitys.end(); it++)
+    {
+       
+         float A = Entitys[it]->Map.m_x;
+        float B = Entitys[it]->Map.m_y;
+        Entitys[it]->Radius = (sqrt((A * A) + (B * B))) / 2;
+   
+    }
     
    
 
  }
-
+ 
  Game::~Game()
  {
+     
      if (m_monsterTransKeyed)
          delete m_monsterTransKeyed;
      if (m_monsterTrans)
@@ -168,10 +184,20 @@
      //CheckEvents();
      SDL_RenderClear(m_Renderer);
      //show bitmaps
+     Flappy->Flappy_Map->draw();
      m_monster ->draw();
      m_monsterTrans->draw();
      m_monsterTransKeyed->draw();
 
+
+     Flappy->flappy_Transform.m_position;
+       Physics phi;
+     //collision check/////////////////////////////////////////////////////////////
+     
+     phi.CheckCollision(Flappy->Radius, vector <Bitmap>Entitys);
+
+     
+    phi.Move(Flappy->flappy_Transform, (1, 0, 0));
 
      //draw text
     UpdateText("Small Red", 50, 10, m_pSmallFont, { 255,0,0 });

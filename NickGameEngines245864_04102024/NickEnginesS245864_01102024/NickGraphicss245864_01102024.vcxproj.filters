@@ -42,6 +42,9 @@
     <ClCompile Include="MyEventTypes.hpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Physics.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -67,6 +70,12 @@
     </ClInclude>
     <ClInclude Include="Entity2.hpp">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

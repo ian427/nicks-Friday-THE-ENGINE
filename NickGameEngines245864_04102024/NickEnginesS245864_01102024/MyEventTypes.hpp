@@ -1,7 +1,8 @@
 #pragma once
-
+//list of eventcalls
 enum MyEventTypes
 {
-	TEST_EVENT
+	TEST_EVENT,
+	APPLY_GRAVITY
 
 };

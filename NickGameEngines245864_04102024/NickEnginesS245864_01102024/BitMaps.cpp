@@ -30,7 +30,7 @@ Bitmap::Bitmap(SDL_Renderer* renderer, std::string fileName, int xpos, int ypos,
 		//using tranparancy magenta r==255 g ==0 b 255
 		if (useTransparancy)
 		{
-			Uint32 colourKey = SDL_MapRGB(m_pbitmapSurface->format, 255, 0, 255);
+			Uint32 colourKey = SDL_MapRGB(m_pbitmapSurface->format, 255, 0, 255);// pass width and height to collider
 			SDL_SetColorKey(m_pbitmapSurface, SDL_TRUE, colourKey);
 	
 		}
