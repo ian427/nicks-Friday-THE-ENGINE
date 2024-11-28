@@ -19,6 +19,10 @@ private:
 		Bitmap* m_monsterTransKeyed;
 
 		Bird* Flappy;
+		Pipe* TopPipe1;
+		UI* Celling;
+		Ground* Floor;
+		float Time;
 
 		TTF_Font* m_pSmallFont;
 		TTF_Font* m_pBigFont;
@@ -33,3 +37,4 @@ public:
 
 };
 #endif
+

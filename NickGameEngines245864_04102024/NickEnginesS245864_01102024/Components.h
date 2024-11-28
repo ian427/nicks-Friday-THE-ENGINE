@@ -13,11 +13,14 @@ class Commponent //should this be an interface
 class Collider : public Commponent
 {
 private:
+
+public:
 	vec3 TL = vec3(0, 0, 0);
 	vec3 TR = vec3(1, 0, 0);
 	vec3 BL = vec3(0, -1, 0);
 	vec3 BR = vec3(1, -1, 0);
-public:
+	float Width;
+	float Height;
 	Collider(Transform& const t)
 	{
 		vec3 Pos = t.GetPosition();
@@ -32,6 +35,8 @@ public:
 		TL = TL + Pos;
 		BR = BR + Pos;
 		BL = BL + Pos;
+		Width = (TR.x - TL.x);
+		Height = (TR.y - BR.y);
 	}
 
 		vec3 GetColliderPoints();

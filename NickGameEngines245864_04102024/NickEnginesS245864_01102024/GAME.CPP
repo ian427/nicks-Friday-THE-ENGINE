@@ -56,13 +56,16 @@ public:
         return;
 
     }
-    vector<Base*>Entitys;///ask nick
+    
+    vector<Pipe>Pipes;
     Bird Flappy;
     Pipe TopPipe1;
-    Entitys.push_back(&Flappy);
-    Entitys.push_back(&TopPipe1);
+    UI Celling;
+    Ground Floor;
+   // Entitys.push_back(&Flappy);
+   // Entitys.push_back(&TopPipe1);
     // create all objects
-    
+    Pipes.push_back(TopPipe1);
    m_monster = new Bitmap(m_Renderer , "assets/monster.bmp", 100, 100);
    // m_monsterTrans = new Bitmap(m_Renderer ,"assets/monster.bmp", 200, 100);
     //m_monsterTransKeyed = new Bitmap(m_Renderer ,"assets/monster.bmp", 300, 100); 
@@ -73,19 +76,28 @@ public:
     m_pSmallFont = TTF_OpenFont("assets/DejaVuSans.ttf",15); //04-02
     m_pBigFont = TTF_OpenFont("assets/DejaVuSans.ttf",50); //04-02   
 
-    //for loop for every obj in scene
-    for (int i = 0; i< Entitys.size(); i++)
-    {
-        Bitmap* map = Entitys[i].Map;
-        Bitmap* map = Base*->Flappy->Map;
-        Bitmap* map = Flappy.Map;
-       
-         float A = Entitys[i]->map->m_x;
-        float B = Entitys[i]->map.m_y;
-        Entitys[i]->Radius = (sqrt((A * A) + (B * B))) / 2;//calculates raduius that we sould do a collision check in 
    
-    }
     
+    //calculates raduius that we sould do a collision check in 
+
+    for (int i = 0; i < Pipes.size(); i++)
+    {
+        float A = Pipes[i].Map->m_x;
+        float B = Pipes[i].Map->m_y;
+        Pipes[i].Radius = (sqrt((A * A) + (B * B))) / 2;
+    }
+    //bird
+    float A = Flappy.Map->m_x;
+    float B = Flappy.Map->m_y;
+    Flappy.Radius = (sqrt((A * A) + (B * B))) / 2;
+    //ui
+    float A = Celling.Map->m_x;
+    float B = Celling.Map->m_y;
+    Celling.Radius = (sqrt((A * A) + (B * B))) / 2;
+
+    float A = Floor.Map->m_x;
+    float B = Floor.Map->m_y;
+    Floor.Radius = (sqrt((A * A) + (B * B))) / 2;
    
 
  }
@@ -113,11 +125,7 @@ public:
     }
 
  }
- void CheckCollisions(float radiusobj, Base Entitys)
-{
-     
-      Physics::AABBIntersection(Collider & Collider1, Collider & Collider2);
-}
+ 
 
 
  void Game::SetDisplayColour(int r, int g, int b, int a)
@@ -210,12 +218,21 @@ public:
 
 
      Flappy->flappy_Transform.GetPosition();
+     
        Physics phi;
-     //collision check/////////////////////////////////////////////////////////////
-     
-       CheckCollision(Flappy->Radius,  Entitys);
-     
+     //collision check/////////////////////////////////////////////////////////////pipes
+       float Dx = Flappy->flappy_Transform.GetPosition().x - Floor->Transform.GetPosition().x;
+       float Dy = Flappy->flappy_Transform.GetPosition().y - Floor->Transform.GetPosition().y;
+       float D = (sqrt((Dx * Dx) + (Dy * Dy)));
 
+       if ((D == Flappy->Radius + Floor->Radius) || (D == Flappy->Radius + Floor->Radius))//circle collision check
+       {
+           phi.AABBIntersection(Flappy->BoxCollider, Floor->BoxCollider);
+
+       }
+      
+     
+       
      
     phi.Move(Flappy->flappy_Transform, (1, 0, 0));
 

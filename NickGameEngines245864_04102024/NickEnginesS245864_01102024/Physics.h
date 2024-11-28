@@ -21,11 +21,11 @@ public :
 	void ApplyForces(Transform transform);//to move
 	void Gravity(Transform transform);
 
-	bool AABBIntersection (Collider& Collider1, Collider& Collider2);
+	bool AABBIntersection (Collider* Collider1, Collider* Collider2);
 
 	void UpdatePhysics();
 	void Move(Transform transform, vec3 movement);
-	void CheckCollisions(float X , vector <Bitmap>Entitys);
+	
 private:
 	std::vector<vec3> forces;
 	std::vector<vec3> impulses;

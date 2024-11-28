@@ -49,12 +49,9 @@ vec3 Collider::GetColliderPoints()
     return BR;
 }
 
-bool Physics::AABBIntersection(Collider& Collider1 , Collider& Collider2)
+bool Physics::AABBIntersection(Collider* Collider1 , Collider* Collider2)
 {
-    if (rectA.x < rectB.x + rectB.width &&
-        rectA.x + rectA.width > rectB.x &&
-        rectA.y < rectB.y + rectB.height &&
-        rectA.height + rectA.y > rectB.y)
+    if ((Collider1->BR == Collider2->BR)|| (Collider1->TR == Collider2->TR) || (Collider1->BL == Collider2->BL) || (Collider1->TL == Collider2->TL))
     {
         return true;
     }

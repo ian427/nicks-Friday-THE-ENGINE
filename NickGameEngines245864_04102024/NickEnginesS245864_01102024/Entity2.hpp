@@ -3,18 +3,9 @@
 #include "MyEventTypes.hpp"
 #include "EventHandler.h"
 
-class Base {
-public:
-	virtual void display() const { // Virtual function for polymorphism
-		std::cout << "Base class" << std::endl;
-	}
 
-	
 
-	virtual ~Base() = default; // Virtual destructor for proper cleanup
-};
-
-class Bird : public I_EventHandeler , public Base
+class Bird : public I_EventHandeler 
 {
 public:
 	//collider 
@@ -60,7 +51,7 @@ public:
 
 };
 
-class Pipe: public Base
+class Pipe
 {
 public:
 	//bitmap
@@ -68,8 +59,9 @@ public:
 	Bitmap* Map;
 	Collider* BoxCollider;
 	float Radius;
+	Transform Transform;
 };
-class ground : public Base
+class Ground 
 {
 public:
 	//bitmap
@@ -77,8 +69,9 @@ public:
 	Bitmap* Map;
 	Collider* BoxCollider;
 	float Radius;
+	Transform Transform;
 };
-class UI : public Base
+class UI 
 {
 public:
 	//bitmap
@@ -86,4 +79,5 @@ public:
 	Bitmap* Map;
 	Collider* BoxCollider;
 	float Radius;
+	Transform Transform;
 };
