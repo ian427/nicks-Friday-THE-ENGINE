@@ -3,8 +3,18 @@
 #include "MyEventTypes.hpp"
 #include "EventHandler.h"
 
+class Base {
+public:
+	virtual void display() const { // Virtual function for polymorphism
+		std::cout << "Base class" << std::endl;
+	}
 
-class Bird : public I_EventHandeler
+	
+
+	virtual ~Base() = default; // Virtual destructor for proper cleanup
+};
+
+class Bird : public I_EventHandeler , public Base
 {
 public:
 	//collider 
@@ -13,20 +23,24 @@ public:
 	//bitmap
 	//phiysics check
 
-	Collider* FlappysBoxCollider;
+	Collider* BoxCollider;
 	Bitmap* Map;
 	Transform flappy_Transform;
 	float Radius;
 	
+	
+
 	Bird()
 	{
 		
-		FlappysBoxCollider = new Collider(flappy_Transform);
+		BoxCollider = new Collider(flappy_Transform);
+		//Map = new Bitmap();
 		
 	}
 	~Bird()
 	{
-
+		delete BoxCollider;  
+		//delete Map;
 	}
 	
 	void OnEvent(MyEventTypes eventType, Event* data)
@@ -46,25 +60,30 @@ public:
 
 };
 
-class Pipe
+class Pipe: public Base
 {
-	
+public:
 	//bitmap
 	//collider 
 	Bitmap* Map;
+	Collider* BoxCollider;
 	float Radius;
 };
-class ground
+class ground : public Base
 {
+public:
 	//bitmap
 	//collider 
 	Bitmap* Map;
+	Collider* BoxCollider;
 	float Radius;
 };
-class UI
+class UI : public Base
 {
+public:
 	//bitmap
 	//collider 
 	Bitmap* Map;
+	Collider* BoxCollider;
 	float Radius;
 };

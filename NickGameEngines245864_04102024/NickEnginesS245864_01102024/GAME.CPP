@@ -5,7 +5,14 @@
 #include "Debug.h" //|4|
 #include "Entity2.hpp"
  #include "physics.h"
+class Base {
+public:
+    virtual void display() const { // Virtual function for polymorphism
+        
+    }
 
+    virtual ~Base() = default; // Virtual destructor for proper cleanup
+};
  Game::Game()
 {  
      
@@ -49,25 +56,33 @@
         return;
 
     }
+    vector<Base*>Entitys;///ask nick
+    Bird Flappy;
+    Pipe TopPipe1;
+    Entitys.push_back(&Flappy);
+    Entitys.push_back(&TopPipe1);
     // create all objects
-    vector <Bitmap>Entitys;
+    
    m_monster = new Bitmap(m_Renderer , "assets/monster.bmp", 100, 100);
    // m_monsterTrans = new Bitmap(m_Renderer ,"assets/monster.bmp", 200, 100);
     //m_monsterTransKeyed = new Bitmap(m_Renderer ,"assets/monster.bmp", 300, 100); 
-
-    Flappy->Map = new Bitmap(m_Renderer, "assets/Flappy.png", 100, 100);
-    Entitys.push_back(Flappy);
+  
+    Flappy.Map = new Bitmap(m_Renderer, "assets/Flappy.png", 100, 100);
+    TopPipe1.Map = new Bitmap(m_Renderer, "assets/Flappy.png", 100, 100);
      //read in the font
     m_pSmallFont = TTF_OpenFont("assets/DejaVuSans.ttf",15); //04-02
     m_pBigFont = TTF_OpenFont("assets/DejaVuSans.ttf",50); //04-02   
 
     //for loop for every obj in scene
-    for (auto it = Entitys.begin(); it != Entitys.end(); it++)
+    for (int i = 0; i< Entitys.size(); i++)
     {
+        Bitmap* map = Entitys[i].Map;
+        Bitmap* map = Base*->Flappy->Map;
+        Bitmap* map = Flappy.Map;
        
-         float A = Entitys[it]->Map.m_x;
-        float B = Entitys[it]->Map.m_y;
-        Entitys[it]->Radius = (sqrt((A * A) + (B * B))) / 2;
+         float A = Entitys[i]->map->m_x;
+        float B = Entitys[i]->map.m_y;
+        Entitys[i]->Radius = (sqrt((A * A) + (B * B))) / 2;//calculates raduius that we sould do a collision check in 
    
     }
     
@@ -98,7 +113,11 @@
     }
 
  }
-
+ void CheckCollisions(float radiusobj, Base Entitys)
+{
+     
+      Physics::AABBIntersection(Collider & Collider1, Collider & Collider2);
+}
 
 
  void Game::SetDisplayColour(int r, int g, int b, int a)
@@ -184,17 +203,18 @@
      //CheckEvents();
      SDL_RenderClear(m_Renderer);
      //show bitmaps
-     Flappy->Flappy_Map->draw();
+     Flappy->Map->draw();
      m_monster ->draw();
      m_monsterTrans->draw();
      m_monsterTransKeyed->draw();
 
 
-     Flappy->flappy_Transform.m_position;
+     Flappy->flappy_Transform.GetPosition();
        Physics phi;
      //collision check/////////////////////////////////////////////////////////////
      
-     phi.CheckCollision(Flappy->Radius, vector <Bitmap>Entitys);
+       CheckCollision(Flappy->Radius,  Entitys);
+     
 
      
     phi.Move(Flappy->flappy_Transform, (1, 0, 0));

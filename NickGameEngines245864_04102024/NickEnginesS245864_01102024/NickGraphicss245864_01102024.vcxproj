@@ -156,6 +156,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="Physics.h" />
+    <ClInclude Include="Test.hpp" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Transform.hpp" />
   </ItemGroup>

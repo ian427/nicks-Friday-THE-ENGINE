@@ -77,7 +77,4 @@ void  Physics::Move(Transform transform, vec3 movement)
     void ApplyForces(Transform transform);
 }
 
-void Physics::CheckCollisions(float radiusobj, vector <Bitmap>Entitys)
-{
-    AABBIntersection(Collider & Collider1, Collider & Collider2);
-}
+
