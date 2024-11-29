@@ -1,13 +1,17 @@
 #ifndef GAME_H
 #define GAME_H
 #include "SDL_ttf.h"
+#include <vector>
 
 class Bitmap;
 class SDL_Window;
 class SDL_Renderer;
+class Bird;
+class Pipe;
+class UI;
+class Ground;
 
 class Game
-	
 {
 private:
 	SDL_Window *m_Window;
@@ -20,6 +24,7 @@ private:
 
 		Bird* Flappy;
 		Pipe* TopPipe1;
+		std::vector<Pipe*>Pipes;
 		UI* Celling;
 		Ground* Floor;
 		float Time;

@@ -9,7 +9,7 @@ using namespace glm;
 class Transform
 {
 public:
-	Transform(const vec3& pos = vec3(), const vec3& rot = vec3(), const vec3& scale = vec3(1)) :
+	Transform(const vec3& pos = vec3(0), const vec3& rot = vec3(0), const vec3& scale = vec3(1)) :
 		m_position(pos),
 		m_rotation(rot),
 		m_scale(scale)

@@ -57,47 +57,49 @@ public:
 
     }
     
-    vector<Pipe>Pipes;
-    Bird Flappy;
-    Pipe TopPipe1;
-    UI Celling;
-    Ground Floor;
+    
+   
+
    // Entitys.push_back(&Flappy);
    // Entitys.push_back(&TopPipe1);
     // create all objects
-    Pipes.push_back(TopPipe1);
+    TopPipe1 = new Pipe();
+    Pipes.push_back(TopPipe1);    // Push the pointer into the vector
+
    m_monster = new Bitmap(m_Renderer , "assets/monster.bmp", 100, 100);
    // m_monsterTrans = new Bitmap(m_Renderer ,"assets/monster.bmp", 200, 100);
     //m_monsterTransKeyed = new Bitmap(m_Renderer ,"assets/monster.bmp", 300, 100); 
   
-    Flappy.Map = new Bitmap(m_Renderer, "assets/Flappy.png", 100, 100);
-    TopPipe1.Map = new Bitmap(m_Renderer, "assets/Flappy.png", 100, 100);
+   Flappy = new Bird();
+    
+    TopPipe1->Map = new Bitmap(m_Renderer, "assets/monster.bmp", 100, 100);////////////////////// move to constructer /////////////////////////////////////////////////
      //read in the font
     m_pSmallFont = TTF_OpenFont("assets/DejaVuSans.ttf",15); //04-02
     m_pBigFont = TTF_OpenFont("assets/DejaVuSans.ttf",50); //04-02   
 
+    Floor = new Ground();
    
     
     //calculates raduius that we sould do a collision check in 
 
     for (int i = 0; i < Pipes.size(); i++)
     {
-        float A = Pipes[i].Map->m_x;
-        float B = Pipes[i].Map->m_y;
-        Pipes[i].Radius = (sqrt((A * A) + (B * B))) / 2;
+        float A = Pipes[i]->Map->m_x;
+        float B = Pipes[i]->Map->m_y;
+        Pipes[i]->Radius = (sqrt((A * A) + (B * B))) / 2;
     }
     //bird
-    float A = Flappy.Map->m_x;
+   /* float A = Flappy.Map->m_x;
     float B = Flappy.Map->m_y;
     Flappy.Radius = (sqrt((A * A) + (B * B))) / 2;
     //ui
-    float A = Celling.Map->m_x;
-    float B = Celling.Map->m_y;
+    A = Celling.Map->m_x;
+    B = Celling.Map->m_y;
     Celling.Radius = (sqrt((A * A) + (B * B))) / 2;
 
-    float A = Floor.Map->m_x;
-    float B = Floor.Map->m_y;
-    Floor.Radius = (sqrt((A * A) + (B * B))) / 2;
+    A = Floor.Map->m_x;
+    B = Floor.Map->m_y;
+    Floor.Radius = (sqrt((A * A) + (B * B))) / 2;*/
    
 
  }
@@ -208,37 +210,42 @@ public:
  }
  void Game::Update(void)
  {
+
      //CheckEvents();
      SDL_RenderClear(m_Renderer);
      //show bitmaps
      Flappy->Map->draw();
-     m_monster ->draw();
-     m_monsterTrans->draw();
-     m_monsterTransKeyed->draw();
+     //_monster ->draw();
+     //_monsterTrans->draw();
+     //_monsterTransKeyed->draw();
 
 
      Flappy->flappy_Transform.GetPosition();
-     
-       Physics phi;
+
+     Physics phi;
      //collision check/////////////////////////////////////////////////////////////pipes
-       float Dx = Flappy->flappy_Transform.GetPosition().x - Floor->Transform.GetPosition().x;
-       float Dy = Flappy->flappy_Transform.GetPosition().y - Floor->Transform.GetPosition().y;
-       float D = (sqrt((Dx * Dx) + (Dy * Dy)));
+     float Dx = Flappy->flappy_Transform.GetPosition().x - Floor->Transform.GetPosition().x;
+     float Dy = Flappy->flappy_Transform.GetPosition().y - Floor->Transform.GetPosition().y;
+     float D = (sqrt((Dx * Dx) + (Dy * Dy)));
 
-       if ((D == Flappy->Radius + Floor->Radius) || (D == Flappy->Radius + Floor->Radius))//circle collision check
-       {
-           phi.AABBIntersection(Flappy->BoxCollider, Floor->BoxCollider);
+     if ((D == Flappy->Radius + Floor->Radius) || (D == Flappy->Radius - Floor->Radius))//circle collision check
+     {
+         if (phi.AABBIntersection(Flappy->BoxCollider, Floor->BoxCollider))
+         {
 
-       }
-      
-     
-       
-     
-    phi.Move(Flappy->flappy_Transform, (1, 0, 0));
+
+        }
+
+     }
+
+
+
+
+     phi.Move(Flappy->flappy_Transform, vec3(1, 0, 0));//
 
      //draw text
-    UpdateText("Small Red", 50, 10, m_pSmallFont, { 255,0,0 });
-    UpdateText("Small Blue", 50, 40, m_pSmallFont, { 0,0,255 });
+     UpdateText("Small Red", 50, 10, m_pSmallFont, { 255,0,0 });
+     UpdateText("Small Blue", 50, 40, m_pSmallFont, { 0,0,255 });
 
      char array[] = "Big White";
      UpdateText(array, 50, 140, m_pBigFont, { 0,255,0 });
@@ -246,14 +253,14 @@ public:
      std::string myString = "Big Green";
      UpdateText(myString, 50, 70, m_pBigFont, { 0,255,0 });
 
-     int testNumber = 1234 ;
+     int testNumber = 1234;
      std::string testString = "Test Number:  ";
      testString += std::to_string(testNumber);
      UpdateText(testString, 50, 210, m_pBigFont, { 255,255,255 });
 
-    
+
      SDL_RenderPresent(m_Renderer);
 
      SDL_Delay(16);//milliseconds
-
  }
+

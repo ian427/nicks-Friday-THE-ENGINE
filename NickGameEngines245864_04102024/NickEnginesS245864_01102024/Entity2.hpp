@@ -25,7 +25,7 @@ public:
 	{
 		
 		BoxCollider = new Collider(flappy_Transform);
-		//Map = new Bitmap();
+		Map = new Bitmap(m_Renderer, "assets/monster.bmp", 100, 100);
 		
 	}
 	~Bird()
