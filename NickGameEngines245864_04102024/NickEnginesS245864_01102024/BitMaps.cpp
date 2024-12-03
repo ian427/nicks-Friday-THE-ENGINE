@@ -40,7 +40,7 @@ Bitmap::Bitmap(SDL_Renderer* renderer, std::string fileName, int xpos, int ypos,
 		{
 			//error check
 			
-			DeBug::Log()->printDebug(DeBug::Verbosity::yellow, "TEXTURE not loaded %s, %d", fileName.c_str(), 3);
+			DeBug::Log()->printDebug(DeBug::Verbosity::yellow, "TEXTURE not loaded %s, %d", fileName.c_str(), 2);
 			printf("%\n", SDL_GetError());
 
 		}

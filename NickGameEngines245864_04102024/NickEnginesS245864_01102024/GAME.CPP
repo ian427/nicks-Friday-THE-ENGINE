@@ -1,10 +1,11 @@
 #include <SDL.h>
 #include <iostream>
 #include "Game.h"
+
 //#include "BitMaps.h"//nuke later
 #include "Debug.h" //|4|
 #include "Entity2.hpp"
- #include "physics.h"
+
 class Base {
 public:
     virtual void display() const { // Virtual function for polymorphism
@@ -17,7 +18,7 @@ public:
 {  
      
     m_Window = nullptr;
-    m_Renderer = nullptr;
+   // m_Renderer = nullptr;
 
     //start up
     SDL_Init(SDL_INIT_VIDEO);
@@ -63,16 +64,17 @@ public:
    // Entitys.push_back(&Flappy);
    // Entitys.push_back(&TopPipe1);
     // create all objects
-    TopPipe1 = new Pipe();
+    TopPipe1 = new Pipe(true);
     Pipes.push_back(TopPipe1);    // Push the pointer into the vector
-
+    BottomPipe1 = new Pipe(false);
+    Pipes.push_back(BottomPipe1);
    m_monster = new Bitmap(m_Renderer , "assets/monster.bmp", 100, 100);
    // m_monsterTrans = new Bitmap(m_Renderer ,"assets/monster.bmp", 200, 100);
     //m_monsterTransKeyed = new Bitmap(m_Renderer ,"assets/monster.bmp", 300, 100); 
   
    Flappy = new Bird();
+  
     
-    TopPipe1->Map = new Bitmap(m_Renderer, "assets/monster.bmp", 100, 100);////////////////////// move to constructer /////////////////////////////////////////////////
      //read in the font
     m_pSmallFont = TTF_OpenFont("assets/DejaVuSans.ttf",15); //04-02
     m_pBigFont = TTF_OpenFont("assets/DejaVuSans.ttf",50); //04-02   
@@ -234,7 +236,7 @@ public:
          {
 
 
-        }
+         }
 
      }
 

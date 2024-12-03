@@ -18,9 +18,10 @@ int main(int argc, char* argv[])
 {	
 	//DeBug::Log()->printDebug(DeBug::Verbosity::note, "entered Main , %d",  1);
 
-	Bird TestBird;
+	//Bird TestBird;//
+	Bird Flappy;// cant load texture on object with no renderer
 	EventSystem eventSyetem;
-	eventSyetem.AddListener(&TestBird);
+	eventSyetem.AddListener(&Flappy);
 
 	eventSyetem.AddEvent(TEST_EVENT, new Event("hello world"));
 

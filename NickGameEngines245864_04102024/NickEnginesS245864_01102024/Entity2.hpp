@@ -2,7 +2,10 @@
 #include "BitMaps.h"
 #include "MyEventTypes.hpp"
 #include "EventHandler.h"
+ #include "physics.h"
 
+
+class SDL_Renderer;
 
 
 class Bird : public I_EventHandeler 
@@ -15,10 +18,11 @@ public:
 	//phiysics check
 
 	Collider* BoxCollider;
+	Physics phi;
 	Bitmap* Map;
 	Transform flappy_Transform;
 	float Radius;
-	
+	SDL_Renderer* m_Renderer;
 	
 
 	Bird()
@@ -43,6 +47,7 @@ public:
 			break;
 		case APPLY_GRAVITY:
 			
+			phi.Gravity(flappy_Transform);
 			break;
 		default:
 			break;
@@ -53,6 +58,7 @@ public:
 
 class Pipe
 {
+	bool topPipe  = true;
 public:
 	//bitmap
 	//collider 
@@ -60,7 +66,27 @@ public:
 	Collider* BoxCollider;
 	float Radius;
 	Transform Transform;
+	SDL_Renderer* m_Renderer;
+	Pipe(bool value) : topPipe(value) 
+	{
+		BoxCollider = new Collider(Transform);
+		if (topPipe)
+		{
+			Map = new Bitmap(m_Renderer, "assets/Pipes3Top.png", 100, 1000);// loads top pipe png
+		}
+		else
+		{
+			Map = new Bitmap(m_Renderer, "assets/Pipes3Bottom.png", 100, 1000);//loads bottom pipe png
+		}
+		
+	}
+	~Pipe()
+	{
+
+
+	}
 };
+
 class Ground 
 {
 public:
@@ -70,6 +96,17 @@ public:
 	Collider* BoxCollider;
 	float Radius;
 	Transform Transform;
+	SDL_Renderer* m_Renderer;
+	Ground()
+	{
+		BoxCollider = new Collider(Transform);
+		Map = new Bitmap(m_Renderer, "assets/Ground.png", 80, 640);
+	}
+	~Ground()
+	{
+
+
+    }
 };
 class UI 
 {
@@ -80,4 +117,14 @@ public:
 	Collider* BoxCollider;
 	float Radius;
 	Transform Transform;
+	SDL_Renderer* m_Renderer;
+	UI()
+	{
+		BoxCollider = new Collider(Transform);
+		Map = new Bitmap(m_Renderer, "assets/UI.png", 100, 100);
+	}
+	~UI()
+	{
+
+	}
 };

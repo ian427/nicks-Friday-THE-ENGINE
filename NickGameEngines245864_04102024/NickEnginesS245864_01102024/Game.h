@@ -5,7 +5,7 @@
 
 class Bitmap;
 class SDL_Window;
-class SDL_Renderer;
+
 class Bird;
 class Pipe;
 class UI;
@@ -14,16 +14,18 @@ class Ground;
 class Game
 {
 private:
-	SDL_Window *m_Window;
 	SDL_Renderer* m_Renderer;
+	SDL_Window *m_Window;
+	//SDL_Renderer* m_Renderer;
 		bool m_running;
 		//bitmaps
 		Bitmap* m_monster;
 		Bitmap* m_monsterTrans;
 		Bitmap* m_monsterTransKeyed;
-
+		
 		Bird* Flappy;
 		Pipe* TopPipe1;
+		Pipe* BottomPipe1;
 		std::vector<Pipe*>Pipes;
 		UI* Celling;
 		Ground* Floor;

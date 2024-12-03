@@ -58,7 +58,7 @@ bool Physics::AABBIntersection(Collider* Collider1 , Collider* Collider2)
 
         (Collider1->TL.y >= Collider2->TL.y && Collider1->TR.y >= Collider2->TL.y) ||//check height
         (Collider1->TR.y >= Collider2->TR.y && Collider1->TL.y >= Collider2->TR.y) ||
-        (Collider1->BL.y >= Collider2->BL.y && Collider1->BR.y >= Collider2->BL.y) ||
+        (Collider1->BL.y >= Collider2->BL.y && Collider1->BR.y >= Collider2->BL.y) ||/////////////////////////exception
         (Collider1->BR.y >= Collider2->BR.y && Collider1->BL.y >= Collider2->BR.y))
     {
         return true;
