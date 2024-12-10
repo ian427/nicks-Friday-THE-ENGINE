@@ -2,13 +2,41 @@
 #include "BitMaps.h"
 #include "MyEventTypes.hpp"
 #include "EventHandler.h"
- #include "physics.h"
+#include "physics.h"
 
 
-class SDL_Renderer;
+struct SDL_Renderer;
+
+class BaseEntity
+{
+private:
+	Collider* collider;
+	Bitmap* Map;
+	Transform _transform;
+	float Radius;
+	SDL_Renderer* m_Renderer;
+public:
+	Transform& GetTransform() { return _transform; }
+void Draw()
+	{
+		Map->m_x = _transform.GetPosition().x;
+		Map->m_y = _transform.GetPosition().y;
+		Map->draw();
+	}
+Collider* GetCollider()
+{
+	return collider;
+}
+float GetRadius()
+{
+	return Radius;
+}
 
 
-class Bird : public I_EventHandeler 
+	
+};
+
+class Bird : public I_EventHandeler , public BaseEntity
 {
 public:
 	//collider 
@@ -18,45 +46,61 @@ public:
 	//phiysics check
 
 	Collider* BoxCollider;
-	Physics phi;
+	Physics phi;//anything that needs to move
 	Bitmap* Map;
-	Transform flappy_Transform;
-	float Radius;
+	Transform Transform{ vec3{320.0f, 240.0f, 0.0f} };
+	float Radius{ 10.0f };
 	SDL_Renderer* m_Renderer;
 	
 
-	Bird()
+	Bird(SDL_Renderer* renderer) : m_Renderer{renderer}, BoxCollider{new Collider(Transform)}
 	{
-		
-		BoxCollider = new Collider(flappy_Transform);
-		Map = new Bitmap(m_Renderer, "assets/monster.bmp", 100, 100);
-		
+		Map = new Bitmap(m_Renderer, "assets/Flappy.bmp", 320.0f, 240.0f);
 	}
+
 	~Bird()
 	{
 		delete BoxCollider;  
 		//delete Map;
 	}
 	
+
 	void OnEvent(MyEventTypes eventType, Event* data)
 	{
 		switch (eventType)
 		{
 		case TEST_EVENT:
-			cout << "Bird on event "<< data->name << endl;
+			std::cout << "Bird on event " << data->name << '\n';
 			break;
 		case APPLY_GRAVITY:
 			
-			phi.Gravity(flappy_Transform);
+			phi.Gravity(Transform);
 			break;
 		default:
 			break;
 		}
 	}
+	bool CollisionCheck( BaseEntity* CollidingAgainst)// needs to the the derived class
+	{//calculates the position and hoe far apart so we can find where to check radii from 
+		float Dx = Transform.GetPosition().x - CollidingAgainst->GetTransform().GetPosition().x;
+		float Dy = Transform.GetPosition().y - CollidingAgainst->GetTransform().GetPosition().y;
+		float D = (sqrt((Dx * Dx) + (Dy * Dy)));
 
+		if ((D == Radius + CollidingAgainst->GetRadius()) || (D == Radius - CollidingAgainst->GetRadius()))//circle collision check
+		{
+			if (phi.AABBIntersection(BoxCollider, CollidingAgainst->GetCollider()))
+			{
+
+
+			}
+
+		}
+
+	}
 };
 
-class Pipe
+class Pipe : public BaseEntity
+
 {
 	bool topPipe  = true;
 public:
@@ -71,7 +115,7 @@ public:
 	{
 		BoxCollider = new Collider(Transform);
 		if (topPipe)
-		{
+		{   
 			Map = new Bitmap(m_Renderer, "assets/Pipes3Top.png", 100, 1000);// loads top pipe png
 		}
 		else

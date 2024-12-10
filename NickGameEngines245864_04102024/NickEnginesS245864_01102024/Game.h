@@ -3,8 +3,11 @@
 #include "SDL_ttf.h"
 #include <vector>
 
+#include "EventHandler.h"
+
 class Bitmap;
-class SDL_Window;
+struct SDL_Window;
+struct SDL_Renderer;
 
 class Bird;
 class Pipe;
@@ -29,6 +32,8 @@ private:
 		std::vector<Pipe*>Pipes;
 		UI* Celling;
 		Ground* Floor;
+		EventSystem* eventSystem;
+		Physics* phi;
 		float Time;
 
 		TTF_Font* m_pSmallFont;

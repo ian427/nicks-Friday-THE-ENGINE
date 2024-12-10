@@ -1,2 +1,47 @@
-﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (NickGraphicss245864_01102024.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  NickGraphicss245864_01102024.vcxproj -> C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\x64\Debug\NickEnginesS245864_01102024.exe
+﻿  Game.cpp
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.h(36,10): error C2143: syntax error: missing ';' before '*'
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.h(36,3): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.h(36,15): error C2238: unexpected token(s) preceding ';'
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(22,38): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(22,38): warning C4244:         with
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(22,38): warning C4244:         [
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(22,38): warning C4244:             T=float
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(22,38): warning C4244:         ]
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(23,38): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(23,38): warning C4244:         with
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(23,38): warning C4244:         [
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(23,38): warning C4244:             T=float
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(23,38): warning C4244:         ]
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(58,61): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(58,53): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(54,5): error C2065: 'phi': undeclared identifier
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(87,17): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(88,17): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(92,13): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(93,13): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(96,21): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(97,21): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(100,19): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(101,19): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(174,17): warning C4778: 'printf' : unterminated format string '%\n'
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(174,36): warning C4474: 'printf' : too many arguments passed for format string
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(185,25): warning C4778: 'printf' : unterminated format string '%\n'
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(185,44): warning C4474: 'printf' : too many arguments passed for format string
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(256,6): error C2065: 'phi': undeclared identifier
+  Master.cpp
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.h(36,10): error C2143: syntax error: missing ';' before '*'
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.h(36,3): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.h(36,15): error C2238: unexpected token(s) preceding ';'
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(22,38): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(22,38): warning C4244:         with
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(22,38): warning C4244:         [
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(22,38): warning C4244:             T=float
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(22,38): warning C4244:         ]
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(23,38): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(23,38): warning C4244:         with
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(23,38): warning C4244:         [
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(23,38): warning C4244:             T=float
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(23,38): warning C4244:         ]
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(58,61): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(58,53): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  Generating Code...

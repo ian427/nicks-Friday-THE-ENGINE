@@ -1,7 +1,7 @@
 #include "Physics.h"
 #include "Debug.h" //|6|
 
-void Physics::ApplyForces(Transform transform)
+void Physics::ApplyForces(Transform& transform)
 {
     vec3 currentForce = vec3(0);
 
@@ -17,7 +17,7 @@ void Physics::ApplyForces(Transform transform)
     
     //apply currentFocre to transform
     vec3 Pos = transform.GetPosition();
-    Pos + currentForce;
+    transform.SetPosition(Pos + currentForce);
 }
 
 void Physics::Gravity(Transform transform)
@@ -74,12 +74,20 @@ void Physics::UpdatePhysics()
 {
 }
 
-void  Physics::Move(Transform transform, vec3 movement)
+void  Physics::Move(Transform& transform, vec3 movement)
 {
     //set impulse apply movment
     
     impulses.push_back(movement);
-    void ApplyForces(Transform transform);
+    ApplyForces(transform);
 }
+/*
+void Physics::CollisionCheck(BaseEntity Object, BaseEntity CollidingAgainst)
+{
+
+
+}*/
+
+
 
 

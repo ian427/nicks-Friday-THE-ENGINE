@@ -21,7 +21,7 @@ public:
 	vec3 BR = vec3(1, -1, 0);
 	float Width;
 	float Height;
-	Collider(Transform& const t)
+	Collider(const Transform&  t)
 	{
 		vec3 Pos = t.GetPosition();
 		vec3 Scale = t.GetScale();

@@ -5,12 +5,8 @@
 #include <vector>
 #include "MyEventTypes.hpp"
 
-
-
-using namespace std;
-
-
-#include "MyEventTypes.hpp"
+using std::string;
+using std::vector;
 
 class Event
 {
@@ -29,16 +25,13 @@ public:
 	virtual void OnEvent(MyEventTypes eventType, Event* data) = 0;
 };
 
-
-
-
-
 class EventSystem
 {
 public:
 
 	vector<I_EventHandeler*> EventListeners;//list of events
-	vector<pair<MyEventTypes, Event*>> EventPool;
+	vector<std::pair<MyEventTypes, Event*>> EventPool;
+
 	void HandelEvents()
 	{
 		for (size_t j = 0; j < EventPool.size(); j++)
@@ -50,9 +43,10 @@ public:
 			}
 		}
 	}
+
 	void AddEvent(MyEventTypes eventType, Event* data)
 	{
-		EventPool.push_back(make_pair(eventType, data));
+		EventPool.push_back(std::make_pair(eventType, data));
 	}
 
 	void AddListener(I_EventHandeler* listener)

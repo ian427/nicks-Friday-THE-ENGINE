@@ -6,14 +6,6 @@
 #include "Debug.h" //|4|
 #include "Entity2.hpp"
 
-class Base {
-public:
-    virtual void display() const { // Virtual function for polymorphism
-        
-    }
-
-    virtual ~Base() = default; // Virtual destructor for proper cleanup
-};
  Game::Game()
 {  
      
@@ -56,8 +48,14 @@ public:
         getchar();
         return;
 
-    }
-    
+    }	
+
+    eventSystem = new EventSystem();
+    phi = new Physics();
+    eventSystem->AddEvent(TEST_EVENT, new Event("Gravity"));
+
+
+    Celling = new UI();
     
    
 
@@ -72,8 +70,8 @@ public:
    // m_monsterTrans = new Bitmap(m_Renderer ,"assets/monster.bmp", 200, 100);
     //m_monsterTransKeyed = new Bitmap(m_Renderer ,"assets/monster.bmp", 300, 100); 
   
-   Flappy = new Bird();
-  
+   Flappy = new Bird(m_Renderer);
+   eventSystem->AddListener(Flappy);
     
      //read in the font
     m_pSmallFont = TTF_OpenFont("assets/DejaVuSans.ttf",15); //04-02
@@ -91,21 +89,22 @@ public:
         Pipes[i]->Radius = (sqrt((A * A) + (B * B))) / 2;
     }
     //bird
-   /* float A = Flappy.Map->m_x;
-    float B = Flappy.Map->m_y;
-    Flappy.Radius = (sqrt((A * A) + (B * B))) / 2;
+    float A = Flappy->Map->m_x;
+    float B = Flappy->Map->m_y;
+    Flappy->Radius = (sqrt((A * A) + (B * B))) / 2;
     //ui
-    A = Celling.Map->m_x;
-    B = Celling.Map->m_y;
-    Celling.Radius = (sqrt((A * A) + (B * B))) / 2;
+    A = Celling->Map->m_x;
+    B = Celling->Map->m_y;
+    Celling->Radius = (sqrt((A * A) + (B * B))) / 2;
 
-    A = Floor.Map->m_x;
-    B = Floor.Map->m_y;
-    Floor.Radius = (sqrt((A * A) + (B * B))) / 2;*/
+    A = Floor->Map->m_x;
+    B = Floor->Map->m_y;
+    Floor->Radius = (sqrt((A * A) + (B * B))) / 2;
    
 
  }
  
+
  Game::~Game()
  {
      
@@ -216,50 +215,65 @@ public:
      //CheckEvents();
      SDL_RenderClear(m_Renderer);
      //show bitmaps
-     Flappy->Map->draw();
+     
      //_monster ->draw();
      //_monsterTrans->draw();
      //_monsterTransKeyed->draw();
+    eventSystem->HandelEvents();
 
+     Flappy->Transform.GetPosition();
 
-     Flappy->flappy_Transform.GetPosition();
-
-     Physics phi;
-     //collision check/////////////////////////////////////////////////////////////pipes
-     float Dx = Flappy->flappy_Transform.GetPosition().x - Floor->Transform.GetPosition().x;
-     float Dy = Flappy->flappy_Transform.GetPosition().y - Floor->Transform.GetPosition().y;
-     float D = (sqrt((Dx * Dx) + (Dy * Dy)));
-
-     if ((D == Flappy->Radius + Floor->Radius) || (D == Flappy->Radius - Floor->Radius))//circle collision check
+     
+    
+    
+     /*
+     if ((D == Flappy->Radius + Floor->Radius) || (D == Flappy->Radius - Celling->Radius))//circle collision check
      {
-         if (phi.AABBIntersection(Flappy->BoxCollider, Floor->BoxCollider))
+         if (phi.AABBIntersection(Flappy->BoxCollider, Celling->BoxCollider))
          {
 
 
          }
 
      }
+     for (int i = 0; i < Pipes.size(); i++)
+     {
+         if ((D == Flappy->Radius + Floor->Radius) || (D == Flappy->Radius - Celling->Radius))//circle collision check
+         {
+             if (phi.AABBIntersection(Flappy->BoxCollider, Pipes[i]->BoxCollider))
+             {
 
 
+             }
+
+         }
+
+     }*/
+
+     
 
 
-     phi.Move(Flappy->flappy_Transform, vec3(1, 0, 0));//
+     phi->Move(Flappy->Transform, vec3(1, 0, 0));//
 
-     //draw text
-     UpdateText("Small Red", 50, 10, m_pSmallFont, { 255,0,0 });
-     UpdateText("Small Blue", 50, 40, m_pSmallFont, { 0,0,255 });
+     ////draw text
+     //UpdateText("Small Red", 50, 10, m_pSmallFont, { 255,0,0 });
+     //UpdateText("Small Blue", 50, 40, m_pSmallFont, { 0,0,255 });
 
-     char array[] = "Big White";
-     UpdateText(array, 50, 140, m_pBigFont, { 0,255,0 });
+     //char array[] = "Big White";
+     //UpdateText(array, 50, 140, m_pBigFont, { 0,255,0 });
 
-     std::string myString = "Big Green";
-     UpdateText(myString, 50, 70, m_pBigFont, { 0,255,0 });
+     //std::string myString = "Big Green";
+     //UpdateText(myString, 50, 70, m_pBigFont, { 0,255,0 });
 
-     int testNumber = 1234;
-     std::string testString = "Test Number:  ";
-     testString += std::to_string(testNumber);
-     UpdateText(testString, 50, 210, m_pBigFont, { 255,255,255 });
-
+     //int testNumber = 1234;
+     //std::string testString = "Test Number:  ";
+     //testString += std::to_string(testNumber);
+     //UpdateText(testString, 50, 210, m_pBigFont, { 255,255,255 });
+        //collision check/////////////////////////////////////////////////////////////pipes
+     Flappy->CollisionCheck(TopPipe1);
+     
+     //m_monster->draw();
+     Flappy->Draw();
 
      SDL_RenderPresent(m_Renderer);
 

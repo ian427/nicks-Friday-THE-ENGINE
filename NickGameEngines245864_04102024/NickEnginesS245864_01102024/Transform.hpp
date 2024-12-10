@@ -30,7 +30,7 @@ public:
 
 
 
-	vec3 GetPosition()
+	vec3 GetPosition() const
 	{
 		return  m_position;
 
@@ -41,7 +41,7 @@ public:
 		m_position = newpos;
 
 	}
-	vec3 GetRotation()
+	vec3 GetRotation() const
 	{
 		return  m_rotation;
 
@@ -52,7 +52,7 @@ public:
 
 
 	}
-	vec3 GetScale()
+	vec3 GetScale() const
 	{
 		return  m_scale;
 

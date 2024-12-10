@@ -72,8 +72,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Users\Games\Desktop\NickGameEngines245864_04102024\SDL2-2.30.7\include;C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\SDL2_ttf-2.22.0\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\SDL2_ttf-2.22.0\lib\x64;C:\Users\Games\Desktop\NickGameEngines245864_04102024\SDL2-2.30.7\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)SDL2-2.30.7\include;$(SolutionDir)SDL2_ttf-2.22.0\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)SDL2_ttf-2.22.0\lib\x64;$(SolutionDir)SDL2-2.30.7\lib\x64;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LibraryPath>$(SolutionDir)SDL2_ttf-2.22.0\lib\x64;$(SolutionDir)SDL2-2.30.7\lib\x64;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+    <IncludePath>$(SolutionDir)SDL2-2.30.7\include;$(SolutionDir)SDL2_ttf-2.22.0\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -115,7 +119,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)\SDL2-2.30.7\lib\x64;$(SolutionDir)\glew-2.1.0\lib\Release\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;SDL2_ttf.lib</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

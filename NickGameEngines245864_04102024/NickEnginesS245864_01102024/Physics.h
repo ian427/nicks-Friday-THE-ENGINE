@@ -8,6 +8,7 @@
 #include<glm.hpp>
 #include "Components.h"
 #include <vector>
+
 using namespace glm;
 class Physics
 {
@@ -18,13 +19,13 @@ public :
 	float Mass;
 	
 	vec3 AccumulateForces(const std::vector<vec3> forces);
-	void ApplyForces(Transform transform);//to move
+	void ApplyForces(Transform& transform);//to move
 	void Gravity(Transform transform);
 
 	bool AABBIntersection (Collider* Collider1, Collider* Collider2);
 
 	void UpdatePhysics();
-	void Move(Transform transform, vec3 movement);
+	void Move(Transform& transform, vec3 movement);
 	
 private:
 	std::vector<vec3> forces;
