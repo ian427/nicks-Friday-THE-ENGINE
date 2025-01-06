@@ -2,7 +2,7 @@
 #define GAME_H
 #include "SDL_ttf.h"
 #include <vector>
-
+#include "physics.h"
 #include "EventHandler.h"
 
 class Bitmap;
@@ -13,6 +13,7 @@ class Bird;
 class Pipe;
 class UI;
 class Ground;
+class BaseEntity;
 
 class Game
 {
@@ -30,15 +31,17 @@ private:
 		Pipe* TopPipe1;
 		Pipe* BottomPipe1;
 		std::vector<Pipe*>Pipes;
+		std::vector<BaseEntity*>Entitys;
 		UI* Celling;
 		Ground* Floor;
 		EventSystem* eventSystem;
-		Physics* phi;
+		Physics* phi;/////////////////////////
 		float Time;
 
 		TTF_Font* m_pSmallFont;
 		TTF_Font* m_pBigFont;
 public:
+	///////////////////error
 	Game();
 	~Game();
 	void SetDisplayColour(int r, int g, int b, int a);

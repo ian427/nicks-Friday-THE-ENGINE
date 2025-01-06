@@ -1,0 +1,29 @@
+New  Log 
+Error 1: |error_yellow|TEXTURE not loaded assets/UI.bmp, 2 
+Error 2: |error_yellow|TEXTURE not loaded assets/Pipes3Top.bmp, 2 
+Error 3: |error_yellow|TEXTURE not loaded assets/Pipes3Bottom.bmp, 2 
+Error 4: |error_yellow|TEXTURE not loaded assets/Ground.bmp, 2 
+New  Log 
+Error 1: |error_yellow|TEXTURE not loaded assets/UI.bmp, 2 
+Error 2: |error_yellow|TEXTURE not loaded assets/Pipes3Top.bmp, 2 
+Error 3: |error_yellow|TEXTURE not loaded assets/Pipes3Bottom.bmp, 2 
+Error 4: |error_yellow|TEXTURE not loaded assets/Ground.bmp, 2 
+Error 5: |error_yellow|TEXTURE not loaded assets/UI.bmp, 2 
+New  Log 
+Error 1: |error_yellow|TEXTURE not loaded assets/UI.bmp, 2 
+Error 2: |error_yellow|TEXTURE not loaded assets/Pipes3Top.bmp, 2 
+Error 3: |error_yellow|TEXTURE not loaded assets/Pipes3Bottom.bmp, 2 
+Error 4: |error_yellow|TEXTURE not loaded assets/Ground.bmp, 2 
+Error 5: |error_yellow|TEXTURE not loaded assets/UI.bmp, 2 
+New  Log 
+Error 1: |error_yellow|TEXTURE not loaded assets/UI.bmp, 2 
+Error 2: |error_yellow|TEXTURE not loaded assets/Pipes3Top.bmp, 2 
+Error 3: |error_yellow|TEXTURE not loaded assets/Pipes3Bottom.bmp, 2 
+Error 4: |error_yellow|TEXTURE not loaded assets/Ground.bmp, 2 
+Error 5: |error_yellow|TEXTURE not loaded assets/UI.bmp, 2 
+New  Log 
+Error 1: |error_yellow|TEXTURE not loaded assets/UI.bmp, 2 
+Error 2: |error_yellow|TEXTURE not loaded assets/Pipes3Top.bmp, 2 
+Error 3: |error_yellow|TEXTURE not loaded assets/Pipes3Bottom.bmp, 2 
+Error 4: |error_yellow|TEXTURE not loaded assets/Ground.bmp, 2 
+Error 5: |error_yellow|TEXTURE not loaded assets/UI.bmp, 2 

@@ -113,12 +113,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\glew-2.1.0\include\GL;..\glm;..\SDL2-2.30.7\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\glew-2.1.0\include\GL;..\glm;..\SDL2-2.30.7\include;..\imgui-master;..\imgui_sdl-master;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)\SDL2-2.30.7\lib\x64;$(SolutionDir)\glew-2.1.0\lib\Release\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\SDL2-2.30.7\lib\x64;$(SolutionDir)\glew-2.1.0\lib\Release\x64;$(SolutionDir)\imgui-master;$(SolutionDir)\imgui_sdl-master;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -140,9 +140,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\imgui-master\backends\imgui_impl_sdl.cpp" />
+    <ClCompile Include="..\imgui-master\imgui.cpp" />
+    <ClCompile Include="..\imgui-master\imgui_demo.cpp" />
+    <ClCompile Include="..\imgui-master\imgui_draw.cpp" />
+    <ClCompile Include="..\imgui-master\imgui_tables.cpp" />
+    <ClCompile Include="..\imgui-master\imgui_widgets.cpp" />
+    <ClCompile Include="..\imgui_sdl-master\imgui_sdl.cpp" />
     <ClCompile Include="BitMaps.cpp" />
     <ClCompile Include="Components.cpp" />
     <ClCompile Include="Debug.cpp" />
+    <ClCompile Include="Entity2.cpp" />
     <ClCompile Include="EventHandler.cpp" />
     <ClCompile Include="MyEventTypes.hpp" />
     <ClCompile Include="Game.cpp" />
@@ -152,6 +160,14 @@
     <ClCompile Include="TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\imgui-master\backends\imgui_impl_sdl.h" />
+    <ClInclude Include="..\imgui-master\imconfig.h" />
+    <ClInclude Include="..\imgui-master\imgui.h" />
+    <ClInclude Include="..\imgui-master\imgui_internal.h" />
+    <ClInclude Include="..\imgui-master\imstb_rectpack.h" />
+    <ClInclude Include="..\imgui-master\imstb_textedit.h" />
+    <ClInclude Include="..\imgui-master\imstb_truetype.h" />
+    <ClInclude Include="..\imgui_sdl-master\imgui_sdl.h" />
     <ClInclude Include="BitMaps.h" />
     <ClInclude Include="Components.h" />
     <ClInclude Include="Debug.h" />

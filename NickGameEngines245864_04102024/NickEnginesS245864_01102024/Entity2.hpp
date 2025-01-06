@@ -4,39 +4,45 @@
 #include "EventHandler.h"
 #include "physics.h"
 
-
+//base class in vector with virtual methods each child of base overloads that method
 struct SDL_Renderer;
 
 class BaseEntity
 {
-private:
-	Collider* collider;
-	Bitmap* Map;
-	Transform _transform;
-	float Radius;
+protected:
+	
+	 
 	SDL_Renderer* m_Renderer;
 public:
-	Transform& GetTransform() { return _transform; }
-void Draw()
+	Physics phi;//copy
+	 float Radius;
+	 Bitmap* Map;
+	 Collider*  BoxCollider;
+	 Transform transform;//26,27 getting this transforms data not flappys
+	 Transform& GetTransform() { return transform; }
+	 virtual void Draw()//genral class ?
 	{
-		Map->m_x = _transform.GetPosition().x;
-		Map->m_y = _transform.GetPosition().y;
+		Map->m_x = transform.GetPosition().x;
+		Map->m_y = transform.GetPosition().y;
 		Map->draw();
 	}
-Collider* GetCollider()
-{
-	return collider;
-}
+	 
+	 Collider* GetCollider()
+	 {
+		return BoxCollider;
+	 }
 float GetRadius()
 {
 	return Radius;
 }
 
+virtual void ApplyContinuousMoment() =0;
+
 
 	
 };
 
-class Bird : public I_EventHandeler , public BaseEntity
+class Bird : public I_EventHandeler , public virtual BaseEntity
 {
 public:
 	//collider 
@@ -45,23 +51,32 @@ public:
 	//bitmap
 	//phiysics check
 
-	Collider* BoxCollider;
-	Physics phi;//anything that needs to move
-	Bitmap* Map;
-	Transform Transform{ vec3{320.0f, 240.0f, 0.0f} };
+	
+	//anything that needs to move
+	
+	//Transform transform;
+	//Transform Transform{ vec3{320.0f, 240.0f, 0.0f} };
 	float Radius{ 10.0f };
 	SDL_Renderer* m_Renderer;
 	
 
-	Bird(SDL_Renderer* renderer) : m_Renderer{renderer}, BoxCollider{new Collider(Transform)}
+	Bird(SDL_Renderer* renderer) : m_Renderer{renderer}
 	{
-		Map = new Bitmap(m_Renderer, "assets/Flappy.bmp", 320.0f, 240.0f);
+		transform = vec3{ 320.0f, 240.0f, 0.0f };
+		Map = new Bitmap(m_Renderer, "assets/Flappy.bmp", transform.GetPosition().x, transform.GetPosition().y);
+		BoxCollider = new Collider(transform);
+		
 	}
 
 	~Bird()
 	{
 		delete BoxCollider;  
 		//delete Map;
+	}
+	
+	void ApplyContinuousMoment()
+	{
+		phi.ContinuousMoment(transform, vec3(0, -1, 0));
 	}
 	
 
@@ -72,25 +87,21 @@ public:
 		case TEST_EVENT:
 			std::cout << "Bird on event " << data->name << '\n';
 			break;
-		case APPLY_GRAVITY:
-			
-			phi.Gravity(Transform);
-			break;
 		default:
 			break;
 		}
 	}
 	bool CollisionCheck( BaseEntity* CollidingAgainst)// needs to the the derived class
 	{//calculates the position and hoe far apart so we can find where to check radii from 
-		float Dx = Transform.GetPosition().x - CollidingAgainst->GetTransform().GetPosition().x;
-		float Dy = Transform.GetPosition().y - CollidingAgainst->GetTransform().GetPosition().y;
+		float Dx = transform.GetPosition().x - CollidingAgainst->GetTransform().GetPosition().x;
+		float Dy = transform.GetPosition().y - CollidingAgainst->GetTransform().GetPosition().y;
 		float D = (sqrt((Dx * Dx) + (Dy * Dy)));
 
 		if ((D == Radius + CollidingAgainst->GetRadius()) || (D == Radius - CollidingAgainst->GetRadius()))//circle collision check
 		{
 			if (phi.AABBIntersection(BoxCollider, CollidingAgainst->GetCollider()))
 			{
-
+				return true;
 
 			}
 
@@ -99,15 +110,16 @@ public:
 	}
 };
 
-class Pipe : public BaseEntity
+class Pipe : public virtual BaseEntity
 
 {
 	bool topPipe  = true;
+	bool inuse = false; //spawning
 public:
 	//bitmap
 	//collider 
-	Bitmap* Map;
-	Collider* BoxCollider;
+	
+	//Collider* BoxCollider;
 	float Radius;
 	Transform Transform;
 	SDL_Renderer* m_Renderer;
@@ -116,11 +128,11 @@ public:
 		BoxCollider = new Collider(Transform);
 		if (topPipe)
 		{   
-			Map = new Bitmap(m_Renderer, "assets/Pipes3Top.png", 100, 1000);// loads top pipe png
+			Map = new Bitmap(m_Renderer, "assets/Pipes3Top.bmp", 100, 1000);// loads top pipe png
 		}
 		else
 		{
-			Map = new Bitmap(m_Renderer, "assets/Pipes3Bottom.png", 100, 1000);//loads bottom pipe png
+			Map = new Bitmap(m_Renderer, "assets/Pipes3Bottom.bmp", 100, 1000);//loads bottom pipe png
 		}
 		
 	}
@@ -129,46 +141,57 @@ public:
 
 
 	}
+	void ApplyContinuousMoment()
+	{
+		phi.ContinuousMoment(transform, vec3(-1,0, 0));
+	}
 };
 
-class Ground 
+class Ground : public virtual BaseEntity
 {
 public:
 	//bitmap
 	//collider 
-	Bitmap* Map;
-	Collider* BoxCollider;
+	
+	//Collider* BoxCollider;
 	float Radius;
 	Transform Transform;
 	SDL_Renderer* m_Renderer;
 	Ground()
 	{
 		BoxCollider = new Collider(Transform);
-		Map = new Bitmap(m_Renderer, "assets/Ground.png", 80, 640);
+		Map = new Bitmap(m_Renderer, "assets/Ground.bmp", 80, 640);
 	}
 	~Ground()
 	{
 
 
     }
+
+	void ApplyContinuousMoment()
+	{
+	}
 };
-class UI 
+class UI : public virtual BaseEntity
 {
 public:
 	//bitmap
 	//collider 
-	Bitmap* Map;
-	Collider* BoxCollider;
+	
+	//Collider* BoxCollider;
 	float Radius;
 	Transform Transform;
 	SDL_Renderer* m_Renderer;
 	UI()
 	{
 		BoxCollider = new Collider(Transform);
-		Map = new Bitmap(m_Renderer, "assets/UI.png", 100, 100);
+		Map = new Bitmap(m_Renderer, "assets/UI.bmp", 100, 100);
 	}
 	~UI()
 	{
 
+	}
+	void ApplyContinuousMoment()
+	{
 	}
 };

@@ -10,7 +10,7 @@ class Commponent //should this be an interface
 };
 
 
-class Collider : public Commponent
+ class Collider : public Commponent
 {
 private:
 

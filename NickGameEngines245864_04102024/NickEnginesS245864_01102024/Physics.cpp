@@ -20,10 +20,10 @@ void Physics::ApplyForces(Transform& transform)
     transform.SetPosition(Pos + currentForce);
 }
 
-void Physics::Gravity(Transform transform)
+ void Physics::ContinuousMoment(Transform transform, vec3 Move)
 {
     vec3 Pos = transform.GetPosition();
-    Pos + gravity;
+    Pos + Move;
      
 }
 

@@ -1,10 +1,14 @@
 #include <SDL.h>
 #include <iostream>
 #include "Game.h"
-
+#include "Entity2.hpp" 
 //#include "BitMaps.h"//nuke later
 #include "Debug.h" //|4|
-#include "Entity2.hpp"
+
+#include "imgui.h"
+#include "backends/imgui_impl_sdl.h"
+#include "imgui_sdl.h"
+#include "imgui_internal.h"
 
  Game::Game()
 {  
@@ -16,13 +20,13 @@
     SDL_Init(SDL_INIT_VIDEO);
     TTF_Init();//04-02
 
-    //CreateWindow
+    //CreateWindow//make configurable
     m_Window = SDL_CreateWindow(
         "Main Window",
         250, // XPosition
         50, // YPosition
-        640, //Width in pixels
-        480,  //height pixels
+        1280, //Width in pixels
+        720,  //height pixels
         0 //behaviour flags
     );
     if (!m_Window)
@@ -34,6 +38,7 @@
         return;
 
     }
+    
 
         m_Renderer = SDL_CreateRenderer(
         m_Window, //links to window
@@ -49,57 +54,60 @@
         return;
 
     }	
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    SDL_DisplayMode DisplayMode;
+    SDL_GetCurrentDisplayMode(0, &DisplayMode);
+    ImGuiSDL::Initialize(m_Renderer, DisplayMode.w, DisplayMode.h);
+    ImGuiIO& io = ImGui::GetIO();
+    (void)io;
+    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+    io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+    ImGui::StyleColorsDark();
+
+    ImGui_ImplSDL2_InitForOpenGL(m_Window, 0);///behaviour flag 0 ask nick
+
+    
 
     eventSystem = new EventSystem();
     phi = new Physics();
-    eventSystem->AddEvent(TEST_EVENT, new Event("Gravity"));
+    //eventSystem->AddEvent(APPLY_GRAVITY, new Event("Gravity"));
 
 
     Celling = new UI();
     
    
 
-   // Entitys.push_back(&Flappy);
-   // Entitys.push_back(&TopPipe1);
     // create all objects
     TopPipe1 = new Pipe(true);
-    Pipes.push_back(TopPipe1);    // Push the pointer into the vector
+    Entitys.push_back(TopPipe1);    // Push the pointer into the vector
     BottomPipe1 = new Pipe(false);
-    Pipes.push_back(BottomPipe1);
-   m_monster = new Bitmap(m_Renderer , "assets/monster.bmp", 100, 100);
-   // m_monsterTrans = new Bitmap(m_Renderer ,"assets/monster.bmp", 200, 100);
-    //m_monsterTransKeyed = new Bitmap(m_Renderer ,"assets/monster.bmp", 300, 100); 
-  
+    Entitys.push_back(BottomPipe1);
+   
    Flappy = new Bird(m_Renderer);
    eventSystem->AddListener(Flappy);
-    
+   Entitys.push_back(Flappy);
      //read in the font
     m_pSmallFont = TTF_OpenFont("assets/DejaVuSans.ttf",15); //04-02
     m_pBigFont = TTF_OpenFont("assets/DejaVuSans.ttf",50); //04-02   
 
     Floor = new Ground();
-   
+    Entitys.push_back(Floor);
+    Celling = new UI();
+    Entitys.push_back(Celling);
+ 
     
     //calculates raduius that we sould do a collision check in 
 
-    for (int i = 0; i < Pipes.size(); i++)
-    {
-        float A = Pipes[i]->Map->m_x;
-        float B = Pipes[i]->Map->m_y;
-        Pipes[i]->Radius = (sqrt((A * A) + (B * B))) / 2;
-    }
-    //bird
-    float A = Flappy->Map->m_x;
-    float B = Flappy->Map->m_y;
-    Flappy->Radius = (sqrt((A * A) + (B * B))) / 2;
-    //ui
-    A = Celling->Map->m_x;
-    B = Celling->Map->m_y;
-    Celling->Radius = (sqrt((A * A) + (B * B))) / 2;
+   
 
-    A = Floor->Map->m_x;
-    B = Floor->Map->m_y;
-    Floor->Radius = (sqrt((A * A) + (B * B))) / 2;
+    for (int i = 0; i < Entitys.size(); i++)
+    {
+        float A = Entitys[i]->Map->m_x;
+        float B = Entitys[i]->Map->m_y;
+        Entitys[i]->Radius = (sqrt((A * A) + (B * B))) / 2;
+    }
    
 
  }
@@ -214,6 +222,17 @@
 
      //CheckEvents();
      SDL_RenderClear(m_Renderer);
+
+     ImGui::NewFrame();
+     ImGui_ImplSDL2_NewFrame(m_Window);
+     bool show = true;
+     //ShowExampleAppleDockSpace(&show);
+
+     ImGui::ShowDemoWindow(nullptr);
+
+     ImGui::Render();
+     ImGuiSDL::Render(ImGui::GetDrawData());
+
      //show bitmaps
      
      //_monster ->draw();
@@ -221,7 +240,7 @@
      //_monsterTransKeyed->draw();
     eventSystem->HandelEvents();
 
-     Flappy->Transform.GetPosition();
+     Flappy->transform.GetPosition();
 
      
     
@@ -253,8 +272,11 @@
      
 
 
-     phi->Move(Flappy->Transform, vec3(1, 0, 0));//
-
+    phi->Move(Flappy->transform, vec3(1, 0, 0));
+     for (int i = 0; i < Entitys.size(); i++)
+     {
+         Entitys[i]->Draw();
+     }
      ////draw text
      //UpdateText("Small Red", 50, 10, m_pSmallFont, { 255,0,0 });
      //UpdateText("Small Blue", 50, 40, m_pSmallFont, { 0,0,255 });
@@ -269,11 +291,18 @@
      //std::string testString = "Test Number:  ";
      //testString += std::to_string(testNumber);
      //UpdateText(testString, 50, 210, m_pBigFont, { 255,255,255 });
-        //collision check/////////////////////////////////////////////////////////////pipes
-     Flappy->CollisionCheck(TopPipe1);
+        //collision check/////////////////////////////////////////////////////////////
+     for (int i = 0; i < Entitys.size(); i++){}
      
+     
+    
+      Flappy->CollisionCheck(TopPipe1);
      //m_monster->draw();
-     Flappy->Draw();
+      for (int i = 0; i < Entitys.size(); i++)
+      { Entitys[i]->ApplyContinuousMoment();}
+       
+      
+    
 
      SDL_RenderPresent(m_Renderer);
 

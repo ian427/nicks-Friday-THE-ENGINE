@@ -42,7 +42,11 @@ public:
 					EventPool[j].second);
 			}
 		}
+		//clear the event pool
+		EventPool.clear();
 	}
+
+		
 
 	void AddEvent(MyEventTypes eventType, Event* data)
 	{

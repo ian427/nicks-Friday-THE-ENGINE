@@ -1,25 +1,40 @@
-#include <iostream>
-
-class MyClass {
-private:
-    bool flag;
-
-public:
-    // Constructor to initialize flag
-    MyClass(bool value) : flag(value) {}
-
-    // Getter to check the value of flag
-    bool getFlag() const {
-        return flag;
+//todo
+//get gravity event working
+// remove events from event system
+// fix debug logger file
+public class Thingy
+{
+    public virtual void StepA()
+    {
+        Console.Out.WriteLine("Zing");
     }
-};
 
-int main() {
-    MyClass objTrue(true);  // Initializes flag as true
-    MyClass objFalse(false); // Initializes flag as false
+    public void Action()
+    {
+        StepA();
+        Console.Out.WriteLine("A Thingy in Action.");
+    }
+}
 
-    std::cout << "Object 1 flag: " << objTrue.getFlag() << std::endl;
-    std::cout << "Object 2 flag: " << objFalse.getFlag() << std::endl;
+public class Widget : Thingy
+{
+    public override void StepA()
+    {
+        Console.Out.WriteLine("Wiggy");
+    }
+}
 
-    return 0;
+class Program
+{
+    static void Main(string[] args)
+    {
+        Thingy thingy = new Thingy();
+        Widget widget = new Widget();
+
+        thingy.Action();
+        widget.Action();
+
+        Console.Out.WriteLine("Press any key to quit.");
+        Console.ReadKey();
+    }
 }

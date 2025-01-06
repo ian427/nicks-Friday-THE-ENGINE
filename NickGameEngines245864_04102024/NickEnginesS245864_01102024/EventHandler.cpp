@@ -12,7 +12,8 @@
 //	 Events.push_back(EventType);
 //}
 
-int i = TEST_EVENT;
+int i = APPLY_GRAVITY;
+
 
 //on start check&&create new event list
 //on call add event check for event list add to that list
