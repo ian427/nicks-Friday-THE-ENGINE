@@ -3,6 +3,6 @@
 enum MyEventTypes
 {
 	TEST_EVENT,
-	APPLY_GRAVITY
+	SPACE_PRESSED
 
 };

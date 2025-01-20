@@ -9,6 +9,7 @@
 #include "backends/imgui_impl_sdl.h"
 #include "imgui_sdl.h"
 #include "imgui_internal.h"
+#include <filesystem>
 
  Game::Game()
 {  
@@ -67,8 +68,58 @@
     ImGui::StyleColorsDark();
 
     ImGui_ImplSDL2_InitForOpenGL(m_Window, 0);///behaviour flag 0 ask nick
-
+    /////////////////////////////////////////////////////////////////////// migrate to cpp
+    //populates imGui with assets
+    std::string path = "./assets";
     
+    for (const auto& entry : std::filesystem::directory_iterator(path)) //directory_iterator(path) //recursive_
+    {
+        if (entry.path().extension() == ".bmp" || entry.path().extension() == ".jpg" || entry.path().extension() == ".png")
+        {
+            Bitmap* Asset = new Bitmap(m_Renderer, entry.path().string(), 0, 0, true);
+            content.push_back(Asset);
+
+        }
+        else if (entry.is_directory())
+        {
+            std::cout << "dir " << entry << std::endl;
+        }
+        //debug
+        std::cout << entry.path() << std::endl;
+    }
+
+
+
+
+
+
+
+    ImGui::Begin("Editor");
+    ImGui::BeginChild("Content Window", ImVec2(), true);
+    //ImGui::BeginTable("Content browser", 3);
+    ;
+    for (int i = 0; i < content.size(); i++)
+    {
+        ImGui::PushID(i);
+
+        ImGui::ImageButton((ImTextureID)content[i]->GetTextureRef(), { 100,100 });
+
+
+        //for dragging
+        /*if (ImGui::BeginDragDropSource())
+        {
+            AssetMousDrag = content[i];
+            ImGui::Image((ImTextureID)content[i]->GetTextureRef(), { 100,100 });
+            ImGui::EndDragDropSource();
+        }*/
+        ImGui::PopID();
+        ImGui::SameLine();
+    }
+
+    //ImGui::EndTabItem();
+
+    ImGui::EndChild();
+    ImGui::End();
 
     eventSystem = new EventSystem();
     phi = new Physics();
@@ -111,7 +162,7 @@
    
 
  }
- 
+
 
  Game::~Game()
  {
@@ -228,8 +279,84 @@
      bool show = true;
      //ShowExampleAppleDockSpace(&show);
 
-     ImGui::ShowDemoWindow(nullptr);
+     
+     
+     if (ImGui::IsMouseReleased(ImGuiMouseButton_Left) && AssetMousDrag != nullptr)
+     {
+        
+         int x, y;
+         SDL_GetMouseState(&x, &y);
+         Bitmap* s = new Bitmap(m_Renderer, AssetMousDrag->FileName, x, y, true);
+         //s->Transfrom.ParentSet(GameWindow::Instance().GetHirarcy());
+         sceneRoot.push_back(s);
 
+         AssetMousDrag = nullptr;
+     }
+
+
+
+     ImGui::ShowDemoWindow(nullptr);
+     ImGui::Begin("Editor");
+     ImGui::BeginChild("Content Window", ImVec2(), true);
+     //ImGui::BeginTable("Content browser", 3);
+     //for contents of assets file creat a dragable
+     ;
+     for (int i = 0; i < content.size(); i++)
+     {
+         ImGui::PushID(i);
+
+         ImGui::ImageButton((ImTextureID)content[i]->GetTextureRef(), { 100,100 });//bit in window
+
+
+         /////////////////////////////////For Draging
+         if (ImGui::BeginDragDropSource())
+         {
+             AssetMousDrag = content[i];
+             ImGui::Image((ImTextureID)content[i]->GetTextureRef(), { 100,100 }); // thumbnail
+             ImGui::EndDragDropSource();
+         }
+         /////////////////////////////////For Draging
+         ImGui::PopID();
+         ImGui::SameLine();
+     }
+
+     //ImGui::EndTabItem();
+
+     ImGui::EndChild();
+     ImGui::End();
+     
+     for (Bitmap* path)
+     {
+         if (!path->IsSelected)
+             continue;
+
+         Bitmap* SelectedObject = path;
+         ImGui::Begin(string("Selected Object" + to_string(SelectedObject->ID)).c_str());
+
+         int posTemp[2];
+         posTemp[0] = SelectedObject->GetX();
+         posTemp[1] = SelectedObject->GetY();
+
+
+         char buff[255]{};
+         strncpy(buff, SelectedObject->ObjectName.c_str(), sizeof(buff) - 1);
+         ImGui::InputText("Name:", buff, sizeof(buff));
+         SelectedObject->ObjectName = buff;
+
+         ImGui::Text(SelectedObject->ObjectName.c_str());
+         ImGui::DragInt2("X", posTemp);
+
+
+         SelectedObject->SetX(posTemp[0]);
+         SelectedObject->SetY(posTemp[1]);
+
+         if (ImGui::Button("Close"))
+         {
+             SelectedObject->IsSelected = false;
+         }
+
+         ImGui::End();
+     }
      ImGui::Render();
      ImGuiSDL::Render(ImGui::GetDrawData());
 
@@ -272,7 +399,7 @@
      
 
 
-    phi->Move(Flappy->transform, vec3(1, 0, 0));
+    //phi->Move(Flappy->transform, vec3(1, -1, 0));
      for (int i = 0; i < Entitys.size(); i++)
      {
          Entitys[i]->Draw();

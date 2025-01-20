@@ -36,7 +36,7 @@ float GetRadius()
 	return Radius;
 }
 
-virtual void ApplyContinuousMoment() =0;
+virtual void ApplyContinuousMoment() = 0;
 
 
 	
@@ -76,7 +76,7 @@ public:
 	
 	void ApplyContinuousMoment()
 	{
-		phi.ContinuousMoment(transform, vec3(0, -1, 0));
+		phi.Move(transform, vec3(0, 1, 0));
 	}
 	
 
@@ -84,8 +84,8 @@ public:
 	{
 		switch (eventType)
 		{
-		case TEST_EVENT:
-			std::cout << "Bird on event " << data->name << '\n';
+		case SPACE_PRESSED:
+			phi.Move(transform, vec3(0, -2, 0));
 			break;
 		default:
 			break;
@@ -128,11 +128,11 @@ public:
 		BoxCollider = new Collider(Transform);
 		if (topPipe)
 		{   
-			Map = new Bitmap(m_Renderer, "assets/Pipes3Top.bmp", 100, 1000);// loads top pipe png
+			Map = new Bitmap(m_Renderer, "assets/Pipes3Top.bmp", transform.GetPosition().x, transform.GetPosition().y);// loads top pipe png
 		}
 		else
 		{
-			Map = new Bitmap(m_Renderer, "assets/Pipes3Bottom.bmp", 100, 1000);//loads bottom pipe png
+			Map = new Bitmap(m_Renderer, "assets/Pipes3Bottom.bmp", transform.GetPosition().x, transform.GetPosition().y);//loads bottom pipe png
 		}
 		
 	}
@@ -143,7 +143,7 @@ public:
 	}
 	void ApplyContinuousMoment()
 	{
-		phi.ContinuousMoment(transform, vec3(-1,0, 0));
+		phi.Move(transform, vec3(-1,0, 0));
 	}
 };
 
@@ -160,7 +160,7 @@ public:
 	Ground()
 	{
 		BoxCollider = new Collider(Transform);
-		Map = new Bitmap(m_Renderer, "assets/Ground.bmp", 80, 640);
+		Map = new Bitmap(m_Renderer, "assets/Ground.bmp", transform.GetPosition().x, transform.GetPosition().y);
 	}
 	~Ground()
 	{
@@ -185,7 +185,7 @@ public:
 	UI()
 	{
 		BoxCollider = new Collider(Transform);
-		Map = new Bitmap(m_Renderer, "assets/UI.bmp", 100, 100);
+		Map = new Bitmap(m_Renderer, "assets/UI.bmp", transform.GetPosition().x, transform.GetPosition().y);
 	}
 	~UI()
 	{

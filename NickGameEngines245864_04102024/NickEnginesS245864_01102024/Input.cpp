@@ -1,10 +1,13 @@
 #include "input.h"
 #include "Debug.h "//|3|
+
+#include "EventHandler.h"
 void Input::Update(void)
 {
+	class EventSystem;
 	while (SDL_PollEvent(&m_event) != NULL)
 	{
-
+		//ImGui_ImplSDL2_ProcessEvent(&e);
 		//check keydown
 		if (m_event.type == SDL_KEYDOWN)
 		{
@@ -29,6 +32,10 @@ void Input::Update(void)
 			case SDLK_b:
 				m_keysPressed[KEY_B] = true;
 				break;
+			case SDLK_SPACE:
+				m_keysPressed[KEY_SPACE] = true;
+				//AddEvent(MyEventTypes eventType, Event * data);
+				break;
 			}
 		}
 		// check for key up
@@ -52,6 +59,11 @@ void Input::Update(void)
 			case SDLK_b:
 				m_keysPressed[KEY_B] = false;
 				
+				break;
+				break;
+			case SDLK_SPACE:
+				m_keysPressed[KEY_SPACE] = false;
+
 				break;
 			}
 

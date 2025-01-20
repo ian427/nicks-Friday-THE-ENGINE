@@ -24,6 +24,7 @@ void Physics::ApplyForces(Transform& transform)
 {
     vec3 Pos = transform.GetPosition();
     Pos + Move;
+    ApplyForces(transform);
      
 }
 

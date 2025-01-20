@@ -26,12 +26,16 @@ private:
 		Bitmap* m_monster;
 		Bitmap* m_monsterTrans;
 		Bitmap* m_monsterTransKeyed;
+
+		Bitmap* AssetMousDrag;
 		
 		Bird* Flappy;
 		Pipe* TopPipe1;
 		Pipe* BottomPipe1;
 		std::vector<Pipe*>Pipes;
 		std::vector<BaseEntity*>Entitys;
+		std::vector<Bitmap*>content;
+		vector<Bitmap*> sceneRoot;//list of objects in scene
 		UI* Celling;
 		Ground* Floor;
 		EventSystem* eventSystem;

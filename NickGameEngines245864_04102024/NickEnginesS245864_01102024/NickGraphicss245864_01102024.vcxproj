@@ -114,6 +114,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>..\glew-2.1.0\include\GL;..\glm;..\SDL2-2.30.7\include;..\imgui-master;..\imgui_sdl-master;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -150,7 +151,6 @@
     <ClCompile Include="BitMaps.cpp" />
     <ClCompile Include="Components.cpp" />
     <ClCompile Include="Debug.cpp" />
-    <ClCompile Include="Entity2.cpp" />
     <ClCompile Include="EventHandler.cpp" />
     <ClCompile Include="MyEventTypes.hpp" />
     <ClCompile Include="Game.cpp" />

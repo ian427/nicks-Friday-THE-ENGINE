@@ -9,6 +9,8 @@ using namespace std;
 Bitmap::Bitmap(SDL_Renderer* renderer, std::string fileName, int xpos, int ypos, bool useTransparancy)
 {
 	
+	FileName = fileName;
+	ObjectName = "Object name to be changed";
 	//DeBug::Log()->printDebug(DeBug::Verbosity::red, "Surface not loaded %s, %d", fileName.c_str(), 1);
 	
 	//store renderer
@@ -63,6 +65,24 @@ void Bitmap::draw()
 	}
 
 }
+int Bitmap::GetX()
+{
+	return m_x;
+}
+int Bitmap::GetY()
+{
+	return m_y;
+}
+void Bitmap::SetX(int temppos)
+{
+	m_x = temppos;
+}
+
+void Bitmap::SetY(int temppos)
+{
+	m_y = temppos;
+}
+
 Bitmap::~Bitmap()
 {
 	if (m_pbitmapTexture)
