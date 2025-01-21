@@ -3,7 +3,7 @@
 #include <cstdio>  
 #include <cstdarg>
 #include <string>
-
+///NOTE/////////////////////////////////////////////////////the logger has been done this way to preserve the errors that happened in the event of a crash
 #define _CRT_SECURE_NO_WARNINGS
 DeBug::DeBug()
 {    

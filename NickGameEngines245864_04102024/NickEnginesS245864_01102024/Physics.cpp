@@ -73,6 +73,7 @@ bool Physics::AABBIntersection(Collider* Collider1 , Collider* Collider2)
 
 void Physics::UpdatePhysics()
 {
+
 }
 
 void  Physics::Move(Transform& transform, vec3 movement)

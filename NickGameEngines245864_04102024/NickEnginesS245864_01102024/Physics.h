@@ -23,7 +23,7 @@ public :
 	void ContinuousMoment(Transform transform, vec3 Move);
 
 
-	//this is an example ONLY
+	////this is an example ONLY
 	//virtual void TestMethod()// default
 	//{
 	//	int i = 0;
