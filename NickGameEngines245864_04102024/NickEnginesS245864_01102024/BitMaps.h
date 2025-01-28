@@ -33,7 +33,7 @@ public:
 		return m_pbitmapTexture;
 	}
 };
-
+/*
 ///////////////////////////NOTES
 SDL_rect imagerect.x;
 SDL_rect imagerect.y;
@@ -98,3 +98,4 @@ re write
 	string s 
 
 }
+*/

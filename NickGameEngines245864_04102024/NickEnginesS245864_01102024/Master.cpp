@@ -26,7 +26,7 @@ int main(int argc, char* argv[])
 	
 	Game* game = new Game(); // creates new game
 	Input* input = new Input();
-	
+	EventSystem* eventSystem = new EventSystem();
 	if (game && input)
 	{
 		Uint8 r = 50, g = 127 ,b = 50, a = 255;// background colour

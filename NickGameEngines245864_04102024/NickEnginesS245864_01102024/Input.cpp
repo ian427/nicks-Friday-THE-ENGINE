@@ -9,6 +9,7 @@ void Input::Update(void)
 	{
 		//ImGui_ImplSDL2_ProcessEvent(&e);
 		//check keydown
+		EventSystem& eventSystem = eventSystem;
 		if (m_event.type == SDL_KEYDOWN)
 		{
 			//cache code for keypress
@@ -63,7 +64,7 @@ void Input::Update(void)
 				break;
 			case SDLK_SPACE:
 				m_keysPressed[KEY_SPACE] = false;
-
+				EventSystem& eventSystem->AddEvent(MyEventTypes eventType, Event * data);
 				break;
 			}
 
@@ -83,6 +84,6 @@ Input::Input()//CONSTRUCTOR
 }
 Input::~Input()//DESTRUCTOR
 {
-
+	EventSystem& eventSystem = nullptr;
 }
 

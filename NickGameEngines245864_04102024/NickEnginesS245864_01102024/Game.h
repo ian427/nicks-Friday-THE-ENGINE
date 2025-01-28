@@ -32,15 +32,23 @@ private:
 		Bird* Flappy;
 		Pipe* TopPipe1;
 		Pipe* BottomPipe1;
+		Pipe* TopPipe2;
+		Pipe* BottomPipe2;
+		Pipe* TopPipe3;
+		Pipe* BottomPipe3;
+		Pipe* TopPipe4;
+		Pipe* BottomPipe4;
 		std::vector<Pipe*>Pipes;
 		std::vector<BaseEntity*>Entitys;
 		std::vector<Bitmap*>content;
 		vector<Bitmap*> sceneRoot;//list of objects in scene
 		UI* Celling;
 		Ground* Floor;
-		EventSystem* eventSystem;
+		EventSystem& eventSystem;
 		Physics* phi;/////////////////////////
-		float Time;
+		
+		float score = 0;
+		std::string scoretxt = "Test Number:  ";
 
 		TTF_Font* m_pSmallFont;
 		TTF_Font* m_pBigFont;

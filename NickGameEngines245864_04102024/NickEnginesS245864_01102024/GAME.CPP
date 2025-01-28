@@ -121,7 +121,7 @@
     ImGui::EndChild();
     ImGui::End();
 
-    eventSystem = new EventSystem();
+    
     phi = new Physics();
     //eventSystem->AddEvent(APPLY_GRAVITY, new Event("Gravity"));
 
@@ -279,11 +279,11 @@
      bool show = true;
      //ShowExampleAppleDockSpace(&show);
 
-     
-     
+
+
      if (ImGui::IsMouseReleased(ImGuiMouseButton_Left) && AssetMousDrag != nullptr)
      {
-        
+
          int x, y;
          SDL_GetMouseState(&x, &y);
          Bitmap* s = new Bitmap(m_Renderer, AssetMousDrag->FileName, x, y, true);
@@ -324,14 +324,14 @@
 
      ImGui::EndChild();
      ImGui::End();
-     
-     for (Bitmap* path)
+
+     for (Bitmap* path : sceneRoot)
      {
          if (!path->IsSelected)
              continue;
 
          Bitmap* SelectedObject = path;
-         ImGui::Begin(string("Selected Object" + to_string(SelectedObject->ID)).c_str());
+         ImGui::Begin(string("Selected Object" + std::to_string(SelectedObject->ID)).c_str());
 
          int posTemp[2];
          posTemp[0] = SelectedObject->GetX();
@@ -339,7 +339,7 @@
 
 
          char buff[255]{};
-         strncpy(buff, SelectedObject->ObjectName.c_str(), sizeof(buff) - 1);
+         strncpy_s(buff, SelectedObject->ObjectName.c_str(), sizeof(buff) - 1);
          ImGui::InputText("Name:", buff, sizeof(buff));
          SelectedObject->ObjectName = buff;
 
@@ -361,17 +361,21 @@
      ImGuiSDL::Render(ImGui::GetDrawData());
 
      //show bitmaps
-     
+
      //_monster ->draw();
      //_monsterTrans->draw();
      //_monsterTransKeyed->draw();
-    eventSystem->HandelEvents();
+     //////////////////////////////////////////GAMELOOP//////////////////////////////////////////////////
+     eventSystem->HandelEvents();
 
-     Flappy->transform.GetPosition();
 
-     
-    
-    
+     score = +0.001f;
+     scoretxt += std::to_string(score);
+     UpdateText(scoretxt, 50, 210, m_pBigFont, { 255,255,255 });
+
+
+
+
      /*
      if ((D == Flappy->Radius + Floor->Radius) || (D == Flappy->Radius - Celling->Radius))//circle collision check
      {
@@ -395,11 +399,25 @@
          }
 
      }*/
-
+     //collision check/////////////////////////////////////////////////////////////
+     for (int i = 0; i < Entitys.size(); i++) 
+     {
+         if (Flappy->CollisionCheck(Entitys[i]))
+         {
+             //endGame
+         }
      
+     }
+        
+   
+     for (int i = 0; i < Entitys.size(); i++)
+      { Entitys[i]->ApplyContinuousMoment();}
+ 
 
 
-    //phi->Move(Flappy->transform, vec3(1, -1, 0));
+
+
+     //phi->Move(Flappy->transform, vec3(1, -1, 0));
      for (int i = 0; i < Entitys.size(); i++)
      {
          Entitys[i]->Draw();
@@ -418,21 +436,7 @@
      //std::string testString = "Test Number:  ";
      //testString += std::to_string(testNumber);
      //UpdateText(testString, 50, 210, m_pBigFont, { 255,255,255 });
-        //collision check/////////////////////////////////////////////////////////////
-     for (int i = 0; i < Entitys.size(); i++){}
-     
-     
-    
-      Flappy->CollisionCheck(TopPipe1);
-     //m_monster->draw();
-      for (int i = 0; i < Entitys.size(); i++)
-      { Entitys[i]->ApplyContinuousMoment();}
-       
-      
-    
-
      SDL_RenderPresent(m_Renderer);
 
      SDL_Delay(16);//milliseconds
  }
-

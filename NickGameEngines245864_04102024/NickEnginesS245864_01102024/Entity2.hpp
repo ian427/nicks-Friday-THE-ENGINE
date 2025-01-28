@@ -109,7 +109,7 @@ public:
 
 	}
 };
-
+//?setBitmapWith input string implement if time
 class Pipe : public virtual BaseEntity
 
 {
@@ -142,9 +142,8 @@ public:
 
 	}
 	void ApplyContinuousMoment()
-	{
-		phi.Move(transform, vec3(-1,0, 0));
-	}
+	{}
+	
 };
 
 class Ground : public virtual BaseEntity
