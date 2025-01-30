@@ -61,11 +61,15 @@ int main(int argc, char* argv[])
 		//destructors
 
 	}
+	delete eventSystem;
+	eventSystem = nullptr;
+
 	delete input;
 	input = nullptr;
 
     delete game;
     game = nullptr;
+	 
 	return 0 ;
 	
 }

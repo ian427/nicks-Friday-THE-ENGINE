@@ -12,7 +12,7 @@
 #include <filesystem>
 
  Game::Game()
-{  
+ {  
      
     m_Window = nullptr;
    // m_Renderer = nullptr;
@@ -93,7 +93,6 @@
 
 
 
-
     ImGui::Begin("Editor");
     ImGui::BeginChild("Content Window", ImVec2(), true);
     //ImGui::BeginTable("Content browser", 3);
@@ -129,12 +128,32 @@
     Celling = new UI();
     
    
-
+    int tempx = 0;
+   
     // create all objects
-    TopPipe1 = new Pipe(true);
-    Entitys.push_back(TopPipe1);    // Push the pointer into the vector
-    BottomPipe1 = new Pipe(false);
-    Entitys.push_back(BottomPipe1);
+    for (int i; i < 4; i++)
+    { 
+        int y;
+        //rand() % (high - low + 1) + low
+
+        y = rand() % (600 - 0 + 1) + 0;
+        
+        TopPipe1 = new Pipe(true);
+        TopPipe1->Map->m_x = tempx;
+        TopPipe1->Map->m_y = y;
+        Entitys.push_back(TopPipe1);
+        Pipes.push_back(BottomPipe1);    // Push the pointer into the vector
+
+        BottomPipe1 = new Pipe(false);
+        
+        BottomPipe1->Map->m_x = tempx;
+        BottomPipe1->Map->m_y = (y+50);
+        Entitys.push_back(BottomPipe1);
+        Pipes.push_back(BottomPipe1);
+        tempx += 320;
+
+    }
+   
    
    Flappy = new Bird(m_Renderer);
    eventSystem->AddListener(Flappy);
@@ -144,8 +163,12 @@
     m_pBigFont = TTF_OpenFont("assets/DejaVuSans.ttf",50); //04-02   
 
     Floor = new Ground();
+    Floor->Map->m_x = 640;
+    Floor->Map->m_y = (720);
     Entitys.push_back(Floor);
     Celling = new UI();
+    Celling->Map->m_x = 0;
+    Celling->Map->m_y = 720;
     Entitys.push_back(Celling);
  
     
@@ -367,12 +390,29 @@
      //_monsterTransKeyed->draw();
      //////////////////////////////////////////GAMELOOP//////////////////////////////////////////////////
      eventSystem->HandelEvents();
+     for (int i = 0; i < Pipes.size(); i++)
+     {
+         if (Pipes[i]->Map->m_x<=0)
+         {
+             Pipes[i]->Map->m_x = 1280;
 
+             ////////////////////////////////
+             //top pipe
+             int  y = rand() % (600 - 0 + 1) + 0;
+             Pipes[i]->Map->m_y = y;
+
+             //bottompipe
+             
+             Pipes[i=1]->Map->m_x = 1280;
+             Pipes[i+1]->Map->m_y = (y + 50);
+            
+         }
+
+     }
 
      score = +0.001f;
      scoretxt += std::to_string(score);
-     UpdateText(scoretxt, 50, 210, m_pBigFont, { 255,255,255 });
-
+    
 
 
 
@@ -423,6 +463,8 @@
          Entitys[i]->Draw();
      }
      ////draw text
+      UpdateText(scoretxt, 50, 640, m_pBigFont, { 0,0,0 });
+
      //UpdateText("Small Red", 50, 10, m_pSmallFont, { 255,0,0 });
      //UpdateText("Small Blue", 50, 40, m_pSmallFont, { 0,0,255 });
 

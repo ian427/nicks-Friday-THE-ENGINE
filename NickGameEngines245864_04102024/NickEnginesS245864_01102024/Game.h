@@ -40,6 +40,7 @@ private:
 		Pipe* BottomPipe4;
 		std::vector<Pipe*>Pipes;
 		std::vector<BaseEntity*>Entitys;
+		
 		std::vector<Bitmap*>content;
 		vector<Bitmap*> sceneRoot;//list of objects in scene
 		UI* Celling;
@@ -55,7 +56,46 @@ private:
 public:
 	///////////////////error
 	Game();
-	~Game();
+	~Game()
+	{
+		delete phi;
+		Physics* phi= nullptr;
+		delete Floor;
+		Ground* Floor = nullptr;
+		delete Celling;
+		UI* Celling = nullptr;
+		delete BottomPipe4;
+		Pipe* BottomPipe4 = nullptr;
+		delete TopPipe4;
+		Pipe* TopPipe4 = nullptr;
+		delete BottomPipe3;
+		Pipe* BottomPipe3 = nullptr;	
+		delete TopPipe3;
+		Pipe* TopPipe3 = nullptr;
+		delete BottomPipe2;
+		Pipe* BottomPipe2 = nullptr;
+		delete TopPipe2;
+		Pipe* TopPipe2 = nullptr;
+		delete BottomPipe1;
+		Pipe* BottomPipe1 = nullptr;	
+		delete TopPipe1;
+		Pipe* TopPipe1 = nullptr;
+		delete Flappy;
+		Bird* Flappy = nullptr;
+		delete AssetMousDrag;
+		Bitmap* AssetMousDrag = nullptr;
+		delete m_monsterTransKeyed;
+		Bitmap* m_monsterTransKeyed = nullptr;
+		delete m_monsterTrans;
+		Bitmap* m_monsterTrans = nullptr;
+		delete m_monster;
+		Bitmap* m_monster = nullptr;
+		delete m_Window;
+		SDL_Window* m_Window = nullptr;
+		delete m_Renderer;
+		SDL_Renderer* m_Renderer = nullptr;
+
+	};
 	void SetDisplayColour(int r, int g, int b, int a);
 
 	void UpdateText(std::string msg, int x, int y, TTF_Font* font, SDL_Colour colour);

@@ -31,13 +31,20 @@ public:
 	 {
 		return BoxCollider;
 	 }
-float GetRadius()
-{
-	return Radius;
-}
+	 float GetRadius()
+	 {
+		return Radius;
+	 }
 
-virtual void ApplyContinuousMoment() = 0;
-
+	 virtual void ApplyContinuousMoment() = 0;
+	 ~BaseEntity()
+	 {
+		
+		 Bitmap* Map = nullptr;
+		 Collider* BoxCollider = nullptr;
+		 SDL_Renderer* m_Renderer = nullptr;
+		 
+	 }
 
 	
 };
@@ -57,10 +64,10 @@ public:
 	//Transform transform;
 	//Transform Transform{ vec3{320.0f, 240.0f, 0.0f} };
 	float Radius{ 10.0f };
-	SDL_Renderer* m_Renderer;
 	
+	SDL_Renderer& m_Renderer;
 
-	Bird(SDL_Renderer* renderer) : m_Renderer{renderer}
+	Bird(SDL_Renderer& renderer) : m_Renderer{renderer}
 	{
 		transform = vec3{ 320.0f, 240.0f, 0.0f };
 		Map = new Bitmap(m_Renderer, "assets/Flappy.bmp", transform.GetPosition().x, transform.GetPosition().y);
@@ -111,40 +118,42 @@ public:
 };
 //?setBitmapWith input string implement if time
 class Pipe : public virtual BaseEntity
-
 {
-	bool topPipe  = true;
+	bool topPipe = true;
 	bool inuse = false; //spawning
 public:
 	//bitmap
 	//collider 
-	
+
 	//Collider* BoxCollider;
 	float Radius;
 	Transform Transform;
 	SDL_Renderer* m_Renderer;
-	Pipe(bool value) : topPipe(value) 
+	Pipe(bool value) : topPipe(value)
 	{
 		BoxCollider = new Collider(Transform);
 		if (topPipe)
-		{   
+		{
 			Map = new Bitmap(m_Renderer, "assets/Pipes3Top.bmp", transform.GetPosition().x, transform.GetPosition().y);// loads top pipe png
 		}
 		else
 		{
 			Map = new Bitmap(m_Renderer, "assets/Pipes3Bottom.bmp", transform.GetPosition().x, transform.GetPosition().y);//loads bottom pipe png
 		}
-		
+
 	}
 	~Pipe()
 	{
 
-
+		SDL_Renderer* m_Renderer = nullptr;
 	}
 	void ApplyContinuousMoment()
-	{}
-	
+	{
+		phi.Move(transform, vec3(1, 0, 0));
+	}
 };
+	
+
 
 class Ground : public virtual BaseEntity
 {
@@ -164,7 +173,7 @@ public:
 	~Ground()
 	{
 
-
+		SDL_Renderer* m_Renderer = nullptr;
     }
 
 	void ApplyContinuousMoment()
@@ -188,7 +197,8 @@ public:
 	}
 	~UI()
 	{
-
+		SDL_Renderer* m_Renderer = nullptr;
+		
 	}
 	void ApplyContinuousMoment()
 	{
