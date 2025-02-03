@@ -112,7 +112,7 @@
    { 
           int y;
      //rand() % (high - low + 1) + low
-      y = (rand() % 500)+ 300;//between 300,600
+          y = rand() % (600 - 300 + 1) + 300;//between 300,600
      //     y = -200;
           BottomPipe1 = new Pipe( false, m_Renderer);
           BottomPipe1->transform = vec3{ tempx, y, 0.0f };
@@ -302,7 +302,7 @@
  }
  void Game::Update(void)
  {
-
+    
      //CheckEvents();
      SDL_RenderClear(m_Renderer);
 
@@ -435,7 +435,7 @@
              { Pipes[i ]->transform = vec3{ screenWidth,( y-800), 0.0f }; }
              else
              {  
-                 y =  (rand() % 500) + 300 ;
+                 y = rand() % (600 - 300 + 1) + 300;
                  Pipes[i]->transform = vec3{ screenWidth, y, 0.0f };
              }
 
