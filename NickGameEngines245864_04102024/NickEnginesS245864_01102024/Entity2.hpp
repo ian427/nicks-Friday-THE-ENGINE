@@ -65,10 +65,11 @@ public:
 	//Transform Transform{ vec3{320.0f, 240.0f, 0.0f} };
 	float Radius{ 10.0f };
 	
-	SDL_Renderer& m_Renderer;
+	SDL_Renderer* m_Renderer;
 
-	Bird(SDL_Renderer& renderer) : m_Renderer{renderer}
+	Bird(SDL_Renderer* renderer) : m_Renderer{ renderer }
 	{
+
 		transform = vec3{ 320.0f, 240.0f, 0.0f };
 		Map = new Bitmap(m_Renderer, "assets/Flappy.bmp", transform.GetPosition().x, transform.GetPosition().y);
 		BoxCollider = new Collider(transform);
@@ -92,7 +93,7 @@ public:
 		switch (eventType)
 		{
 		case SPACE_PRESSED:
-			phi.Move(transform, vec3(0, -2, 0));
+			phi.Move(transform, vec3(0, -10, 0));
 			break;
 		default:
 			break;
@@ -119,9 +120,10 @@ public:
 //?setBitmapWith input string implement if time
 class Pipe : public virtual BaseEntity
 {
-	bool topPipe = true;
+	
 	bool inuse = false; //spawning
 public:
+	bool topPipe = true;
 	//bitmap
 	//collider 
 
@@ -129,16 +131,17 @@ public:
 	float Radius;
 	Transform Transform;
 	SDL_Renderer* m_Renderer;
-	Pipe(bool value) : topPipe(value)
+	Pipe(bool value,SDL_Renderer* renderer) : topPipe(value) , m_Renderer{ renderer }
 	{
 		BoxCollider = new Collider(Transform);
 		if (topPipe)
 		{
-			Map = new Bitmap(m_Renderer, "assets/Pipes3Top.bmp", transform.GetPosition().x, transform.GetPosition().y);// loads top pipe png
+			//Map = new Bitmap(m_Renderer, "assets/Pipes3Top.bmp", transform.GetPosition().x, transform.GetPosition().y);// loads top pipe png
+			Map = new Bitmap(m_Renderer, "assets/Pipes3Bottom.bmp", transform.GetPosition().x, transform.GetPosition().y);// loads top pipe png
 		}
 		else
 		{
-			Map = new Bitmap(m_Renderer, "assets/Pipes3Bottom.bmp", transform.GetPosition().x, transform.GetPosition().y);//loads bottom pipe png
+			Map = new Bitmap(m_Renderer, "assets/Pipes3Top.bmp", transform.GetPosition().x, transform.GetPosition().y);//loads bottom pipe png
 		}
 
 	}
@@ -149,7 +152,7 @@ public:
 	}
 	void ApplyContinuousMoment()
 	{
-		phi.Move(transform, vec3(1, 0, 0));
+		phi.Move(transform, vec3(-3, 0, 0));
 	}
 };
 	
@@ -165,7 +168,7 @@ public:
 	float Radius;
 	Transform Transform;
 	SDL_Renderer* m_Renderer;
-	Ground()
+	Ground(SDL_Renderer* renderer) : m_Renderer{ renderer }
 	{
 		BoxCollider = new Collider(Transform);
 		Map = new Bitmap(m_Renderer, "assets/Ground.bmp", transform.GetPosition().x, transform.GetPosition().y);
@@ -190,7 +193,7 @@ public:
 	float Radius;
 	Transform Transform;
 	SDL_Renderer* m_Renderer;
-	UI()
+	UI(SDL_Renderer* renderer) : m_Renderer{ renderer }
 	{
 		BoxCollider = new Collider(Transform);
 		Map = new Bitmap(m_Renderer, "assets/UI.bmp", transform.GetPosition().x, transform.GetPosition().y);

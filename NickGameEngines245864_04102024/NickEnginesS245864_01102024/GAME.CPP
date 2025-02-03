@@ -3,30 +3,31 @@
 #include "Game.h"
 #include "Entity2.hpp" 
 //#include "BitMaps.h"//nuke later
-#include "Debug.h" //|4|
 
+#include "Debug.h" //|4|
 #include "imgui.h"
 #include "backends/imgui_impl_sdl.h"
 #include "imgui_sdl.h"
 #include "imgui_internal.h"
 #include <filesystem>
 
- Game::Game()
+ Game::Game(EventSystem* eventSytem)
  {  
-     
+     srand(time(NULL));
+    this->eventSystem = eventSytem;
     m_Window = nullptr;
    // m_Renderer = nullptr;
 
     //start up
     SDL_Init(SDL_INIT_VIDEO);
     TTF_Init();//04-02
-
+   
     //CreateWindow//make configurable
     m_Window = SDL_CreateWindow(
         "Main Window",
         250, // XPosition
         50, // YPosition
-        1280, //Width in pixels
+        screenWidth, //Width in pixels
         720,  //height pixels
         0 //behaviour flags
     );
@@ -88,73 +89,46 @@
         std::cout << entry.path() << std::endl;
     }
 
-
-
-
-
-
-    ImGui::Begin("Editor");
-    ImGui::BeginChild("Content Window", ImVec2(), true);
-    //ImGui::BeginTable("Content browser", 3);
-    ;
-    for (int i = 0; i < content.size(); i++)
-    {
-        ImGui::PushID(i);
-
-        ImGui::ImageButton((ImTextureID)content[i]->GetTextureRef(), { 100,100 });
-
-
-        //for dragging
-        /*if (ImGui::BeginDragDropSource())
-        {
-            AssetMousDrag = content[i];
-            ImGui::Image((ImTextureID)content[i]->GetTextureRef(), { 100,100 });
-            ImGui::EndDragDropSource();
-        }*/
-        ImGui::PopID();
-        ImGui::SameLine();
-    }
-
-    //ImGui::EndTabItem();
-
-    ImGui::EndChild();
-    ImGui::End();
-
     
     phi = new Physics();
     //eventSystem->AddEvent(APPLY_GRAVITY, new Event("Gravity"));
 
-
-    Celling = new UI();
+    int tempx = 10;
     
-   
-    int tempx = 0;
-   
-    // create all objects
-    for (int i; i < 4; i++)
-    { 
-        int y;
-        //rand() % (high - low + 1) + low
+    /*
+    TopPipe1 = new Pipe(true, m_Renderer);
+    TopPipe1->transform = vec3{ 1000, -500, 0.0f };//-200 - -500
+    Entitys.push_back(TopPipe1);
+    Pipes.push_back(TopPipe1);
 
-        y = rand() % (600 - 0 + 1) + 0;
-        
-        TopPipe1 = new Pipe(true);
-        TopPipe1->Map->m_x = tempx;
-        TopPipe1->Map->m_y = y;
-        Entitys.push_back(TopPipe1);
-        Pipes.push_back(BottomPipe1);    // Push the pointer into the vector
+    TopPipe2 = new Pipe(false, m_Renderer);
+    TopPipe2->transform = vec3{ 1000, 300, 0.0f };//300-600
+    Entitys.push_back(TopPipe2);
+    Pipes.push_back(TopPipe2);
+    */
+    //////// create all objects
+     
+   for (int i =0; i < 4; i++)
+   { 
+          int y;
+     //rand() % (high - low + 1) + low
+      y = (rand() % 500)+ 300;//between 300,600
+     //     y = -200;
+          BottomPipe1 = new Pipe( false, m_Renderer);
+          BottomPipe1->transform = vec3{ tempx, y, 0.0f };
+     Entitys.push_back(BottomPipe1);
+     Pipes.push_back(BottomPipe1);    // push the pointer into the vector
+    
+     TopPipe1 = new Pipe(true, m_Renderer);
+     TopPipe1->transform = vec3{ tempx, (y - 800), 0.0f };
+      Entitys.push_back(TopPipe1);
+      Pipes.push_back(TopPipe1);
 
-        BottomPipe1 = new Pipe(false);
-        
-        BottomPipe1->Map->m_x = tempx;
-        BottomPipe1->Map->m_y = (y+50);
-        Entitys.push_back(BottomPipe1);
-        Pipes.push_back(BottomPipe1);
-        tempx += 320;
+     tempx += screenWidth/4+1;
 
     }
    
-   
+
    Flappy = new Bird(m_Renderer);
    eventSystem->AddListener(Flappy);
    Entitys.push_back(Flappy);
@@ -162,13 +136,13 @@
     m_pSmallFont = TTF_OpenFont("assets/DejaVuSans.ttf",15); //04-02
     m_pBigFont = TTF_OpenFont("assets/DejaVuSans.ttf",50); //04-02   
 
-    Floor = new Ground();
-    Floor->Map->m_x = 640;
-    Floor->Map->m_y = (720);
+    Floor = new Ground(m_Renderer);
+    Floor->transform = vec3{ 640, 720, 0.0f };
+ 
     Entitys.push_back(Floor);
-    Celling = new UI();
-    Celling->Map->m_x = 0;
-    Celling->Map->m_y = 720;
+    Celling = new UI(m_Renderer);
+    Celling->transform = vec3{ 720, 0, 0.0f };
+
     Entitys.push_back(Celling);
  
     
@@ -189,13 +163,48 @@
 
  Game::~Game()
  {
+     delete phi;
+     Physics* phi = nullptr;
+     delete Floor;
+     Ground* Floor = nullptr;
+     delete Celling;
+     UI* Celling = nullptr;
+     delete BottomPipe4;
+     Pipe* BottomPipe4 = nullptr;
+     delete TopPipe4;
+     Pipe* TopPipe4 = nullptr;
+     delete BottomPipe3;
+     Pipe* BottomPipe3 = nullptr;
+     delete TopPipe3;
+     Pipe* TopPipe3 = nullptr;
+     delete BottomPipe2;
+     Pipe* BottomPipe2 = nullptr;
+     delete TopPipe2;
+     Pipe* TopPipe2 = nullptr;
+     delete BottomPipe1;
+     Pipe* BottomPipe1 = nullptr;
+     delete TopPipe1;
+     Pipe* TopPipe1 = nullptr;
+     delete Flappy;
+     Bird* Flappy = nullptr;
+     delete AssetMousDrag;
+     Bitmap* AssetMousDrag = nullptr;
+     delete m_monsterTransKeyed;
+     Bitmap* m_monsterTransKeyed = nullptr;
+     delete m_monsterTrans;
+     Bitmap* m_monsterTrans = nullptr;
+     delete m_monster;
+     Bitmap* m_monster = nullptr;
      
-     if (m_monsterTransKeyed)
+
+
+     
+     /*if (m_monsterTransKeyed)
          delete m_monsterTransKeyed;
      if (m_monsterTrans)
          delete m_monsterTrans;
      if (m_monster)
-         delete m_monster;
+         delete m_monster;*/
      TTF_CloseFont(m_pBigFont);
      TTF_CloseFont(m_pSmallFont);
      // destroy in reverse creation order
@@ -303,6 +312,33 @@
      //ShowExampleAppleDockSpace(&show);
 
 
+     ImGui::Begin("Editor");
+     ImGui::BeginChild("Content Window", ImVec2(), true);
+     //ImGui::BeginTable("Content browser", 3);
+     ;
+     for (int i = 0; i < content.size(); i++)
+     {
+         ImGui::PushID(i);
+
+         ImGui::ImageButton((ImTextureID)content[i]->GetTextureRef(), { 100,100 });
+
+
+         //for dragging
+         /*if (ImGui::BeginDragDropSource())
+         {
+             AssetMousDrag = content[i];
+             ImGui::Image((ImTextureID)content[i]->GetTextureRef(), { 100,100 });
+             ImGui::EndDragDropSource();
+         }*/
+         ImGui::PopID();
+         ImGui::SameLine();
+     }
+
+     //ImGui::EndTabItem();
+
+     ImGui::EndChild();
+     ImGui::End();
+
 
      if (ImGui::IsMouseReleased(ImGuiMouseButton_Left) && AssetMousDrag != nullptr)
      {
@@ -389,23 +425,29 @@
      //_monsterTrans->draw();
      //_monsterTransKeyed->draw();
      //////////////////////////////////////////GAMELOOP//////////////////////////////////////////////////
-     eventSystem->HandelEvents();
+     eventSystem->HandelEvents();int  y;
      for (int i = 0; i < Pipes.size(); i++)
      {
-         if (Pipes[i]->Map->m_x<=0)
-         {
-             Pipes[i]->Map->m_x = 1280;
+         
+         if (Pipes[i]->transform.GetPosition().x <= 0)
+         {    //top pipe
+             if (Pipes[i]->topPipe == true)
+             { Pipes[i ]->transform = vec3{ screenWidth,( y-800), 0.0f }; }
+             else
+             {  
+                 y =  (rand() % 500) + 300 ;
+                 Pipes[i]->transform = vec3{ screenWidth, y, 0.0f };
+             }
 
-             ////////////////////////////////
-             //top pipe
-             int  y = rand() % (600 - 0 + 1) + 0;
-             Pipes[i]->Map->m_y = y;
-
-             //bottompipe
-             
-             Pipes[i=1]->Map->m_x = 1280;
-             Pipes[i+1]->Map->m_y = (y + 50);
             
+             ////////////////////////////////
+             
+           
+            //moves to start&&resets y
+             //bottompipe
+             //TODO refactort
+            //moves to start&&resets y
+
          }
 
      }
@@ -463,7 +505,7 @@
          Entitys[i]->Draw();
      }
      ////draw text
-      UpdateText(scoretxt, 50, 640, m_pBigFont, { 0,0,0 });
+          UpdateText(scoretxt, 50, 640, m_pBigFont, { 0,0,0 });
 
      //UpdateText("Small Red", 50, 10, m_pSmallFont, { 255,0,0 });
      //UpdateText("Small Blue", 50, 40, m_pSmallFont, { 0,0,255 });

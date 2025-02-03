@@ -1,7 +1,7 @@
 #include "input.h"
 #include "Debug.h "//|3|
 
-#include "EventHandler.h"
+
 void Input::Update(void)
 {
 	class EventSystem;
@@ -9,7 +9,7 @@ void Input::Update(void)
 	{
 		//ImGui_ImplSDL2_ProcessEvent(&e);
 		//check keydown
-		EventSystem& eventSystem = eventSystem;
+		
 		if (m_event.type == SDL_KEYDOWN)
 		{
 			//cache code for keypress
@@ -64,7 +64,7 @@ void Input::Update(void)
 				break;
 			case SDLK_SPACE:
 				m_keysPressed[KEY_SPACE] = false;
-				EventSystem& eventSystem->AddEvent(MyEventTypes eventType, Event * data);
+				eventSystem->AddEvent(MyEventTypes::SPACE_PRESSED, new Event("test spoace pressed"));
 				break;
 			}
 
@@ -75,8 +75,9 @@ bool Input::KeyIsPressed(KEYS_PRESSED_LIST key)
 {
 	return m_keysPressed[key];
 }
-Input::Input()//CONSTRUCTOR
+Input::Input(EventSystem* eventSystem)//CONSTRUCTOR
 {
+	this->eventSystem = eventSystem;
 	for (int i = 0; i < SIZE_OF_KEYS_PRESSED_ENUM;i++)
 	{
 		m_keysPressed[i] = NULL;
@@ -84,6 +85,6 @@ Input::Input()//CONSTRUCTOR
 }
 Input::~Input()//DESTRUCTOR
 {
-	EventSystem& eventSystem = nullptr;
+	eventSystem = nullptr;
 }
 

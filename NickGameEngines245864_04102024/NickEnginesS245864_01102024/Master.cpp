@@ -22,11 +22,11 @@ int main(int argc, char* argv[])
 
 	//Bird TestBird;//
 	
-	
-	
-	Game* game = new Game(); // creates new game
-	Input* input = new Input();
 	EventSystem* eventSystem = new EventSystem();
+	
+	Game* game = new Game(eventSystem); // creates new game
+	Input* input = new Input(eventSystem);
+	
 	if (game && input)
 	{
 		Uint8 r = 50, g = 127 ,b = 50, a = 255;// background colour
@@ -61,15 +61,17 @@ int main(int argc, char* argv[])
 		//destructors
 
 	}
-	delete eventSystem;
-	eventSystem = nullptr;
+	
 
 	delete input;
 	input = nullptr;
 
     delete game;
     game = nullptr;
-	 
+
+	delete eventSystem;
+	eventSystem = nullptr;
+
 	return 0 ;
 	
 }

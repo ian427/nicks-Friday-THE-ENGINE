@@ -31,7 +31,7 @@ public :
 	//}
 	//virtual void TestMethodPure() =0;
 
-	bool AABBIntersection (Collider& Collider1, Collider& Collider2);
+	bool AABBIntersection (Collider* Collider1, Collider* Collider2);
 
 	void UpdatePhysics();
 	void Move(Transform& transform, vec3 movement);
