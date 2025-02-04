@@ -54,14 +54,8 @@ private:
 		TTF_Font* m_pSmallFont;
 		TTF_Font* m_pBigFont;
 		//list of eventcalls
-		/*
-		enum CurrentScene
-		{
-			TESTSCENE,
-			GAME,
-			GAMEOVER
-
-		};
+		
+		int currentScene = 2;
 		//list of eventcalls
 		enum Scenes
 		{
@@ -70,7 +64,7 @@ private:
 			GAMEOVER
 
 		};
-		*/
+		
 public:
 	int screenWidth = 2000;
 	///////////////////error

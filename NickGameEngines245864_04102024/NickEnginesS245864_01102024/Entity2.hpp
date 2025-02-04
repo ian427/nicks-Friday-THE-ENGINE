@@ -25,6 +25,7 @@ public:
 		Map->m_x = transform.GetPosition().x;
 		Map->m_y = transform.GetPosition().y;
 		Map->draw();
+		BoxCollider->Update(transform);
 	}
 	 
 	 Collider* GetCollider()
@@ -45,6 +46,7 @@ public:
 		 SDL_Renderer* m_Renderer = nullptr;
 		 
 	 }
+	
 
 	
 };
@@ -73,7 +75,7 @@ public:
 		transform = vec3{ 320.0f, 240.0f, 0.0f };
 		Map = new Bitmap(m_Renderer, "assets/Flappy.bmp", transform.GetPosition().x, transform.GetPosition().y);
 		BoxCollider = new Collider(transform);
-		
+	
 	}
 
 	~Bird()

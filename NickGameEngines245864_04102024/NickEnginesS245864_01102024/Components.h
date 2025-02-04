@@ -41,8 +41,22 @@ public:
 
 		vec3 GetColliderPoints();
 
-		void Update()
+		void Update(const Transform& t)
 		{
+			vec3 Pos = t.GetPosition();
+			vec3 Scale = t.GetScale();
+
+			TR = TR * Scale;
+			TL = TL * Scale;
+			BR = BR * Scale;
+			BL = BL * Scale;
+
+			TR = TR + Pos;
+			TL = TL + Pos;
+			BR = BR + Pos;
+			BL = BL + Pos;
+			Width = (TR.x - TL.x);
+			Height = (TR.y - BR.y);
 
 		}
 };

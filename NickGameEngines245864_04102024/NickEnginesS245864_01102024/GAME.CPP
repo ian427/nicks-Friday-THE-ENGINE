@@ -95,29 +95,19 @@
 
     int tempx = 10;
     
-    /*
-    TopPipe1 = new Pipe(true, m_Renderer);
-    TopPipe1->transform = vec3{ 1000, -500, 0.0f };//-200 - -500
-    Entitys.push_back(TopPipe1);
-    Pipes.push_back(TopPipe1);
-
-    TopPipe2 = new Pipe(false, m_Renderer);
-    TopPipe2->transform = vec3{ 1000, 300, 0.0f };//300-600
-    Entitys.push_back(TopPipe2);
-    Pipes.push_back(TopPipe2);
-    */
+   
     //////// create all objects
      
    for (int i =0; i < 4; i++)
    { 
           int y;
-     //rand() % (high - low + 1) + low
+     
           y = rand() % (600 - 300 + 1) + 300;//between 300,600
-     //     y = -200;
+
           BottomPipe1 = new Pipe( false, m_Renderer);
           BottomPipe1->transform = vec3{ tempx, y, 0.0f };
      Entitys.push_back(BottomPipe1);
-     Pipes.push_back(BottomPipe1);    // push the pointer into the vector
+     Pipes.push_back(BottomPipe1);    // pushing the pointer into the vector
     
      TopPipe1 = new Pipe(true, m_Renderer);
      TopPipe1->transform = vec3{ tempx, (y - 800), 0.0f };
@@ -198,13 +188,7 @@
      
 
 
-     
-     /*if (m_monsterTransKeyed)
-         delete m_monsterTransKeyed;
-     if (m_monsterTrans)
-         delete m_monsterTrans;
-     if (m_monster)
-         delete m_monster;*/
+    
      TTF_CloseFont(m_pBigFont);
      TTF_CloseFont(m_pSmallFont);
      // destroy in reverse creation order
@@ -235,8 +219,7 @@
          //wipe display
          SDL_RenderClear(m_Renderer);
          //present whats drawn
-        // SDL_RenderPresent(m_Renderer);
-         //pause 5 seconds
+       
         // SDL_Delay(16);//milli seconds //may be needed back
        
 
@@ -252,9 +235,7 @@
 
      int texW = 0;
      int texH = 0;
-     //SDL_colour color = {0,0,0}
-     //char msg [100}
-     //sprintf_s(msg,"Checks:%d",m_checkTally
+    
 
      surface = TTF_RenderText_Solid(font, msg.c_str(), colour);
      if (!surface)
@@ -302,224 +283,223 @@
  }
  void Game::Update(void)
  {
-    
+
      //CheckEvents();
      SDL_RenderClear(m_Renderer);
-
-     ImGui::NewFrame();
-     ImGui_ImplSDL2_NewFrame(m_Window);
-     bool show = true;
-     //ShowExampleAppleDockSpace(&show);
-
-
-     ImGui::Begin("Editor");
-     ImGui::BeginChild("Content Window", ImVec2(), true);
-     //ImGui::BeginTable("Content browser", 3);
-     ;
-     for (int i = 0; i < content.size(); i++)
+     if (currentScene == TESTSCENE)
      {
-         ImGui::PushID(i);
+         ImGui::NewFrame();
+         ImGui_ImplSDL2_NewFrame(m_Window);
+         bool show = true;
+         //ShowExampleAppleDockSpace(&show);
 
-         ImGui::ImageButton((ImTextureID)content[i]->GetTextureRef(), { 100,100 });
 
+         ImGui::Begin("Editor");
+         ImGui::BeginChild("Content Window", ImVec2(), true);
+         //ImGui::BeginTable("Content browser", 3);
 
-         //for dragging
-         /*if (ImGui::BeginDragDropSource())
+         for (int i = 0; i < content.size(); i++)
          {
-             AssetMousDrag = content[i];
-             ImGui::Image((ImTextureID)content[i]->GetTextureRef(), { 100,100 });
-             ImGui::EndDragDropSource();
-         }*/
-         ImGui::PopID();
-         ImGui::SameLine();
-     }
+             ImGui::PushID(i);
 
-     //ImGui::EndTabItem();
-
-     ImGui::EndChild();
-     ImGui::End();
+             ImGui::ImageButton((ImTextureID)content[i]->GetTextureRef(), { 100,100 });
 
 
-     if (ImGui::IsMouseReleased(ImGuiMouseButton_Left) && AssetMousDrag != nullptr)
-     {
-
-         int x, y;
-         SDL_GetMouseState(&x, &y);
-         Bitmap* s = new Bitmap(m_Renderer, AssetMousDrag->FileName, x, y, true);
-         //s->Transfrom.ParentSet(GameWindow::Instance().GetHirarcy());
-         sceneRoot.push_back(s);
-
-         AssetMousDrag = nullptr;
-     }
-
-
-
-     ImGui::ShowDemoWindow(nullptr);
-     ImGui::Begin("Editor");
-     ImGui::BeginChild("Content Window", ImVec2(), true);
-     //ImGui::BeginTable("Content browser", 3);
-     //for contents of assets file creat a dragable
-     ;
-     for (int i = 0; i < content.size(); i++)
-     {
-         ImGui::PushID(i);
-
-         ImGui::ImageButton((ImTextureID)content[i]->GetTextureRef(), { 100,100 });//bit in window
-
-
-         /////////////////////////////////For Draging
-         if (ImGui::BeginDragDropSource())
-         {
-             AssetMousDrag = content[i];
-             ImGui::Image((ImTextureID)content[i]->GetTextureRef(), { 100,100 }); // thumbnail
-             ImGui::EndDragDropSource();
-         }
-         /////////////////////////////////For Draging
-         ImGui::PopID();
-         ImGui::SameLine();
-     }
-
-     //ImGui::EndTabItem();
-
-     ImGui::EndChild();
-     ImGui::End();
-
-     for (Bitmap* path : sceneRoot)
-     {
-         if (!path->IsSelected)
-             continue;
-
-         Bitmap* SelectedObject = path;
-         ImGui::Begin(string("Selected Object" + std::to_string(SelectedObject->ID)).c_str());
-
-         int posTemp[2];
-         posTemp[0] = SelectedObject->GetX();
-         posTemp[1] = SelectedObject->GetY();
-
-
-         char buff[255]{};
-         strncpy_s(buff, SelectedObject->ObjectName.c_str(), sizeof(buff) - 1);
-         ImGui::InputText("Name:", buff, sizeof(buff));
-         SelectedObject->ObjectName = buff;
-
-         ImGui::Text(SelectedObject->ObjectName.c_str());
-         ImGui::DragInt2("X", posTemp);
-
-
-         SelectedObject->SetX(posTemp[0]);
-         SelectedObject->SetY(posTemp[1]);
-
-         if (ImGui::Button("Close"))
-         {
-             SelectedObject->IsSelected = false;
-         }
-
-         ImGui::End();
-     }
-     ImGui::Render();
-     ImGuiSDL::Render(ImGui::GetDrawData());
-
-     //show bitmaps
-
-     //_monster ->draw();
-     //_monsterTrans->draw();
-     //_monsterTransKeyed->draw();
-     //////////////////////////////////////////GAMELOOP//////////////////////////////////////////////////
-     eventSystem->HandelEvents();int  y;
-     for (int i = 0; i < Pipes.size(); i++)
-     {
-         
-         if (Pipes[i]->transform.GetPosition().x <= 0)
-         {    //top pipe
-             if (Pipes[i]->topPipe == true)
-             { Pipes[i ]->transform = vec3{ screenWidth,( y-800), 0.0f }; }
-             else
-             {  
-                 y = rand() % (600 - 300 + 1) + 300;
-                 Pipes[i]->transform = vec3{ screenWidth, y, 0.0f };
-             }
-
-            
-             ////////////////////////////////
+             //for dragging
              
-           
-            //moves to start&&resets y
-             //bottompipe
-             //TODO refactort
-            //moves to start&&resets y
-
-         }
-
-     }
-
-     score = +0.001f;
-     scoretxt += std::to_string(score);
-    
-
-
-
-     /*
-     if ((D == Flappy->Radius + Floor->Radius) || (D == Flappy->Radius - Celling->Radius))//circle collision check
-     {
-         if (phi.AABBIntersection(Flappy->BoxCollider, Celling->BoxCollider))
-         {
-
-
-         }
-
-     }
-     for (int i = 0; i < Pipes.size(); i++)
-     {
-         if ((D == Flappy->Radius + Floor->Radius) || (D == Flappy->Radius - Celling->Radius))//circle collision check
-         {
-             if (phi.AABBIntersection(Flappy->BoxCollider, Pipes[i]->BoxCollider))
+             if (ImGui::BeginDragDropSource())
              {
+                  AssetMousDrag = content[i];
+                 ImGui::Image((ImTextureID)content[i]->GetTextureRef(), { 100,100 });
+                 ImGui::EndDragDropSource();
+             }
+             
+             ImGui::PopID();
+             ImGui::SameLine();
+         }
 
+         //ImGui::EndTabItem();
+
+         ImGui::EndChild();
+         ImGui::End();
+
+
+         if (ImGui::IsMouseReleased(ImGuiMouseButton_Left) && AssetMousDrag != nullptr)
+         {
+
+             int x, y;
+             SDL_GetMouseState(&x, &y);
+             Bitmap* s = new Bitmap(m_Renderer, AssetMousDrag->FileName, x, y, true);
+             //s->Transfrom.ParentSet(GameWindow::Instance().GetHirarcy());
+             sceneRoot.push_back(s);
+
+             AssetMousDrag = nullptr;
+         }
+
+
+
+         ImGui::ShowDemoWindow(nullptr);
+         ImGui::Begin("Editor");
+         ImGui::BeginChild("Content Window", ImVec2(), true);
+         //ImGui::BeginTable("Content browser", 3);
+        //for contents of assets file creat a dragable
+
+         for (int i = 0; i < content.size(); i++)
+         {
+             ImGui::PushID(i);
+
+             ImGui::ImageButton((ImTextureID)content[i]->GetTextureRef(), { 100,100 });//bit in window
+
+
+             /////////////////////////////////For Draging
+             if (ImGui::BeginDragDropSource())
+             {
+                 AssetMousDrag = content[i];
+                 ImGui::Image((ImTextureID)content[i]->GetTextureRef(), { 100,100 }); // thumbnail
+                 ImGui::EndDragDropSource();
+             }
+             /////////////////////////////////For Draging
+             ImGui::PopID();
+             ImGui::SameLine();
+         }
+
+         //ImGui::EndTabItem();
+
+         ImGui::EndChild();
+         ImGui::End();
+
+         for (Bitmap* path : sceneRoot)
+         {
+             if (!path->IsSelected)
+                 continue;
+
+             Bitmap* SelectedObject = path;
+             ImGui::Begin(string("Selected Object" + std::to_string(SelectedObject->ID)).c_str());
+
+             int posTemp[2];
+             posTemp[0] = SelectedObject->GetX();
+             posTemp[1] = SelectedObject->GetY();
+
+
+             char buff[255]{};
+             strncpy_s(buff, SelectedObject->ObjectName.c_str(), sizeof(buff) - 1);
+             ImGui::InputText("Name:", buff, sizeof(buff));
+             SelectedObject->ObjectName = buff;
+
+             ImGui::Text(SelectedObject->ObjectName.c_str());
+             ImGui::DragInt2("X", posTemp);
+
+
+             SelectedObject->SetX(posTemp[0]);
+             SelectedObject->SetY(posTemp[1]);
+
+             if (ImGui::Button("Close"))
+             {
+                 SelectedObject->IsSelected = false;
+             }
+
+             ImGui::End();
+         }
+         ImGui::Render();
+         ImGuiSDL::Render(ImGui::GetDrawData());
+
+     }
+     else if (currentScene == GAMEOVER)
+     {
+         ImGui::NewFrame();
+         ImGui_ImplSDL2_NewFrame(m_Window);
+         ImGui::Begin(".");
+         bool clicked = ImGui::Button("Restart", ImVec2(0, 0));
+         if (clicked)
+         {
+             currentScene = GAME;
+         }
+         ImGui::End();
+
+         ImGui::Render();
+         ImGuiSDL::Render(ImGui::GetDrawData());
+
+     }
+     else if (currentScene == GAME)
+     {
+         std::cout << "frame \n";
+     
+
+         //////////////////////////////////////////GAMELOOP//////////////////////////////////////////////////
+         eventSystem->HandelEvents(); int  y;
+         for (int i = 0; i < Pipes.size(); i++)
+         {
+
+             if (Pipes[i]->transform.GetPosition().x <= 0)
+             {    //top pipe
+                 if (Pipes[i]->topPipe == true)
+                 {
+                     Pipes[i]->transform = vec3{ screenWidth,(y - 800), 0.0f };
+                 }
+                 else
+                 {
+                     y = rand() % (600 - 300 + 1) + 300;
+                     Pipes[i]->transform = vec3{ screenWidth, y, 0.0f };
+                 }
 
              }
 
          }
 
-     }*/
-     //collision check/////////////////////////////////////////////////////////////
-     for (int i = 0; i < Entitys.size(); i++) 
-     {
-         if (Flappy->CollisionCheck(Entitys[i]))
+         score = +0.001f;
+         scoretxt += std::to_string(score);
+
+         //collision check/////////////////////////////////////////////////////////////
+         for (int i = 0; i < Entitys.size(); i++)
          {
-             //endGame
+             if (!(Entitys[i] == Flappy))
+             { 
+                 if (Flappy->CollisionCheck(Entitys[i]))
+                 {
+                    currentScene = GAMEOVER;
+                    //endGame
+                 }
+
+             }
+            
+
          }
-     
-     }
+
+
+         for (int i = 0; i < Entitys.size(); i++)
+         {
+             Entitys[i]->ApplyContinuousMoment();
+             
+         }
+
+
+
+
+
+
+         for (int i = 0; i < Entitys.size(); i++)
+         {
+             Entitys[i]->Draw();
+         }
+         ////draw text
+         UpdateText(scoretxt, 50, 640, m_pSmallFont, { 0,0,0 });
+
+         //UpdateText("Small Red", 50, 10, m_pSmallFont, { 255,0,0 });
+         //UpdateText("Small Blue", 50, 40, m_pSmallFont, { 0,0,255 });
+
+         //char array[] = "Big White";
+         //UpdateText(array, 50, 140, m_pBigFont, { 0,255,0 });
+
+         //std::string myString = "Big Green";
+         //UpdateText(myString, 50, 70, m_pBigFont, { 0,255,0 });
+
+         //int testNumber = 1234;
+         //std::string testString = "Test Number:  ";
+         //testString += std::to_string(testNumber);
+         //UpdateText(testString, 50, 210, m_pBigFont, { 255,255,255 });
+         //  //phi->Move(Flappy->transform, vec3(1, -1, 0));
         
-   
-     for (int i = 0; i < Entitys.size(); i++)
-      { Entitys[i]->ApplyContinuousMoment();}
- 
-
-
-
-
-     //phi->Move(Flappy->transform, vec3(1, -1, 0));
-     for (int i = 0; i < Entitys.size(); i++)
-     {
-         Entitys[i]->Draw();
      }
-     ////draw text
-          UpdateText(scoretxt, 50, 640, m_pBigFont, { 0,0,0 });
-
-     //UpdateText("Small Red", 50, 10, m_pSmallFont, { 255,0,0 });
-     //UpdateText("Small Blue", 50, 40, m_pSmallFont, { 0,0,255 });
-
-     //char array[] = "Big White";
-     //UpdateText(array, 50, 140, m_pBigFont, { 0,255,0 });
-
-     //std::string myString = "Big Green";
-     //UpdateText(myString, 50, 70, m_pBigFont, { 0,255,0 });
-
-     //int testNumber = 1234;
-     //std::string testString = "Test Number:  ";
-     //testString += std::to_string(testNumber);
-     //UpdateText(testString, 50, 210, m_pBigFont, { 255,255,255 });
      SDL_RenderPresent(m_Renderer);
 
      SDL_Delay(16);//milliseconds
