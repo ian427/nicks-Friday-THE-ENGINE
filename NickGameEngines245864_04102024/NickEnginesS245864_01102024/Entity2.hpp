@@ -95,7 +95,7 @@ public:
 		switch (eventType)
 		{
 		case SPACE_PRESSED:
-			phi.Move(transform, vec3(0, -10, 0));
+			phi.Move(transform, vec3(0, -20, 0));
 			break;
 		default:
 			break;

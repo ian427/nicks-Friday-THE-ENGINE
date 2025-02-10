@@ -127,11 +127,11 @@
     m_pBigFont = TTF_OpenFont("assets/DejaVuSans.ttf",50); //04-02   
 
     Floor = new Ground(m_Renderer);
-    Floor->transform = vec3{ 640, 720, 0.0f };
+    Floor->transform = vec3{ 0, 620, 0.0f };
  
     Entitys.push_back(Floor);
     Celling = new UI(m_Renderer);
-    Celling->transform = vec3{ 720, 0, 0.0f };
+    Celling->transform = vec3{ 0, 0, 0.0f };
 
     Entitys.push_back(Celling);
  
@@ -356,7 +356,9 @@
              {
                  AssetMousDrag = content[i];
                  ImGui::Image((ImTextureID)content[i]->GetTextureRef(), { 100,100 }); // thumbnail
+
                  ImGui::EndDragDropSource();
+
              }
              /////////////////////////////////For Draging
              ImGui::PopID();
@@ -399,9 +401,40 @@
              }
 
              ImGui::End();
+             /*\
+             ImGui::Begin("Scene Hirarcy", 0, ImGuiWindowFlags_NoMove);
+             ImGui::SetWindowPos({ 0,200 });
+             ImGui::SetWindowSize({ 150, 720 - 200 });
+             /*for (Bitmap* gameObject : SceanHierarchy)
+             {
+                 if (ImGui::TreeNode(gameObject->ObjectName.c_str()))
+                 {
+                     ImGui::TreePop();
+                     I_GUIWindow::EditorToShow = dynamic_cast<I_GUIWindow*>(gameObject);
+                 }
+             }
+             ImGuiTreeNodeFlags nodeFlags = ImGuiTreeNodeFlags_FramePadding | ImGuiTreeNodeFlags_DefaultOpen;
+             bool isNodeOpen = ImGui::TreeNodeEx("Scene", nodeFlags, "Scene");
+             if (isNodeOpen)
+             {
+                 //cout << bitmap->ObjectName.c_str() << endl;
+                 //I_GUIWindow::SelectedObject = .ObjectName;
+
+                 for (int i = 0; i < sceneRoot.Children.size(); i++)
+                 {
+                     Bitmap* child = (Bitmap*)sceneRoot.Children[i]->Owner;
+                     child->GUIDrawChildGUI();
+
+                 }
+                 ImGui::TreePop();
+             }
+
+             ImGui::End();
+             */
          }
          ImGui::Render();
          ImGuiSDL::Render(ImGui::GetDrawData());
+         
 
      }
      else if (currentScene == GAMEOVER)
@@ -413,93 +446,126 @@
          if (clicked)
          {
              currentScene = GAME;
+             
          }
          ImGui::End();
-
+         
          ImGui::Render();
          ImGuiSDL::Render(ImGui::GetDrawData());
 
      }
      else if (currentScene == GAME)
      {
+       
+
          std::cout << "frame \n";
-     
 
-         //////////////////////////////////////////GAMELOOP//////////////////////////////////////////////////
-         eventSystem->HandelEvents(); int  y;
-         for (int i = 0; i < Pipes.size(); i++)
+         if (isInPlay ==false)// resets positions flappy and pipes on restart
          {
+             Flappy->transform.SetPosition(vec3(320, 240, 0));
+             int  y;
+             int tempx = 10;
+             for (int i = 0; i <Pipes.size(); i = i + 2)
+             {    
+                 
 
-             if (Pipes[i]->transform.GetPosition().x <= 0)
-             {    //top pipe
-                 if (Pipes[i]->topPipe == true)
-                 {
-                     Pipes[i]->transform = vec3{ screenWidth,(y - 800), 0.0f };
-                 }
-                 else
+                 if (Pipes[i]->topPipe == true)//if bottom pipe
                  {
                      y = rand() % (600 - 300 + 1) + 300;
-                     Pipes[i]->transform = vec3{ screenWidth, y, 0.0f };
+                     Pipes[i]->transform = vec3{ tempx,(y - 800), 0.0f };
+                     if(Pipes[i + 1]->topPipe == false){  Pipes[i+1]->transform = vec3{ tempx, y, 0.0f };}
+                   
                  }
+              
+                     tempx += screenWidth / 4 + 1;
 
              }
 
-         }
-
-         score = +0.001f;
-         scoretxt += std::to_string(score);
-
-         //collision check/////////////////////////////////////////////////////////////
-         for (int i = 0; i < Entitys.size(); i++)
-         {
-             if (!(Entitys[i] == Flappy))
-             { 
-                 if (Flappy->CollisionCheck(Entitys[i]))
-                 {
-                    currentScene = GAMEOVER;
-                    //endGame
-                 }
-
-             }
-            
-
-         }
-
-
-         for (int i = 0; i < Entitys.size(); i++)
-         {
-             Entitys[i]->ApplyContinuousMoment();
              
+             isInPlay = true;
+
          }
-
-
-
-
-
-
-         for (int i = 0; i < Entitys.size(); i++)
+         else
          {
-             Entitys[i]->Draw();
+             //////////////////////////////////////////GAMELOOP//////////////////////////////////////////////////
+             eventSystem->HandelEvents();
+             int  y;
+             for (int i = 0; i < Pipes.size(); i++)
+             {
+
+                 if (Pipes[i]->transform.GetPosition().x <= 0)
+                 {    //top pipe
+                     if (Pipes[i]->topPipe == true)
+                     {
+                         Pipes[i]->transform = vec3{ screenWidth,(y - 800), 0.0f };
+                     }
+                     else
+                     {
+                         y = rand() % (600 - 300 + 1) + 300;
+                         Pipes[i]->transform = vec3{ screenWidth, y, 0.0f };
+                     }
+
+                 }
+
+             }
+
+             score = +0.001f;
+             scoretxt += std::to_string(score);
+
+             //collision check/////////////////////////////////////////////////////////////
+             for (int i = 0; i < Entitys.size(); i++)
+             {
+                 if (!(Entitys[i] == Flappy))
+                 {
+                     if (Flappy->CollisionCheck(Entitys[i]))
+                     {
+                         currentScene = GAMEOVER;
+                         isInPlay = false;
+                         //endGame
+                     }
+
+                 }
+
+             }
+
+
+             for (int i = 0; i < Entitys.size(); i++)
+             {
+                 Entitys[i]->ApplyContinuousMoment();
+
+             }
+
+
+
+
+
+
+             for (int i = 0; i < Entitys.size(); i++)
+             {
+                 Entitys[i]->Draw();
+             }
+             ////draw text
+             UpdateText(scoretxt, 50, 640, m_pSmallFont, { 0,0,0 });
+
+             //UpdateText("Small Red", 50, 10, m_pSmallFont, { 255,0,0 });
+             //UpdateText("Small Blue", 50, 40, m_pSmallFont, { 0,0,255 });
+
+             //char array[] = "Big White";
+             //UpdateText(array, 50, 140, m_pBigFont, { 0,255,0 });
+
+             //std::string myString = "Big Green";
+             //UpdateText(myString, 50, 70, m_pBigFont, { 0,255,0 });
+
+             //int testNumber = 1234;
+             //std::string testString = "Test Number:  ";
+             //testString += std::to_string(testNumber);
+             //UpdateText(testString, 50, 210, m_pBigFont, { 255,255,255 });
+             //  //phi->Move(Flappy->transform, vec3(1, -1, 0));
+
          }
-         ////draw text
-         UpdateText(scoretxt, 50, 640, m_pSmallFont, { 0,0,0 });
-
-         //UpdateText("Small Red", 50, 10, m_pSmallFont, { 255,0,0 });
-         //UpdateText("Small Blue", 50, 40, m_pSmallFont, { 0,0,255 });
-
-         //char array[] = "Big White";
-         //UpdateText(array, 50, 140, m_pBigFont, { 0,255,0 });
-
-         //std::string myString = "Big Green";
-         //UpdateText(myString, 50, 70, m_pBigFont, { 0,255,0 });
-
-         //int testNumber = 1234;
-         //std::string testString = "Test Number:  ";
-         //testString += std::to_string(testNumber);
-         //UpdateText(testString, 50, 210, m_pBigFont, { 255,255,255 });
-         //  //phi->Move(Flappy->transform, vec3(1, -1, 0));
-        
      }
+
+        
      SDL_RenderPresent(m_Renderer);
 
      SDL_Delay(16);//milliseconds

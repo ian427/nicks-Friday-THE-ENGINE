@@ -8,10 +8,10 @@ using namespace std;
 
 Bitmap::Bitmap(SDL_Renderer* renderer, std::string fileName, int xpos, int ypos, bool useTransparancy)
 {
-	
+	//std::vector<ImGuiTreeNode*>Children;
 	FileName = fileName;
 	ObjectName = "Object name to be changed";
-	//DeBug::Log()->printDebug(DeBug::Verbosity::red, "Surface not loaded %s, %d", fileName.c_str(), 1);
+	
 	
 	//store renderer
 	m_pbitmapRenderer = renderer;
@@ -81,6 +81,19 @@ void Bitmap::SetX(int temppos)
 void Bitmap::SetY(int temppos)
 {
 	m_y = temppos;
+}
+
+void Bitmap::addToChildren(Bitmap* newChild)
+{
+	/*
+	std::vector iterator position childbegin;
+	child.end;
+	myvector.erase(position)
+		parent.children
+		erase.newchild
+		itreenode Parent(name)
+		set Colour;
+	  */
 }
 
 Bitmap::~Bitmap()

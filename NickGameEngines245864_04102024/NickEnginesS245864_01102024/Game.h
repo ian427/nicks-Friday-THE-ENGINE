@@ -49,13 +49,14 @@ private:
 		Physics* phi;/////////////////////////
 		
 		float score = 0;
+		bool isInPlay = false;
 		std::string scoretxt = "Test Number:  ";
 
 		TTF_Font* m_pSmallFont;
 		TTF_Font* m_pBigFont;
 		//list of eventcalls
 		
-		int currentScene = 2;
+		int currentScene = 1;
 		//list of eventcalls
 		enum Scenes
 		{
@@ -64,6 +65,7 @@ private:
 			GAMEOVER
 
 		};
+		
 		
 public:
 	int screenWidth = 2000;

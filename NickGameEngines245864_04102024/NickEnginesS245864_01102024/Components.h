@@ -23,26 +23,20 @@ public:
 	float Height;
 	Collider(const Transform&  t)
 	{
-		vec3 Pos = t.GetPosition();
-		vec3 Scale = t.GetScale();
-
-		TR = TR * Scale;
-		TL = TL * Scale;
-		BR = BR * Scale;
-		BL = BL * Scale;
-
-		TR = TR + Pos;
-		TL = TL + Pos;
-		BR = BR + Pos;
-		BL = BL + Pos;
-		Width = (TR.x - TL.x);
-		Height = (TR.y - BR.y);
+		UpdateColliderPosition(t);
 	}
 
-		vec3 GetColliderPoints();
+	vec3 GetColliderPoints();
+	void Update(){}
+	
 
-		void Update(const Transform& t)
-		{
+	void Update(const Transform& t)
+	{
+			UpdateColliderPosition(t);
+			
+	}
+	void UpdateColliderPosition(const Transform& t)
+	{
 			vec3 Pos = t.GetPosition();
 			vec3 Scale = t.GetScale();
 
@@ -58,5 +52,5 @@ public:
 			Width = (TR.x - TL.x);
 			Height = (TR.y - BR.y);
 
-		}
+	}
 };

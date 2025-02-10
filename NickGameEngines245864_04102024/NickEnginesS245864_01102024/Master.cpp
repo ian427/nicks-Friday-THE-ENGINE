@@ -29,7 +29,7 @@ int main(int argc, char* argv[])
 	
 	if (game && input)
 	{
-		Uint8 r = 50, g = 127 ,b = 50, a = 255;// background colour
+		Uint8 r = 5, g = 0 ,b = 140, a = 255;// background colour
 		
 		while (!input->KeyIsPressed(KEY_ESCAPE))
 			
