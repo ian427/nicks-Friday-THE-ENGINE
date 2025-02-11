@@ -24,8 +24,8 @@ public:
 	{
 		Map->m_x = transform.GetPosition().x;
 		Map->m_y = transform.GetPosition().y;
-		Map->draw();
 		BoxCollider->Update(transform);
+		Map->draw();
 	}
 	 
 	 Collider* GetCollider()
@@ -86,7 +86,7 @@ public:
 	
 	void ApplyContinuousMoment()
 	{
-		phi.Move(transform, vec3(0, 1, 0));
+		phi.Move(transform, vec3(0, 2, 0));
 	}
 	
 
@@ -208,4 +208,35 @@ public:
 	void ApplyContinuousMoment()
 	{
 	}
+};
+class Trigger :public virtual BaseEntity
+{
+	
+public:
+	bool isTrigger = true;
+	//bitmap
+	//collider 
+
+	//Collider* BoxCollider;
+	float Radius;
+	Transform Transform;
+	SDL_Renderer* m_Renderer;
+	Trigger( SDL_Renderer* renderer) :  m_Renderer{ renderer }
+	{
+		BoxCollider = new Collider(Transform);
+		
+		Map = new Bitmap(m_Renderer, "assets/Trigger.bmp", transform.GetPosition().x, transform.GetPosition().y);//loads bottom pipe png
+		
+
+	}
+	~Trigger()
+	{
+
+		SDL_Renderer* m_Renderer = nullptr;
+	}
+	void ApplyContinuousMoment()
+	{
+		phi.Move(transform, vec3(-3, 0, 0));
+	}
+
 };

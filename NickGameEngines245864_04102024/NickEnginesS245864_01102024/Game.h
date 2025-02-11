@@ -40,7 +40,6 @@ private:
 		Pipe* BottomPipe4;
 		std::vector<Pipe*>Pipes;
 		std::vector<BaseEntity*>Entitys;
-		
 		std::vector<Bitmap*>content;
 		vector<Bitmap*> sceneRoot;//list of objects in scene
 		UI* Celling;
@@ -50,7 +49,7 @@ private:
 		
 		float score = 0;
 		bool isInPlay = false;
-		std::string scoretxt = "Test Number:  ";
+		std::string scoretxt = "Test Number: ";
 
 		TTF_Font* m_pSmallFont;
 		TTF_Font* m_pBigFont;

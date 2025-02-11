@@ -158,6 +158,7 @@
      delete Floor;
      Ground* Floor = nullptr;
      delete Celling;
+  
      UI* Celling = nullptr;
      delete BottomPipe4;
      Pipe* BottomPipe4 = nullptr;
@@ -534,12 +535,7 @@
                  Entitys[i]->ApplyContinuousMoment();
 
              }
-
-
-
-
-
-
+=
              for (int i = 0; i < Entitys.size(); i++)
              {
                  Entitys[i]->Draw();
