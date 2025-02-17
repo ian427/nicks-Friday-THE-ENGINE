@@ -287,6 +287,7 @@
      SDL_RenderClear(m_Renderer);
      if (currentScene == TESTSCENE)
      {
+         FrameTimeStack FrameTime;
          ImGui::NewFrame();
          ImGui_ImplSDL2_NewFrame(m_Window);
          bool show = true;
@@ -432,7 +433,7 @@
              ImGui::End();
              
          }
-         FrameTimeStack FrameTime;
+        
          ImGui::Begin("Frametime");
          FrameTime.Push(io.DeltaTime * 1000);
          ImGui::PlotLines("frame", FrameTime.FramTimeQ.data(),
