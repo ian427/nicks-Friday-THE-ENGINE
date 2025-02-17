@@ -1,6 +1,8 @@
 #include "Physics.h"
 #include "Debug.h" //|6|
 
+#include "SDL.h"
+
 void Physics::ApplyForces(Transform& transform)
 {
     vec3 currentForce = vec3(0);
@@ -42,32 +44,35 @@ vec3 Physics::AccumulateForces(const std::vector<vec3> foreces)
 	return Force;
 }
 
-vec3 Collider::GetColliderPoints()
+
+
+Collider::Collider(const Transform& t, int width, int height)
 {
-    return TL;
-    return TR;
-    return BL;
-    return BR;
+    CollisionRect = SDL_Rect{ (int)t.GetPosition().x, (int)t.GetPosition().y, width, height };
+}
+
+void Collider::UpdateColliderPosition(const Transform& t)
+{
+    CollisionRect.x = t.GetPosition().x;
+    CollisionRect.y = t.GetPosition().y;
+    //vec3 Pos = t.GetPosition();
+    //vec3 Scale = t.GetScale();
+}
+
+void Collider::DrawDebug(const Transform& transform, SDL_Renderer* m_Renderer)
+{
+
+    SDL_SetRenderDrawColor(m_Renderer, 255, 0, 0, 0);
+    SDL_RenderDrawRect(m_Renderer, &CollisionRect);
+
+    SDL_SetRenderDrawColor(m_Renderer, 0, 0, 255, 0);
 }
 
 bool Physics::AABBIntersection(Collider* Collider1 , Collider* Collider2)
 {
-    if ((Collider1->TL.x>=Collider2->TL.x && Collider1->TR.x >=Collider2->TL.x) ||//check width
-       (Collider1->TR.x >= Collider2->TR.x && Collider1->TL.x >= Collider2->TR.x) ||
-       (Collider1->BL.x >= Collider2->BL.x && Collider1->BR.x >= Collider2->BL.x) ||
-       (Collider1->BR.x >= Collider2->BR.x && Collider1->BL.x >= Collider2->BR.x) ||
-
-        (Collider1->TL.y >= Collider2->TL.y && Collider1->TR.y >= Collider2->TL.y) ||//check height
-        (Collider1->TR.y >= Collider2->TR.y && Collider1->TL.y >= Collider2->TR.y) ||
-        (Collider1->BL.y >= Collider2->BL.y && Collider1->BR.y >= Collider2->BL.y) ||/////////////////////////exception
-        (Collider1->BR.y >= Collider2->BR.y && Collider1->BL.y >= Collider2->BR.y))
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+   
+    SDL_Rect resuslt;
+    return SDL_IntersectRect(&Collider1->CollisionRect, &Collider2->CollisionRect, &resuslt); 
 
 }
 

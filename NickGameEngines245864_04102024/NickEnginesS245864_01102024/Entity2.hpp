@@ -6,6 +6,8 @@
 
 //base class in vector with virtual methods each child of base overloads that method
 struct SDL_Renderer;
+struct ITreeNode;
+
 
 class BaseEntity
 {
@@ -13,20 +15,47 @@ protected:
 	
 	 
 	SDL_Renderer* m_Renderer;
+
 public:
+	std::vector<ITreeNode*>Children;
+	void addToChildren(Bitmap* newChild);
 	Physics phi;//copy
 	 float Radius;
 	 Bitmap* Map;
 	 Collider*  BoxCollider;
 	 Transform transform;//26,27 getting this transforms data not flappys
 	 Transform& GetTransform() { return transform; }
+	 bool IsSelected = false;
+
+	 
+
+
+	 int ID;
+	 std::string ObjectName;
+
+	 BaseEntity(SDL_Renderer* renderer, std::string fileName, int xpos, int ypos, bool useTransparancy)
+	 {
+		 m_Renderer = renderer;
+		 ObjectName = "Object name to be changed";
+
+		 transform.SetPosition(vec3(xpos, ypos, 0));
+
+		 Map = new Bitmap(m_Renderer, fileName, xpos, ypos, useTransparancy);
+		 BoxCollider = new Collider(transform, Map->GetWidth(), Map->GetHeight() );
+	 }
+
+
+	 
+
 	 virtual void Draw()//genral class ?
 	{
-		Map->m_x = transform.GetPosition().x;
-		Map->m_y = transform.GetPosition().y;
+		
 		BoxCollider->Update(transform);
-		Map->draw();
+		Map->draw(transform.GetPosition().x, transform.GetPosition().y);
+		BoxCollider->DrawDebug(transform, m_Renderer);
 	}
+
+	
 	 
 	 Collider* GetCollider()
 	 {
@@ -37,7 +66,7 @@ public:
 		return Radius;
 	 }
 
-	 virtual void ApplyContinuousMoment() = 0;
+	 virtual void ApplyContinuousMoment() {};
 	 ~BaseEntity()
 	 {
 		
@@ -47,7 +76,14 @@ public:
 		 
 	 }
 	
+ protected:
+	 //BaseEntity()
+	 //{
+		// ObjectName = "Object name to be changed";
 
+		// //Map->m_x = transform.GetPosition().x;
+		// //Map->m_y = transform.GetPosition().y;
+	 //}
 	
 };
 
@@ -65,16 +101,16 @@ public:
 	
 	//Transform transform;
 	//Transform Transform{ vec3{320.0f, 240.0f, 0.0f} };
-	float Radius{ 10.0f };
 	
-	SDL_Renderer* m_Renderer;
+	
 
-	Bird(SDL_Renderer* renderer) : m_Renderer{ renderer }
+	Bird(SDL_Renderer* renderer, int X, int Y) : BaseEntity(renderer, "assets/Flappy.bmp", X, Y, true)
 	{
 
-		transform = vec3{ 320.0f, 240.0f, 0.0f };
-		Map = new Bitmap(m_Renderer, "assets/Flappy.bmp", transform.GetPosition().x, transform.GetPosition().y);
-		BoxCollider = new Collider(transform);
+		//m_Renderer = renderer;
+		
+		
+		
 	
 	}
 
@@ -103,19 +139,23 @@ public:
 	}
 	bool CollisionCheck( BaseEntity* CollidingAgainst)// needs to the the derived class
 	{//calculates the position and hoe far apart so we can find where to check radii from 
-		float Dx = transform.GetPosition().x - CollidingAgainst->GetTransform().GetPosition().x;
-		float Dy = transform.GetPosition().y - CollidingAgainst->GetTransform().GetPosition().y;
-		float D = (sqrt((Dx * Dx) + (Dy * Dy)));
+		//float Dx = transform.GetPosition().x - CollidingAgainst->GetTransform().GetPosition().x;
+		//float Dy = transform.GetPosition().y - CollidingAgainst->GetTransform().GetPosition().y;
+		//float D = (sqrt((Dx * Dx) + (Dy * Dy)));
 
-		if ((D == Radius + CollidingAgainst->GetRadius()) || (D == Radius - CollidingAgainst->GetRadius()))//circle collision check
-		{
+		//if ((D == Radius + CollidingAgainst->GetRadius()) || (D == Radius - CollidingAgainst->GetRadius()))//circle collision check
+	
+		//if(D <= Radius + CollidingAgainst->GetRadius())
+		//{
+				bool Result = false;
 			if (phi.AABBIntersection(BoxCollider, CollidingAgainst->GetCollider()))
 			{
-				return true;
-
+				
+				Result = true;
 			}
 
-		}
+		//}
+		return Result;
 
 	}
 };
@@ -130,12 +170,13 @@ public:
 	//collider 
 
 	//Collider* BoxCollider;
-	float Radius;
-	Transform Transform;
-	SDL_Renderer* m_Renderer;
-	Pipe(bool value,SDL_Renderer* renderer) : topPipe(value) , m_Renderer{ renderer }
+	
+	
+	Pipe(bool value,SDL_Renderer* renderer, int X, int Y) : BaseEntity(renderer, "assets/Pipes3Bottom.bmp", X, Y, true)
 	{
-		BoxCollider = new Collider(Transform);
+		delete Map;
+		Map = nullptr;
+		topPipe = value;
 		if (topPipe)
 		{
 			//Map = new Bitmap(m_Renderer, "assets/Pipes3Top.bmp", transform.GetPosition().x, transform.GetPosition().y);// loads top pipe png
@@ -162,17 +203,16 @@ public:
 
 class Ground : public virtual BaseEntity
 {
-public:
+	public:
 	//bitmap
 	//collider 
 	
 	//Collider* BoxCollider;
-	float Radius;
-	Transform Transform;
-	SDL_Renderer* m_Renderer;
-	Ground(SDL_Renderer* renderer) : m_Renderer{ renderer }
+	
+	
+	Ground(SDL_Renderer* renderer, int X, int Y) : BaseEntity(renderer, "assets/Ground.bmp", X, Y, true)
 	{
-		BoxCollider = new Collider(Transform);
+		
 		Map = new Bitmap(m_Renderer, "assets/Ground.bmp", transform.GetPosition().x, transform.GetPosition().y);
 	}
 	~Ground()
@@ -192,13 +232,10 @@ public:
 	//collider 
 	
 	//Collider* BoxCollider;
-	float Radius;
-	Transform Transform;
-	SDL_Renderer* m_Renderer;
-	UI(SDL_Renderer* renderer) : m_Renderer{ renderer }
+	
+
+	UI(SDL_Renderer* renderer, int X, int Y) : BaseEntity(renderer, "assets/UI.bmp", X, Y, true)
 	{
-		BoxCollider = new Collider(Transform);
-		Map = new Bitmap(m_Renderer, "assets/UI.bmp", transform.GetPosition().x, transform.GetPosition().y);
 	}
 	~UI()
 	{
@@ -218,16 +255,11 @@ public:
 	//collider 
 
 	//Collider* BoxCollider;
-	float Radius;
-	Transform Transform;
-	SDL_Renderer* m_Renderer;
-	Trigger( SDL_Renderer* renderer) :  m_Renderer{ renderer }
+	
+	
+	Trigger( SDL_Renderer* renderer, int X, int Y) : BaseEntity(renderer, "assets/Trigger.bmp", X, Y, true)
 	{
-		BoxCollider = new Collider(Transform);
 		
-		Map = new Bitmap(m_Renderer, "assets/Trigger.bmp", transform.GetPosition().x, transform.GetPosition().y);//loads bottom pipe png
-		
-
 	}
 	~Trigger()
 	{
@@ -238,5 +270,11 @@ public:
 	{
 		phi.Move(transform, vec3(-3, 0, 0));
 	}
+
+};
+struct ITreeNode
+{
+	BaseEntity Owner;
+	std::string ObjectName;
 
 };

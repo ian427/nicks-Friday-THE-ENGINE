@@ -1,85 +1,66 @@
-﻿  Game.cpp
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(25,37): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(25,37): warning C4244:         with
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(25,37): warning C4244:         [
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(25,37): warning C4244:             T=float
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(25,37): warning C4244:         ]
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(26,37): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(26,37): warning C4244:         with
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(26,37): warning C4244:         [
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(26,37): warning C4244:             T=float
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(26,37): warning C4244:         ]
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(76,103): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(76,103): warning C4244:         with
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(76,103): warning C4244:         [
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(76,103): warning C4244:             T=float
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(76,103): warning C4244:         ]
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(76,76): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(76,76): warning C4244:         with
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(76,76): warning C4244:         [
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(76,76): warning C4244:             T=float
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(76,76): warning C4244:         ]
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(142,110): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(142,110): warning C4244:         with
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(142,110): warning C4244:         [
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(142,110): warning C4244:             T=float
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(142,110): warning C4244:         ]
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(142,83): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(142,83): warning C4244:         with
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(142,83): warning C4244:         [
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(142,83): warning C4244:             T=float
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(142,83): warning C4244:         ]
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(146,107): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(146,107): warning C4244:         with
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(146,107): warning C4244:         [
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(146,107): warning C4244:             T=float
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(146,107): warning C4244:         ]
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(146,80): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(146,80): warning C4244:         with
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(146,80): warning C4244:         [
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(146,80): warning C4244:             T=float
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(146,80): warning C4244:         ]
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(176,103): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(176,103): warning C4244:         with
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(176,103): warning C4244:         [
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(176,103): warning C4244:             T=float
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(176,103): warning C4244:         ]
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(176,76): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(176,76): warning C4244:         with
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(176,76): warning C4244:         [
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(176,76): warning C4244:             T=float
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(176,76): warning C4244:         ]
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(201,99): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(201,99): warning C4244:         with
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(201,99): warning C4244:         [
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(201,99): warning C4244:             T=float
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(201,99): warning C4244:         ]
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(201,72): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(201,72): warning C4244:         with
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(201,72): warning C4244:         [
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(201,72): warning C4244:             T=float
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(201,72): warning C4244:         ]
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(228,104): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(228,104): warning C4244:         with
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(228,104): warning C4244:         [
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(228,104): warning C4244:             T=float
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(228,104): warning C4244:         ]
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(228,77): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(228,77): warning C4244:         with
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(228,77): warning C4244:         [
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(228,77): warning C4244:             T=float
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(228,77): warning C4244:         ]
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(16,16): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(145,17): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(146,17): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(247,17): warning C4778: 'printf' : unterminated format string '%\n'
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(247,36): warning C4474: 'printf' : too many arguments passed for format string
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(258,25): warning C4778: 'printf' : unterminated format string '%\n'
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(258,44): warning C4474: 'printf' : too many arguments passed for format string
-  TextureManager.cpp
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\TextureManager.cpp(14,3): warning C4150: deletion of pointer to incomplete type 'SDL_Texture'; no destructor called
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\TextureManager.cpp(24,3): warning C4150: deletion of pointer to incomplete type 'SDL_Texture'; no destructor called
+﻿  BitMaps.cpp
+  Game.cpp
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\BitMaps.cpp(25,10): warning C4778: 'printf' : unterminated format string '%\n'
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\BitMaps.cpp(25,29): warning C4474: 'printf' : too many arguments passed for format string
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\BitMaps.cpp(46,11): warning C4778: 'printf' : unterminated format string '%\n'
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\BitMaps.cpp(46,30): warning C4474: 'printf' : too many arguments passed for format string
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\BitMaps.cpp(94,14): error C2039: 'addToChildren': is not a member of 'Bitmap'
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(54,63): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(54,63): warning C4244:         with
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(54,63): warning C4244:         [
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(54,63): warning C4244:             T=float
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(54,63): warning C4244:         ]
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(54,36): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(54,36): warning C4244:         with
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(54,36): warning C4244:         [
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(54,36): warning C4244:             T=float
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(54,36): warning C4244:         ]
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(183,110): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(183,110): warning C4244:         with
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(183,110): warning C4244:         [
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(183,110): warning C4244:             T=float
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(183,110): warning C4244:         ]
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(183,83): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(183,83): warning C4244:         with
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(183,83): warning C4244:         [
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(183,83): warning C4244:             T=float
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(183,83): warning C4244:         ]
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(187,107): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(187,107): warning C4244:         with
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(187,107): warning C4244:         [
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(187,107): warning C4244:             T=float
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(187,107): warning C4244:         ]
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(187,80): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(187,80): warning C4244:         with
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(187,80): warning C4244:         [
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(187,80): warning C4244:             T=float
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(187,80): warning C4244:         ]
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(216,103): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(216,103): warning C4244:         with
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(216,103): warning C4244:         [
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(216,103): warning C4244:             T=float
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(216,103): warning C4244:         ]
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(216,76): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(216,76): warning C4244:         with
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(216,76): warning C4244:         [
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(216,76): warning C4244:             T=float
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(216,76): warning C4244:         ]
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Profiler.h(10,12): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(16,16): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(245,17): warning C4778: 'printf' : unterminated format string '%\n'
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(245,36): warning C4474: 'printf' : too many arguments passed for format string
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(256,25): warning C4778: 'printf' : unterminated format string '%\n'
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(256,44): warning C4474: 'printf' : too many arguments passed for format string
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(381,66): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(381,66): warning C4244:         with
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(381,66): warning C4244:         [
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(381,66): warning C4244:             T=float
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(381,66): warning C4244:         ]
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(382,66): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(382,66): warning C4244:         with
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(382,66): warning C4244:         [
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(382,66): warning C4244:             T=float
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(382,66): warning C4244:         ]
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(425,42): error C2275: 'BaseEntity': expected an expression instead of a type
+C:\Users\Games\Documents\Unreal Projects\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Game.cpp(437,25): error C2065: 'io': undeclared identifier
   Generating Code...
-C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\NickEnginesS245864_01102024\Entity2.hpp(120,1): warning C4715: 'Bird::CollisionCheck': not all control paths return a value
-  LINK : C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\x64\Debug\NickEnginesS245864_01102024.exe not found or not built by the last incremental link; performing full link
-  NickGraphicss245864_01102024.vcxproj -> C:\Users\Games\Documents\GitHub\nicks-Friday-THE-ENGINE\NickGameEngines245864_04102024\x64\Debug\NickEnginesS245864_01102024.exe

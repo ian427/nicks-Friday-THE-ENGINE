@@ -10,7 +10,7 @@ Bitmap::Bitmap(SDL_Renderer* renderer, std::string fileName, int xpos, int ypos,
 {
 	//std::vector<ImGuiTreeNode*>Children;
 	FileName = fileName;
-	ObjectName = "Object name to be changed";
+	
 	
 	
 	//store renderer
@@ -50,11 +50,11 @@ Bitmap::Bitmap(SDL_Renderer* renderer, std::string fileName, int xpos, int ypos,
 	}
 	//store position
 
-	m_x = xpos;
-	m_y = ypos;
+	//m_x = xpos;
+	//m_y = ypos;
 }
 
-void Bitmap::draw()
+void Bitmap::draw(int m_x,int  m_y)
 {
 	//render bitmap
 	if (m_pbitmapTexture)
@@ -65,23 +65,31 @@ void Bitmap::draw()
 	}
 
 }
-int Bitmap::GetX()
+int Bitmap::GetWidth()
 {
-	return m_x;
+	return m_pbitmapSurface->w;
 }
-int Bitmap::GetY()
+int Bitmap::GetHeight()
 {
-	return m_y;
+	return m_pbitmapSurface->h;
 }
-void Bitmap::SetX(int temppos)
-{
-	m_x = temppos;
-}
-
-void Bitmap::SetY(int temppos)
-{
-	m_y = temppos;
-}
+//int Bitmap::GetX()
+//{
+//	return m_x;
+//}
+//int Bitmap::GetY()
+//{
+//	return m_y;
+//}
+//void Bitmap::SetX(int temppos)
+//{
+//	m_x = temppos;
+//}
+//
+//void Bitmap::SetY(int temppos)
+//{
+//	m_y = temppos;
+//}
 
 void Bitmap::addToChildren(Bitmap* newChild)
 {

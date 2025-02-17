@@ -157,6 +157,7 @@
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Master.cpp" />
     <ClCompile Include="Physics.cpp" />
+    <ClCompile Include="Profiler.cpp" />
     <ClCompile Include="TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -176,6 +177,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="Physics.h" />
+    <ClInclude Include="Profiler.h" />
     <ClInclude Include="Test.hpp" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Transform.hpp" />

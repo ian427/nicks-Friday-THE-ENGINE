@@ -40,8 +40,9 @@ private:
 		Pipe* BottomPipe4;
 		std::vector<Pipe*>Pipes;
 		std::vector<BaseEntity*>Entitys;
-		std::vector<Bitmap*>content;
-		vector<Bitmap*> sceneRoot;//list of objects in scene
+		std::vector<Bitmap*>content;//to be shown in to drag in
+		vector<BaseEntity*> SceanHierarchy;
+		BaseEntity* sceneRoot;//list of objects in scene
 		UI* Celling;
 		Ground* Floor;
 		EventSystem* eventSystem;
@@ -55,7 +56,7 @@ private:
 		TTF_Font* m_pBigFont;
 		//list of eventcalls
 		
-		int currentScene = 1;
+		int currentScene = 0;
 		//list of eventcalls
 		enum Scenes
 		{

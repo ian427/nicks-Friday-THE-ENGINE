@@ -2,7 +2,7 @@
 #include <iostream>
 #include "Game.h"
 #include "Entity2.hpp" 
-//#include "BitMaps.h"//nuke later
+#include "Profiler.h" 
 
 #include "Debug.h" //|4|
 #include "imgui.h"
@@ -40,7 +40,8 @@
         return;
 
     }
-    
+    FrameTimeStack frameTime;
+
 
         m_Renderer = SDL_CreateRenderer(
         m_Window, //links to window
@@ -104,13 +105,11 @@
      
           y = rand() % (600 - 300 + 1) + 300;//between 300,600
 
-          BottomPipe1 = new Pipe( false, m_Renderer);
-          BottomPipe1->transform = vec3{ tempx, y, 0.0f };
+          BottomPipe1 = new Pipe( false, m_Renderer, tempx, y);
      Entitys.push_back(BottomPipe1);
      Pipes.push_back(BottomPipe1);    // pushing the pointer into the vector
     
-     TopPipe1 = new Pipe(true, m_Renderer);
-     TopPipe1->transform = vec3{ tempx, (y - 800), 0.0f };
+     TopPipe1 = new Pipe(true, m_Renderer, tempx, (y - 800));
       Entitys.push_back(TopPipe1);
       Pipes.push_back(TopPipe1);
 
@@ -119,19 +118,17 @@
     }
    
 
-   Flappy = new Bird(m_Renderer);
+   Flappy = new Bird(m_Renderer, 100,380);
    eventSystem->AddListener(Flappy);
    Entitys.push_back(Flappy);
      //read in the font
     m_pSmallFont = TTF_OpenFont("assets/DejaVuSans.ttf",15); //04-02
     m_pBigFont = TTF_OpenFont("assets/DejaVuSans.ttf",50); //04-02   
 
-    Floor = new Ground(m_Renderer);
-    Floor->transform = vec3{ 0, 620, 0.0f };
+    Floor = new Ground(m_Renderer, 0, 620);
  
     Entitys.push_back(Floor);
-    Celling = new UI(m_Renderer);
-    Celling->transform = vec3{ 0, 0, 0.0f };
+    Celling = new UI(m_Renderer,0,0);
 
     Entitys.push_back(Celling);
  
@@ -139,14 +136,15 @@
     //calculates raduius that we sould do a collision check in 
 
    
-
+    /*
     for (int i = 0; i < Entitys.size(); i++)
     {
-        float A = Entitys[i]->Map->m_x;
-        float B = Entitys[i]->Map->m_y;
-        Entitys[i]->Radius = (sqrt((A * A) + (B * B))) / 2;
+        float A = Entitys[i]->transform.GetPosition().x;
+        float B = Entitys[i]->transform.GetPosition().y;
+        //Entitys[i]->Radius = (sqrt((A * A) + (B * B))) / 2;
+        Entitys[i]->Radius = 100;//TODO save bitmap size to plug in
     }
-   
+   */
 
  }
 
@@ -330,9 +328,10 @@
 
              int x, y;
              SDL_GetMouseState(&x, &y);
-             Bitmap* s = new Bitmap(m_Renderer, AssetMousDrag->FileName, x, y, true);
+             BaseEntity* b = new BaseEntity(m_Renderer, AssetMousDrag->FileName, x, y, true);
+             //Bitmap* s = new Bitmap(m_Renderer, AssetMousDrag->FileName, x, y, true);
              //s->Transfrom.ParentSet(GameWindow::Instance().GetHirarcy());
-             sceneRoot.push_back(s);
+             SceanHierarchy.push_back(b);
 
              AssetMousDrag = nullptr;
          }
@@ -342,7 +341,7 @@
          ImGui::ShowDemoWindow(nullptr);
          ImGui::Begin("Editor");
          ImGui::BeginChild("Content Window", ImVec2(), true);
-         //ImGui::BeginTable("Content browser", 3);
+         
         //for contents of assets file creat a dragable
 
          for (int i = 0; i < content.size(); i++)
@@ -366,22 +365,21 @@
              ImGui::SameLine();
          }
 
-         //ImGui::EndTabItem();
-
+         ImGui::EndTabItem();
+         
          ImGui::EndChild();
          ImGui::End();
-
-         for (Bitmap* path : sceneRoot)
+       
+         for (Bitmap* path : content)
          {
-             if (!path->IsSelected)
-                 continue;
 
-             Bitmap* SelectedObject = path;
+
+             BaseEntity* SelectedObject = new BaseEntity(m_Renderer,path->FileName,1,1,false);
              ImGui::Begin(string("Selected Object" + std::to_string(SelectedObject->ID)).c_str());
 
              int posTemp[2];
-             posTemp[0] = SelectedObject->GetX();
-             posTemp[1] = SelectedObject->GetY();
+             posTemp[0] = SelectedObject->transform.GetPosition().x;
+             posTemp[1] = SelectedObject->transform.GetPosition().y;
 
 
              char buff[255]{};
@@ -392,9 +390,9 @@
              ImGui::Text(SelectedObject->ObjectName.c_str());
              ImGui::DragInt2("X", posTemp);
 
-
-             SelectedObject->SetX(posTemp[0]);
-             SelectedObject->SetY(posTemp[1]);
+             SelectedObject->transform.SetPosition(vec3(posTemp[0], posTemp[1], 0));
+             //SelectedObject->SetX(posTemp[0]);
+             //SelectedObject->SetY(posTemp[1]);
 
              if (ImGui::Button("Close"))
              {
@@ -402,16 +400,17 @@
              }
 
              ImGui::End();
-             /*\
+             
              ImGui::Begin("Scene Hirarcy", 0, ImGuiWindowFlags_NoMove);
              ImGui::SetWindowPos({ 0,200 });
              ImGui::SetWindowSize({ 150, 720 - 200 });
-             /*for (Bitmap* gameObject : SceanHierarchy)
+             BaseEntity* sceneRoot = new BaseEntity(m_Renderer, "assets/Trigger.bmp/", 0, 620, true);
+             for (BaseEntity* gameObject : SceanHierarchy)
              {
                  if (ImGui::TreeNode(gameObject->ObjectName.c_str()))
                  {
                      ImGui::TreePop();
-                     I_GUIWindow::EditorToShow = dynamic_cast<I_GUIWindow*>(gameObject);
+                    
                  }
              }
              ImGuiTreeNodeFlags nodeFlags = ImGuiTreeNodeFlags_FramePadding | ImGuiTreeNodeFlags_DefaultOpen;
@@ -420,19 +419,29 @@
              {
                  //cout << bitmap->ObjectName.c_str() << endl;
                  //I_GUIWindow::SelectedObject = .ObjectName;
-
-                 for (int i = 0; i < sceneRoot.Children.size(); i++)
+                
+                 for (int i = 0; i < sceneRoot->Children.size(); i++)
                  {
-                     Bitmap* child = (Bitmap*)sceneRoot.Children[i]->Owner;
-                     child->GUIDrawChildGUI();
+                     BaseEntity* child;
+                     child->Draw();
 
                  }
                  ImGui::TreePop();
              }
 
              ImGui::End();
-             */
+             
          }
+         FrameTimeStack FrameTime;
+         ImGui::Begin("Frametime");
+         FrameTime.Push(io.DeltaTime * 1000);
+         ImGui::PlotLines("frame", FrameTime.FramTimeQ.data(),
+             FrameTime.Capacity);
+            char Buffer[64];
+             printf(Buffer, sizeof Buffer, "%f ms",
+                 FrameTime.AverageTime());
+             ImGui::Text(Buffer);
+             ImGui::End();
          ImGui::Render();
          ImGuiSDL::Render(ImGui::GetDrawData());
          
@@ -453,7 +462,7 @@
          
          ImGui::Render();
          ImGuiSDL::Render(ImGui::GetDrawData());
-
+         
      }
      else if (currentScene == GAME)
      {
@@ -490,7 +499,7 @@
          {
              //////////////////////////////////////////GAMELOOP//////////////////////////////////////////////////
              eventSystem->HandelEvents();
-             int  y;
+             int  y=720;
              for (int i = 0; i < Pipes.size(); i++)
              {
 
@@ -535,7 +544,7 @@
                  Entitys[i]->ApplyContinuousMoment();
 
              }
-=
+
              for (int i = 0; i < Entitys.size(); i++)
              {
                  Entitys[i]->Draw();
@@ -566,3 +575,8 @@
 
      SDL_Delay(16);//milliseconds
  }
+
+ 
+
+
+     
