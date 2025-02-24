@@ -6,10 +6,20 @@
 
 //base class in vector with virtual methods each child of base overloads that method
 struct SDL_Renderer;
-struct ITreeNode;
+class ITreeNode
+{
+public:
+	ITreeNode* Parent;
+	std::vector<ITreeNode*>Children;
+
+	void addToChildren(ITreeNode* newChild)
+	{
+		Children.push_back(newChild);
+	}
+};
 
 
-class BaseEntity
+class BaseEntity: public ITreeNode
 {
 protected:
 	
@@ -17,9 +27,10 @@ protected:
 	SDL_Renderer* m_Renderer;
 
 public:
-	std::vector<ITreeNode*>Children;
-	void addToChildren(Bitmap* newChild);
+	
+
 	Physics phi;//copy
+	
 	 float Radius;
 	 Bitmap* Map;
 	 Collider*  BoxCollider;
@@ -28,7 +39,6 @@ public:
 	 bool IsSelected = false;
 
 	 
-
 
 	 int ID;
 	 std::string ObjectName;
@@ -42,6 +52,7 @@ public:
 
 		 Map = new Bitmap(m_Renderer, fileName, xpos, ypos, useTransparancy);
 		 BoxCollider = new Collider(transform, Map->GetWidth(), Map->GetHeight() );
+
 	 }
 
 
@@ -86,6 +97,10 @@ public:
 	 //}
 	
 };
+
+
+
+
 
 class Bird : public I_EventHandeler , public virtual BaseEntity
 {
@@ -272,9 +287,21 @@ public:
 	}
 
 };
-struct ITreeNode
+
+class Seed :public virtual BaseEntity
 {
-	BaseEntity Owner;
-	std::string ObjectName;
+
+public:
+	
+	Seed(SDL_Renderer* renderer, int X, int Y) : BaseEntity(renderer, "assets/Seed.bmp", X, Y, true)
+	{
+	}
+	~Seed()
+	{
+	}
+	void ApplyContinuousMoment()
+	{
+		phi.Move(transform, vec3(-3, 0, 0));
+	}
 
 };

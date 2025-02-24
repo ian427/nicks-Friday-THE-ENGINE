@@ -61,12 +61,13 @@
     ImGui::CreateContext();
     SDL_DisplayMode DisplayMode;
     SDL_GetCurrentDisplayMode(0, &DisplayMode);
-    ImGuiSDL::Initialize(m_Renderer, DisplayMode.w, DisplayMode.h);
-    ImGuiIO& io = ImGui::GetIO();
+    ImGuiSDL::Initialize(m_Renderer, DisplayMode.w, DisplayMode.h); 
+    io = new ImGuiIO();
+    *io = ImGui::GetIO();
     (void)io;
-    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
-    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
-    io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+    io->ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+    io->ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+    io->ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
     ImGui::StyleColorsDark();
 
     ImGui_ImplSDL2_InitForOpenGL(m_Window, 0);///behaviour flag 0 ask nick
@@ -113,6 +114,9 @@
       Entitys.push_back(TopPipe1);
       Pipes.push_back(TopPipe1);
 
+      seed = new Seed( m_Renderer, tempx, (y - 700));
+      Collectables.push_back(seed);
+
      tempx += screenWidth/4+1;
 
     }
@@ -145,7 +149,11 @@
         Entitys[i]->Radius = 100;//TODO save bitmap size to plug in
     }
    */
-
+    BaseEntity* sceneRoot = new BaseEntity(m_Renderer, "assets/Trigger.bmp", 0, 620, true);
+    for (int i = 0; i < Entitys.size(); i++)
+    {
+        sceneRoot->addToChildren(Entitys[i]);
+    }
  }
 
 
@@ -158,18 +166,8 @@
      delete Celling;
   
      UI* Celling = nullptr;
-     delete BottomPipe4;
-     Pipe* BottomPipe4 = nullptr;
-     delete TopPipe4;
-     Pipe* TopPipe4 = nullptr;
-     delete BottomPipe3;
-     Pipe* BottomPipe3 = nullptr;
-     delete TopPipe3;
-     Pipe* TopPipe3 = nullptr;
-     delete BottomPipe2;
-     Pipe* BottomPipe2 = nullptr;
-     delete TopPipe2;
-     Pipe* TopPipe2 = nullptr;
+     delete seed;
+     Seed* seed = nullptr;
      delete BottomPipe1;
      Pipe* BottomPipe1 = nullptr;
      delete TopPipe1;
@@ -366,7 +364,7 @@
              ImGui::SameLine();
          }
 
-         ImGui::EndTabItem();
+        // ImGui::EndTabItem();
          
          ImGui::EndChild();
          ImGui::End();
@@ -405,7 +403,7 @@
              ImGui::Begin("Scene Hirarcy", 0, ImGuiWindowFlags_NoMove);
              ImGui::SetWindowPos({ 0,200 });
              ImGui::SetWindowSize({ 150, 720 - 200 });
-             BaseEntity* sceneRoot = new BaseEntity(m_Renderer, "assets/Trigger.bmp/", 0, 620, true);
+           
              for (BaseEntity* gameObject : SceanHierarchy)
              {
                  if (ImGui::TreeNode(gameObject->ObjectName.c_str()))
@@ -420,10 +418,10 @@
              {
                  //cout << bitmap->ObjectName.c_str() << endl;
                  //I_GUIWindow::SelectedObject = .ObjectName;
-                
+                 
                  for (int i = 0; i < sceneRoot->Children.size(); i++)
                  {
-                     BaseEntity* child;
+                     BaseEntity* child = static_cast<BaseEntity*>(sceneRoot->Children[i]);
                      child->Draw();
 
                  }
@@ -435,9 +433,9 @@
          }
         
          ImGui::Begin("Frametime");
-         FrameTime.Push(io.DeltaTime * 1000);
-         ImGui::PlotLines("frame", FrameTime.FramTimeQ.data(),
-             FrameTime.Capacity);
+         FrameTime.Push(io->DeltaTime * 1000);
+         //ImGui::PlotLines("frame", FrameTime.FramTimeQ.data(),FrameTime.Capacity);//no data
+             
             char Buffer[64];
              printf(Buffer, sizeof Buffer, "%f ms",
                  FrameTime.AverageTime());
@@ -515,10 +513,24 @@
                          y = rand() % (600 - 300 + 1) + 300;
                          Pipes[i]->transform = vec3{ screenWidth, y, 0.0f };
                      }
+                     seed = new Seed(m_Renderer, screenWidth, (y - 700));
+                     Collectables.push_back(seed);
 
                  }
 
              }
+             for (int i = 0; i < Collectables.size(); i++)
+             {
+                 if (Collectables[i]->transform.GetPosition().x <= 0)
+                 {
+                     
+                     Collectables.erase(Collectables.begin() + i);
+                     Collectables[i] = nullptr;
+
+                 }
+
+             }
+
 
              score = +0.001f;
              scoretxt += std::to_string(score);
@@ -536,6 +548,16 @@
                      }
 
                  }
+
+             }
+             for (int i = 0; i < Collectables.size(); i++)
+             {
+                 
+                     if (Flappy->CollisionCheck(Collectables[i]))
+                     {
+                         score++;
+                         //endGame
+                     }
 
              }
 

@@ -4,6 +4,7 @@
 #include <vector>
 #include "physics.h"
 #include "EventHandler.h"
+#include "imgui.h"
 
 class Bitmap;
 struct SDL_Window;
@@ -14,6 +15,8 @@ class Pipe;
 class UI;
 class Ground;
 class BaseEntity;
+
+class Seed;
 
 class Game
 {
@@ -32,23 +35,21 @@ private:
 		Bird* Flappy;
 		Pipe* TopPipe1;
 		Pipe* BottomPipe1;
-		Pipe* TopPipe2;
-		Pipe* BottomPipe2;
-		Pipe* TopPipe3;
-		Pipe* BottomPipe3;
-		Pipe* TopPipe4;
-		Pipe* BottomPipe4;
+		Seed* seed;
+		BaseEntity* sceneRoot;
+		std::vector<Seed*>Collectables;
 		std::vector<Pipe*>Pipes;
 		std::vector<BaseEntity*>Entitys;
 		std::vector<Bitmap*>content;//to be shown in to drag in
 		vector<BaseEntity*> SceanHierarchy;
-		BaseEntity* sceneRoot;//list of objects in scene
+		BaseEntity* sceneObj;//list of objects in scene
 		UI* Celling;
+		ImGuiIO* io;
 		Ground* Floor;
 		EventSystem* eventSystem;
 		Physics* phi;/////////////////////////
 		
-		float score = 0;
+		int score = 0;
 		bool isInPlay = false;
 		std::string scoretxt = "Test Number: ";
 
