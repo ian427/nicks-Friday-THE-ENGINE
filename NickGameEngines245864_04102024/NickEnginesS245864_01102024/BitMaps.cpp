@@ -91,18 +91,7 @@ int Bitmap::GetHeight()
 //	m_y = temppos;
 //}
 
-void Bitmap::addToChildren(Bitmap* newChild)
-{
-	/*
-	std::vector iterator position childbegin;
-	child.end;
-	myvector.erase(position)
-		parent.children
-		erase.newchild
-		itreenode Parent(name)
-		set Colour;
-	  */
-}
+
 
 Bitmap::~Bitmap()
 {

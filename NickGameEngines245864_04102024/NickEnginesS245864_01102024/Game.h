@@ -35,19 +35,19 @@ private:
 		Bird* Flappy;
 		Pipe* TopPipe1;
 		Pipe* BottomPipe1;
+		
 		Seed* seed;
-		BaseEntity* sceneRoot;
+		BaseEntity* sceneRoot;///root scene object
 		std::vector<Seed*>Collectables;
 		std::vector<Pipe*>Pipes;
 		std::vector<BaseEntity*>Entitys;
-		std::vector<Bitmap*>content;//to be shown in to drag in
-		vector<BaseEntity*> SceanHierarchy;
-		BaseEntity* sceneObj;//list of objects in scene
+		std::vector<Bitmap*>content;///to be shown in to drag in
+		vector<BaseEntity*> SceanHierarchy;///added obj
 		UI* Celling;
 		ImGuiIO* io;
 		Ground* Floor;
 		EventSystem* eventSystem;
-		Physics* phi;/////////////////////////
+		Physics* phi;
 		
 		int score = 0;
 		bool isInPlay = false;
@@ -57,8 +57,8 @@ private:
 		TTF_Font* m_pBigFont;
 		//list of eventcalls
 		
-		int currentScene = 0;
-		//list of eventcalls
+		int currentScene = 0;///what scene the editior/game is on
+		///list of Scenes
 		enum Scenes
 		{
 			TESTSCENE,
@@ -69,15 +69,16 @@ private:
 		
 		
 public:
-	int screenWidth = 2000;
-	///////////////////error
-	Game(EventSystem* eventSytem);
+	BaseEntity* SelectedObject;
+	int screenWidth = 2000;///sets screen width
+	
+	Game(EventSystem* eventSytem);///game object that creates and runs the game
 	~Game();
-	void SetDisplayColour(int r, int g, int b, int a);
+	void SetDisplayColour(int r, int g, int b, int a);///sets ups display colour
 
-	void UpdateText(std::string msg, int x, int y, TTF_Font* font, SDL_Colour colour);
+	void UpdateText(std::string msg, int x, int y, TTF_Font* font, SDL_Colour colour);///updates the text
 
-	void Update(void);
+	void Update(void);///game Update Loop
 
 };
 #endif

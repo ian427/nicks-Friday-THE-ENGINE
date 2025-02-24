@@ -3,7 +3,7 @@
 #include "MyEventTypes.hpp"
 #include "EventHandler.h"
 #include "physics.h"
-
+///
 //base class in vector with virtual methods each child of base overloads that method
 struct SDL_Renderer;
 class ITreeNode
@@ -11,11 +11,13 @@ class ITreeNode
 public:
 	ITreeNode* Parent;
 	std::vector<ITreeNode*>Children;
+	
 
 	void addToChildren(ITreeNode* newChild)
 	{
 		Children.push_back(newChild);
 	}
+	
 };
 
 
@@ -43,10 +45,10 @@ public:
 	 int ID;
 	 std::string ObjectName;
 
-	 BaseEntity(SDL_Renderer* renderer, std::string fileName, int xpos, int ypos, bool useTransparancy)
+	 BaseEntity(SDL_Renderer* renderer, std::string fileName, int xpos, int ypos, bool useTransparancy, std::string Me)
 	 {
 		 m_Renderer = renderer;
-		 ObjectName = "Object name to be changed";
+		 ObjectName = Me;
 
 		 transform.SetPosition(vec3(xpos, ypos, 0));
 
@@ -54,7 +56,59 @@ public:
 		 BoxCollider = new Collider(transform, Map->GetWidth(), Map->GetHeight() );
 
 	 }
+	 void DrawUIChildren()
+	 {
+		ImGuiTreeNodeFlags nodeFlags = ImGuiTreeNodeFlags_FramePadding | ImGuiTreeNodeFlags_DefaultOpen;
+		bool isNodeOpen = ImGui::TreeNodeEx((this->ObjectName.c_str(), nodeFlags, this->ObjectName.c_str()));
+		if (isNodeOpen)
+		{
+			
+			
+			ImGui::TreePop();
+		}
+		for (int i = 0; i < Children.size(); i++)
+		{
+			DrawUIChildren();
+		}
+	 }
+	 void UIDraw() //editor ui
+	 {
+		 std::cout << "clicked";
+		
+		 
+		 //all sprites use the samf window ID to stop the window "pop" problem
+		 ImGui::Begin("Selection");
+		 ImGui::Text(this->ObjectName.c_str());
 
+		 int* TempPosAddressArry[2] = { static_cast<int>(transform.GetPosition().x ), transform.GetPosition().y};//todo convert to int
+		 ImGui::InputInt2("Position:", *TempPosAddressArry);
+
+		 int* TempScaleAddressArry[2] = { transfrom.GetScale().x , transfrom.GetScale().y };
+		 ImGui::InputInt2("Scale:", *TempScaleAddressArry);
+
+		 ImGui::Image(this->Map->GetTextureRef(), ImVec2(this->Map->GetWidth(), Map->GetHeight());
+		 /*
+		 ImGui::Separator();
+		 for (ComponentBase* component : Components)
+		 {
+			 component->GUIDraw();
+		 }
+*/
+
+		 ImGui::End();
+	 }
+
+	 bool CheckBounds(int x, int y)
+	 {
+		 SDL_Rect ImageBound = { transform.GetPosition().x , transform.GetPosition().y , Map->GetWidth(), Map->GetHeight()};
+		 
+		 
+		 
+		 SDL_Point MousePosition = { x, y };
+
+		 bool b =SDL_PointInRect(&MousePosition, &ImageBound);
+		 return b;
+	 }
 
 	 
 
@@ -119,14 +173,10 @@ public:
 	
 	
 
-	Bird(SDL_Renderer* renderer, int X, int Y) : BaseEntity(renderer, "assets/Flappy.bmp", X, Y, true)
+	Bird(SDL_Renderer* renderer, int X, int Y) : BaseEntity(renderer, "assets/Flappy.bmp", X, Y, true,"Bird")
 	{
 
-		//m_Renderer = renderer;
 		
-		
-		
-	
 	}
 
 	~Bird()
@@ -187,18 +237,20 @@ public:
 	//Collider* BoxCollider;
 	
 	
-	Pipe(bool value,SDL_Renderer* renderer, int X, int Y) : BaseEntity(renderer, "assets/Pipes3Bottom.bmp", X, Y, true)
+	Pipe(bool value,SDL_Renderer* renderer, int X, int Y) : BaseEntity(renderer, "assets/Pipes3Bottom.bmp", X, Y, true,"pipe")
 	{
 		delete Map;
 		Map = nullptr;
 		topPipe = value;
 		if (topPipe)
 		{
+			ObjectName = "TopPipe";
 			//Map = new Bitmap(m_Renderer, "assets/Pipes3Top.bmp", transform.GetPosition().x, transform.GetPosition().y);// loads top pipe png
 			Map = new Bitmap(m_Renderer, "assets/Pipes3Bottom.bmp", transform.GetPosition().x, transform.GetPosition().y);// loads top pipe png
 		}
 		else
 		{
+			ObjectName = "BottomPipe";
 			Map = new Bitmap(m_Renderer, "assets/Pipes3Top.bmp", transform.GetPosition().x, transform.GetPosition().y);//loads bottom pipe png
 		}
 
@@ -225,7 +277,7 @@ class Ground : public virtual BaseEntity
 	//Collider* BoxCollider;
 	
 	
-	Ground(SDL_Renderer* renderer, int X, int Y) : BaseEntity(renderer, "assets/Ground.bmp", X, Y, true)
+	Ground(SDL_Renderer* renderer, int X, int Y) : BaseEntity(renderer, "assets/Ground.bmp", X, Y, true,"Ground")
 	{
 		
 		Map = new Bitmap(m_Renderer, "assets/Ground.bmp", transform.GetPosition().x, transform.GetPosition().y);
@@ -249,7 +301,7 @@ public:
 	//Collider* BoxCollider;
 	
 
-	UI(SDL_Renderer* renderer, int X, int Y) : BaseEntity(renderer, "assets/UI.bmp", X, Y, true)
+	UI(SDL_Renderer* renderer, int X, int Y) : BaseEntity(renderer, "assets/UI.bmp", X, Y, true,"UI")
 	{
 	}
 	~UI()
@@ -272,7 +324,7 @@ public:
 	//Collider* BoxCollider;
 	
 	
-	Trigger( SDL_Renderer* renderer, int X, int Y) : BaseEntity(renderer, "assets/Trigger.bmp", X, Y, true)
+	Trigger( SDL_Renderer* renderer, int X, int Y) : BaseEntity(renderer, "assets/Trigger.bmp", X, Y, true,"trigger")
 	{
 		
 	}
@@ -293,7 +345,7 @@ class Seed :public virtual BaseEntity
 
 public:
 	
-	Seed(SDL_Renderer* renderer, int X, int Y) : BaseEntity(renderer, "assets/Seed.bmp", X, Y, true)
+	Seed(SDL_Renderer* renderer, int X, int Y) : BaseEntity(renderer, "assets/Seed.bmp", X, Y, true,"seed")
 	{
 	}
 	~Seed()
