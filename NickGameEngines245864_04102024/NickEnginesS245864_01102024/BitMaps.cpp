@@ -59,7 +59,7 @@ void Bitmap::draw(int m_x,int  m_y)
 	//render bitmap
 	if (m_pbitmapTexture)
 	{
-		SDL_Rect destRect = { m_x , m_y,m_pbitmapSurface->w, m_pbitmapSurface->h };
+		SDL_Rect destRect = { m_x , m_y,m_pbitmapSurface->w, m_pbitmapSurface->h };//todo tie to transform for scale
 		SDL_RenderCopy(m_pbitmapRenderer, m_pbitmapTexture, NULL, &destRect);
 
 	}

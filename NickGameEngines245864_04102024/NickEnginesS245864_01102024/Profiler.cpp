@@ -1,69 +1,41 @@
 #include "Profiler.h"
+#include <chrono>
 
-
-ProfilerSystem::ProfilerSystem()
+void Profile::timeprocess()
 {
-	frameData = new FrameMap();
-	thisFramesFrameData = new FrameMap();
-	lastFramesFrameData = new FrameMap();
+    milliSecondsTaken = end - start;
+}
+
+void Profile::SetStart()
+{
+    start = std::clock();
+}
+
+void Profile::SetEnd()
+{
+    end = std::clock();
+
+}
+
+float Profile::Gettime()
+{
+    return milliSecondsTaken;
 }
 
 
-ProfilerSystem::~ProfilerSystem()
+
+void ProfilerSystem::storeProfiledata(const char* name, float timetaken)
 {
+    ProfileData* data = new ProfileData();
+    data->milliSecondsTaken = timetaken;
+    data->Profilename = name;
 }
 
-
-void ProfilerSystem::StartFrame()
+void Frame::Calctotaltime()
 {
-	currentFrame++;
-	thisFramesTotalTime = 0;
-}
-
-
-void ProfilerSystem::StoreSample(const char* name, int64_t elapsedTime)
-{
-	SampleData* sample = new SampleData();
-	sample->frameReferance = currentFrame;
-	sample->frameTime = elapsedTime;
-
-	thisFramesTotalTime += elapsedTime;
-
-	(*frameData)[name].push_back(sample);
-	(*thisFramesFrameData)[name].push_back(sample);
-}
-
-
-void ProfilerSystem::EndFrame()
-{
-	totalFrameTimes.push_back(thisFramesTotalTime);
-	lastFramesFrameData = thisFramesFrameData;
-	thisFramesFrameData = new FrameMap();
-}
-
-
-void ProfilerSystem::WriteDataToCSV()
-{
-	std::ofstream CSVFile;
-	CSVFile.open("../Assets/Profile.csv");
-
-	for (auto const& [name, samples] : *frameData)
-	{
-		std::string frametime = "";
-		std::string frameRef = "";
-		CSVFile << name << "\n";
-		for (SampleData* sample : samples)
-		{
-			frameRef += std::to_string(sample->frameReferance) + ",";
-			frametime += std::to_string(sample->frameTime) + ",";
-		}
-		frameRef += "\n";
-		frametime += "\n";
-		CSVFile << frameRef;
-		CSVFile << frametime;
-	}
-	CSVFile << ",\n";
-
-	CSVFile.close();
-
+    for (int i = 0; i < Thisframe.size(); i++)
+    {
+        frameTime = frameTime + Thisframe[i].milliSecondsTaken;
+    }
+   
 }

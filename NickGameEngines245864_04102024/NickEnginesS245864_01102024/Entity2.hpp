@@ -38,7 +38,8 @@ public:
 	 Collider*  BoxCollider;
 	 Transform transform;//26,27 getting this transforms data not flappys
 	 Transform& GetTransform() { return transform; }
-	 bool IsSelected = false;
+
+
 
 	 
 
@@ -71,33 +72,33 @@ public:
 			DrawUIChildren();
 		}
 	 }
+	 
 	 void UIDraw() //editor ui
 	 {
-		 std::cout << "clicked";
+		 
+		 //std::cout << "clicked";
 		
 		 
 		 //all sprites use the samf window ID to stop the window "pop" problem
 		 ImGui::Begin("Selection");
 		 ImGui::Text(this->ObjectName.c_str());
 
-		 int* TempPosAddressArry[2] = { static_cast<int>(transform.GetPosition().x ), transform.GetPosition().y};//todo convert to int
-		 ImGui::InputInt2("Position:", *TempPosAddressArry);
+		 float TempPosAddressArry[2] = { transform.GetPosition().x, transform.GetPosition().y};//todo convert to int 
+		 ImGui::InputFloat2("Position:", TempPosAddressArry);
+		 transform.SetPosition( vec3( TempPosAddressArry[0], TempPosAddressArry[1], 0));
 
-		 int* TempScaleAddressArry[2] = { transfrom.GetScale().x , transfrom.GetScale().y };
-		 ImGui::InputInt2("Scale:", *TempScaleAddressArry);
+		 float TempScaleAddressArry[2] = {transform.GetScale().x , transform.GetScale().y };
+		 ImGui::InputFloat2("Scale:", TempScaleAddressArry);
+		 transform.SetScale(vec3(TempScaleAddressArry[0], TempScaleAddressArry[1], 0));
 
-		 ImGui::Image(this->Map->GetTextureRef(), ImVec2(this->Map->GetWidth(), Map->GetHeight());
-		 /*
+		 ImGui::Image(this->Map->GetTextureRef(), ImVec2(this->Map->GetWidth(), Map->GetHeight()));
+		 //ImGui::SliderFloat2("x", transform.GetScale().x, 0, 10);
 		 ImGui::Separator();
-		 for (ComponentBase* component : Components)
-		 {
-			 component->GUIDraw();
-		 }
-*/
+		 
 
 		 ImGui::End();
 	 }
-
+	
 	 bool CheckBounds(int x, int y)
 	 {
 		 SDL_Rect ImageBound = { transform.GetPosition().x , transform.GetPosition().y , Map->GetWidth(), Map->GetHeight()};

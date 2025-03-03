@@ -1,6 +1,6 @@
 #include "input.h"
 #include "Debug.h "//|3|
-
+#include "backends/imgui_impl_sdl.h"
 
 void Input::Update(void)
 {
@@ -9,9 +9,12 @@ void Input::Update(void)
 	{
 		//ImGui_ImplSDL2_ProcessEvent(&e);
 		//check keydown
-		
+		ImGui_ImplSDL2_ProcessEvent(&m_event);
+
 		if (m_event.type == SDL_KEYDOWN)
 		{
+
+			
 			//cache code for keypress
 			SDL_Keycode keyPressed = m_event.key.keysym.sym;
 			
@@ -21,11 +24,11 @@ void Input::Update(void)
 
 			case SDLK_ESCAPE:
 				m_keysPressed[KEY_ESCAPE] = true;
-				DeBug::Log()->printDebug(DeBug::Verbosity::note, "Shuting Down %s, %d", 3);
+				DeBug::Log()->printDebug(DeBug::Verbosity::note, "Shuting Down %d", 3);
 				break;
 			case SDLK_r:
 				m_keysPressed[KEY_R] = true;
-				DeBug::Log()->printDebug(DeBug::Verbosity::note, "R key pressed %s, %d", 3);
+				DeBug::Log()->printDebug(DeBug::Verbosity::note, "R key pressed %d", 3);
 				break;
 			case SDLK_g:
 				m_keysPressed[KEY_G] = true;

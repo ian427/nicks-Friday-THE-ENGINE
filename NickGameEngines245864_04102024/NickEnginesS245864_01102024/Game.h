@@ -25,6 +25,7 @@ private:
 	SDL_Window *m_Window;
 	//SDL_Renderer* m_Renderer;
 		bool m_running;
+		int selectedFrame;
 		//bitmaps
 		Bitmap* m_monster;
 		Bitmap* m_monsterTrans;
@@ -47,6 +48,7 @@ private:
 		ImGuiIO* io;
 		Ground* Floor;
 		EventSystem* eventSystem;
+		ProfilerSystem* profilersystem;
 		Physics* phi;
 		
 		int score = 0;
