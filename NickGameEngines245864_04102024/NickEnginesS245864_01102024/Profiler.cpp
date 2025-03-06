@@ -24,12 +24,31 @@ float Profile::Gettime()
 
 
 
+ProfilerSystem::ProfilerSystem()
+{
+}
+
+ProfilerSystem::~ProfilerSystem()
+{
+}
+
+void ProfilerSystem::startframe()
+{
+}
+
+void ProfilerSystem::endFrame()
+{
+}
+
 void ProfilerSystem::storeProfiledata(const char* name, float timetaken)
 {
     ProfileData* data = new ProfileData();
     data->milliSecondsTaken = timetaken;
     data->Profilename = name;
 }
+
+
+
 
 void Frame::Calctotaltime()
 {

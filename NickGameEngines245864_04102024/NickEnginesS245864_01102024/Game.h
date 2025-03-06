@@ -5,6 +5,8 @@
 #include "physics.h"
 #include "EventHandler.h"
 #include "imgui.h"
+#include <queue>
+#include "Profiler.h" 
 
 class Bitmap;
 struct SDL_Window;
@@ -54,6 +56,7 @@ private:
 		int score = 0;
 		bool isInPlay = false;
 		std::string scoretxt = "Test Number: ";
+		FrameTimeStack* Framtimstack;
 
 		TTF_Font* m_pSmallFont;
 		TTF_Font* m_pBigFont;
