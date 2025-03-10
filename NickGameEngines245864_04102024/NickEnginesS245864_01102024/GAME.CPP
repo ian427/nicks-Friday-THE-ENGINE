@@ -154,6 +154,7 @@
     {
         sceneRoot->addToChildren(Entitys[i]);
     }
+    ProfilerSystem::Instance().startframe();
  }
 
 
@@ -505,7 +506,7 @@
                      }
                  }
              }
-             FrameMap& previousFrame = ProfilerSystem::Instance().GetLastFrameData();
+             FrameMap& previousFrame = ProfilerSystem::Instance().GetLastFrameData();//empty
              if (!LiveFlameGraph && selectedFrame != -1)
              {
                  previousFrame.clear();
@@ -519,7 +520,12 @@
                  LiveFlameGraph = false;
              }
              //ImGui::PlotHistogram("FrameTimes")
-             ImGui::LabelText("Frame Date Count", std::to_string(previousFrame.size()).c_str());
+            
+             
+                 ImGui::LabelText("Frame Date Count", std::to_string(previousFrame.size()).c_str());
+
+             
+             
              //ImGui::LabelText("Graph Window Width", std::to_string(GraphWindowWidth).c_str());
              //ImGui::RenderFrame({ 10,20 }, { 100,50 }, ImGui::GetColorU32(ImGuiCol_FrameBg), true, GImGui->Style.FrameRounding);
              ImDrawList* drawlist = ImGui::GetCurrentWindow()->DrawList;
@@ -586,6 +592,7 @@
 
                  TotalBlockWidthSoFar += ThisBlockWidth;
              }
+
              drawlist->PopClipRect();
                 ImGui::End();
 

@@ -34,6 +34,8 @@ ProfilerSystem::~ProfilerSystem()
 
 void ProfilerSystem::startframe()
 {
+    currentFrame++;
+    thisFramesTotalTime = 0;
 }
 
 void ProfilerSystem::endFrame()
