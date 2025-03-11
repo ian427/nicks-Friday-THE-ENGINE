@@ -158,6 +158,8 @@
     <ClCompile Include="Master.cpp" />
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="Profiler.cpp" />
+    <ClCompile Include="Saveing.cpp" />
+    <ClCompile Include="Saveing.h" />
     <ClCompile Include="TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>

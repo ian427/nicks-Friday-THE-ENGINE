@@ -3,7 +3,7 @@
 #include "MyEventTypes.hpp"
 #include "EventHandler.h"
 #include "physics.h"
-///
+#include "imgui.h"
 //base class in vector with virtual methods each child of base overloads that method
 struct SDL_Renderer;
 class ITreeNode
@@ -19,6 +19,9 @@ public:
 	}
 	
 };
+#ifndef BASE_ENTITY_HPP   // Start header guard
+#define BASE_ENTITY_HPP
+
 
 
 class BaseEntity: public ITreeNode
@@ -152,8 +155,7 @@ public:
 	 //}
 	
 };
-
-
+#endif // BASE_ENTITY_HPP  // End header guard
 
 
 

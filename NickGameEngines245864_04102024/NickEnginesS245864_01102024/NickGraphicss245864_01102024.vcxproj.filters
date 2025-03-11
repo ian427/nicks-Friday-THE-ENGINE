@@ -72,6 +72,12 @@
     <ClCompile Include="Profiler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Saveing.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Saveing.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
