@@ -26,6 +26,9 @@ float Profile::Gettime()
 
 ProfilerSystem::ProfilerSystem()
 {
+    frameData = new FrameMap();
+    thisFramesFrameData = new FrameMap();
+    lastFramesFrameData = new FrameMap();
 }
 
 ProfilerSystem::~ProfilerSystem()
@@ -40,6 +43,9 @@ void ProfilerSystem::startframe()
 
 void ProfilerSystem::endFrame()
 {
+    totalFrameTimes.push_back(thisFramesTotalTime);
+    lastFramesFrameData = thisFramesFrameData;
+    thisFramesFrameData = new FrameMap();
 }
 
 void ProfilerSystem::storeProfiledata(const char* name, float timetaken)
@@ -47,6 +53,10 @@ void ProfilerSystem::storeProfiledata(const char* name, float timetaken)
     ProfileData* data = new ProfileData();
     data->milliSecondsTaken = timetaken;
     data->Profilename = name;
+    thisFramesTotalTime += timetaken;
+
+    (*frameData)[name].push_back(data);
+    (*thisFramesFrameData)[name].push_back(data);
 }
 
 

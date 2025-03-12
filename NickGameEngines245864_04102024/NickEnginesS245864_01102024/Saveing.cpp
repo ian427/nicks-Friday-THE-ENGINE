@@ -2,7 +2,7 @@
 #include "Entity2.hpp"
 
 
-void saveObject(const BasEntity& obj, const std::string& filename, const SDL_Renderer* m_Renderer, Physics phi, float Radius, Bitmap* Map, Collider* BoxCollider, Transform transform, int ID, std::string ObjectName)
+void saveObject(const BaseEntity& obj, const std::string& filename, const SDL_Renderer* m_Renderer, Physics phi, float Radius, Bitmap* Map, Collider* BoxCollider, Transform transform, int ID, std::string ObjectName)
 {
     std::ofstream file(filename, std::ios::app); // Append mode
     if (file.is_open()) {
@@ -16,8 +16,8 @@ void saveObject(const BasEntity& obj, const std::string& filename, const SDL_Ren
 }
 
 
-std::vector<BasEntity> loadObjects(const std::string& filename) {
-    std::vector<BasEntity> objects;
+std::vector<BaseEntity> loadObjects(const std::string& filename) {
+    std::vector<BaseEntity> objects;
     std::ifstream file(filename);
 
     if (file.is_open()) {
@@ -30,7 +30,7 @@ std::vector<BasEntity> loadObjects(const std::string& filename) {
         std::string ObjectName;
 
         while (file >> phi >> Radius >> Map >> BoxCollider>> transform>> ID>> ObjectName) {
-            objects.push_back(BasEntity(phi, Radius, Map, BoxCollider, transform, ID, ObjectName));
+            objects.push_back(BaseEntity*(phi, Radius, Map, BoxCollider, transform, ID, ObjectName));
         }
 
         file.close();

@@ -27,11 +27,11 @@ public:
 class BaseEntity: public ITreeNode
 {
 protected:
-	
+	public:
 	 
 	SDL_Renderer* m_Renderer;
 
-public:
+
 	
 
 	Physics phi;//copy
@@ -49,6 +49,18 @@ public:
 	 int ID;
 	 std::string ObjectName;
 
+	 //loading
+	 BaseEntity(Physics inphi, float inRadius, Bitmap* inMap, Collider* inBoxCollider, Transform intransform, int inID)
+	 {
+		 phi = inphi;
+		 Radius = inRadius;
+		 Map = inMap;
+		 BoxCollider = inBoxCollider;
+		 transform = intransform;
+		 ID = inID;
+
+	 }
+	 //constructing
 	 BaseEntity(SDL_Renderer* renderer, std::string fileName, int xpos, int ypos, bool useTransparancy, std::string Me)
 	 {
 		 m_Renderer = renderer;
@@ -245,6 +257,7 @@ public:
 		delete Map;
 		Map = nullptr;
 		topPipe = value;
+
 		if (topPipe)
 		{
 			ObjectName = "TopPipe";

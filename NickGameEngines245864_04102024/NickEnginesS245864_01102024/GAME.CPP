@@ -3,7 +3,7 @@
 #include "Game.h"
 #include "Entity2.hpp" 
 
-
+//#include "Saveing.h"
 #include "Debug.h" //|4|
 #include "imgui.h"
 #include "backends/imgui_impl_sdl.h"
@@ -154,7 +154,7 @@
     {
         sceneRoot->addToChildren(Entitys[i]);
     }
-    ProfilerSystem::Instance().startframe();
+    ProfilerSystem::Instance().storeProfiledata("Start", 0.0f);
  }
 
 
@@ -282,7 +282,7 @@
  }
  void Game::Update(void)
  {
-    
+     ProfilerSystem::Instance().startframe();
 
      //CheckEvents();
      SDL_RenderClear(m_Renderer);
@@ -302,315 +302,327 @@
 
          }
          ImGui::End();
-
-         {
-             ImGui::Begin("Editor");
-             ImGui::BeginChild("Content Window", ImVec2(), true);
-             ImGui::BeginTable("Content browser", 3);
-
-             for (int i = 0; i < content.size(); i++)
+         
+             PROFILE("Draw Editor");
              {
-                 ImGui::PushID(i);
 
-                 ImGui::ImageButton((ImTextureID)content[i]->GetTextureRef(), { 100,100 });
+                 ImGui::Begin("Editor");
+                 ImGui::BeginChild("Content Window", ImVec2(), true);
+                 ImGui::BeginTable("Content browser", 3);
 
-
-                 //for dragging
-
-                 if (ImGui::BeginDragDropSource())
+                 for (int i = 0; i < content.size(); i++)
                  {
-                     AssetMousDrag = content[i];
-                     ImGui::Image((ImTextureID)content[i]->GetTextureRef(), { 100,100 });
-                     ImGui::EndDragDropSource();
-                 }
+                     ImGui::PushID(i);
 
-                 ImGui::PopID();
-                 ImGui::SameLine();
-             }
-
-             ImGui::EndTable();
-
-             ImGui::EndChild();
-             ImGui::End();
-         }
+                     ImGui::ImageButton((ImTextureID)content[i]->GetTextureRef(), { 100,100 });
 
 
-         if (ImGui::IsMouseReleased(ImGuiMouseButton_Left) && AssetMousDrag != nullptr)
-         {
+                     //for dragging
 
-             int x, y;
-             SDL_GetMouseState(&x, &y);
-             BaseEntity* b = new BaseEntity(m_Renderer, AssetMousDrag->FileName, x, y, true, "Default");
-             //Bitmap* s = new Bitmap(m_Renderer, AssetMousDrag->FileName, x, y, true);
-             //s->Transfrom.ParentSet(GameWindow::Instance().GetHirarcy());
-             SceanHierarchy.push_back(b);
-             sceneRoot->addToChildren(b);
-             Entitys.push_back(b);
+                     if (ImGui::BeginDragDropSource())
+                     {
+                         AssetMousDrag = content[i];
+                         ImGui::Image((ImTextureID)content[i]->GetTextureRef(), { 100,100 });
+                         ImGui::EndDragDropSource();
+                     }
 
-             AssetMousDrag = nullptr;
-         }
-
-
-
-         {
-
-             ImGui::Begin("Editor");
-             ImGui::BeginChild("Content Window", ImVec2(), true);
-
-             //for contents of assets file creat a dragable
-             int CountInRow = 0;
-             for (int i = 0; i < content.size(); i++)
-             {
-                 ImGui::PushID(i);
-
-                 ImGui::ImageButton((ImTextureID)content[i]->GetTextureRef(), { 100,100 });//bit in window
-
-
-                 /////////////////////////////////For Draging
-                 if (ImGui::BeginDragDropSource())
-                 {
-                     AssetMousDrag = content[i];
-                     ImGui::Image((ImTextureID)content[i]->GetTextureRef(), { 100,100 }); // thumbnail
-
-                     ImGui::EndDragDropSource();
-
-                 }
-                 //add place in scene
-
-                 /////////////////////////////////For Draging
-                 ImGui::PopID();
-                 if (CountInRow % 3 < 3)
-                 {
+                     ImGui::PopID();
                      ImGui::SameLine();
-                     CountInRow++;//todo fix
                  }
 
+                 ImGui::EndTable();
+
+                 ImGui::EndChild();
+                 ImGui::End();
+             }
+         
+
+             {
+                 PROFILE("Mouse");
+                 if (ImGui::IsMouseReleased(ImGuiMouseButton_Left) && AssetMousDrag != nullptr)
+                 {
+
+                     int x, y;
+                     SDL_GetMouseState(&x, &y);
+                     BaseEntity* b = new BaseEntity(m_Renderer, AssetMousDrag->FileName, x, y, true, "Default");
+                     //Bitmap* s = new Bitmap(m_Renderer, AssetMousDrag->FileName, x, y, true);
+                     //s->Transfrom.ParentSet(GameWindow::Instance().GetHirarcy());
+                     SceanHierarchy.push_back(b);
+                     sceneRoot->addToChildren(b);
+                     Entitys.push_back(b);
+                     
+
+                     AssetMousDrag = nullptr;
+                 }
              }
 
-             // ImGui::EndTabItem();
-
-             ImGui::EndChild();
-             ImGui::End();
-
-         }
-
-
-         {
-             int selectedFrame = -1;
-
-             ImGui::Begin("Scene Hirarcy", 0, ImGuiWindowFlags_NoMove);
-             ImGui::SetWindowPos({ 0,200 });
-             ImGui::SetWindowSize({ 150, 720 - 200 });
-
-
-
-
-             ImGuiTreeNodeFlags nodeFlags = ImGuiTreeNodeFlags_FramePadding | ImGuiTreeNodeFlags_DefaultOpen;
-             bool isNodeOpen = ImGui::TreeNodeEx("Scene", nodeFlags, "Scene");
-             if (isNodeOpen)
              {
-                 //cout << bitmap->ObjectName.c_str() << endl;
-                 //I_GUIWindow::SelectedObject = .ObjectName;
+
+                 PROFILE("Content");
+                 {
+
+                     ImGui::Begin("Editor");
+                     ImGui::BeginChild("Content Window", ImVec2(), true);
+
+                     //for contents of assets file creat a dragable
+                     int CountInRow = 0;
+                     for (int i = 0; i < content.size(); i++)
+                     {
+                         ImGui::PushID(i);
+
+                         ImGui::ImageButton((ImTextureID)content[i]->GetTextureRef(), { 100,100 });//bit in window
+
+
+                         /////////////////////////////////For Draging
+                         if (ImGui::BeginDragDropSource())
+                         {
+                             AssetMousDrag = content[i];
+                             ImGui::Image((ImTextureID)content[i]->GetTextureRef(), { 100,100 }); // thumbnail
+
+                             ImGui::EndDragDropSource();
+
+                         }
+                         //add place in scene
+
+                         /////////////////////////////////For Draging
+                         ImGui::PopID();
+                         if (CountInRow % 3 < 3)
+                         {
+                             ImGui::SameLine();
+                             CountInRow++;//todo fix
+                         }
+
+                     }
+
+                     // ImGui::EndTabItem();
+
+                     ImGui::EndChild();
+                     ImGui::End();
+
+                 }
+             }
+             {
+
+                 PROFILE("Draw Hirarcy");
+                 {
+                     int selectedFrame = -1;
+
+                     ImGui::Begin("Scene Hirarcy", 0, ImGuiWindowFlags_NoMove);
+                     ImGui::SetWindowPos({ 0,200 });
+                     ImGui::SetWindowSize({ 150, 720 - 200 });
+
+
+
+
+                     ImGuiTreeNodeFlags nodeFlags = ImGuiTreeNodeFlags_FramePadding | ImGuiTreeNodeFlags_DefaultOpen;
+                     bool isNodeOpen = ImGui::TreeNodeEx("Scene", nodeFlags, "Scene");
+                     if (isNodeOpen)
+                     {
+                         //cout << bitmap->ObjectName.c_str() << endl;
+                         //I_GUIWindow::SelectedObject = .ObjectName;
+                         for (int i = 0; i < sceneRoot->Children.size(); i++)
+                         {
+                             BaseEntity* child = static_cast<BaseEntity*>(sceneRoot->Children[i]);
+                             child->DrawUIChildren();
+
+                         }
+
+                         ImGui::TreePop();
+                     }
+
+                     ImGui::End();
+                 }
+
+                 int x, y;
+                 uint32 Buttons = SDL_GetMouseState(&x, &y);
+                 for (BaseEntity* gameObject : Entitys)
+                 {
+
+
+                     if (static_cast<BaseEntity*>(gameObject)->CheckBounds(x, y) && SDL_BUTTON(Buttons) == 1 ||
+                         static_cast<BaseEntity*>(gameObject)->CheckBounds(x, y) && SDL_BUTTON(Buttons) == 3)//1 left 2 middel 3 right|mousebutton//click tolorance
+                     {
+
+                         SelectedObject = gameObject;
+                     }
+                     if (SelectedObject == gameObject)
+                     {
+                         gameObject->UIDraw();
+
+                     }
+                 }
+
+
+
+
                  for (int i = 0; i < sceneRoot->Children.size(); i++)
                  {
                      BaseEntity* child = static_cast<BaseEntity*>(sceneRoot->Children[i]);
-                     child->DrawUIChildren();
+                     child->Draw();
 
                  }
-
-                 ImGui::TreePop();
              }
-
-             ImGui::End();
-         }
-
-         int x, y;
-         uint32 Buttons = SDL_GetMouseState(&x, &y);
-         for (BaseEntity* gameObject : Entitys)
-         {
-
-
-             if (static_cast<BaseEntity*>(gameObject)->CheckBounds(x, y) && SDL_BUTTON(Buttons) == 1 ||
-                 static_cast<BaseEntity*>(gameObject)->CheckBounds(x, y) && SDL_BUTTON(Buttons) == 3)//1 left 2 middel 3 right|mousebutton//click tolorance
              {
 
-                 SelectedObject = gameObject;
-             }
-             if (SelectedObject == gameObject)
-             {
-                 gameObject->UIDraw();
-
-             }
-         }
-
-
-
-
-         for (int i = 0; i < sceneRoot->Children.size(); i++)
-         {
-             BaseEntity* child = static_cast<BaseEntity*>(sceneRoot->Children[i]);
-             child->Draw();
-
-         }
-
-
-         {
-             ImGui::Begin("Frametime");
-             Framtimstack->push(io->DeltaTime * 1000);//fram time stack
-             //ImGui::PlotLines("frame", FrameTime.FramTimeQ.data(),FrameTime.Capacity);//no data
-
-             char Buffer[64];
-             //printf(Buffer, sizeof Buffer, "%f ms",  FrameTime.AverageTime());    
-             ImGui::Text(Buffer);
-             ImGui::End();
-             //checkinf selectedclean up//
-
-
-
-
-             ImGui::Begin("Profiler");
-             static vector<float>* FrameTimes;
-             static FrameMap* Snapshot;
-             ImGui::SameLine();
-             static bool LiveFlameGraph = true;
-             ImGui::Checkbox("Live Flame Graph", &LiveFlameGraph);
-             if (LiveFlameGraph)
-             {
-                 selectedFrame = -1;
-             }
-             static int range[2] = { 0, 100 };
-
-             if (FrameTimes && FrameTimes->size() > 100)
-             {
-                 ImGui::SliderInt2("Frame Range", range, 0, FrameTimes->size());
-                 if (range[0] >= range[1])
-                     range[0] = range[1] - 1;
-                 /*ImGui::SliderInt("Frame Range", &range[0], 0, FrameTimes->size());
-                 if (range[0] <10)
-                     range[0] =10;*/
-                 vector<float> subData(FrameTimes->cbegin() + range[0], FrameTimes->cbegin() + range[1]);
-                 //vector<float> subData(FrameTimes->cbegin() + range[0]-10, FrameTimes->cbegin() + range[0]);
-
-                 int tempHistSelection = ImGui::MyPlotHistogram("Frame data", subData.data(), subData.size());
-                 if (tempHistSelection != -1)
+                 PROFILE("Profiler");
                  {
-                     LiveFlameGraph = false;
-                     selectedFrame = tempHistSelection;
-                 }
-                 ImRect rect = { ImGui::GetItemRectMin(), ImGui::GetItemRectMax() };
-                 if (rect.Contains(io->MousePos))
-                 {
-                     if (ImGui::IsMouseClicked(ImGuiMouseButton_Left))
+                     ImGui::Begin("Frametime");
+                     Framtimstack->push(io->DeltaTime * 1000);//fram time stack
+                     //ImGui::PlotLines("frame", FrameTime.FramTimeQ.data(),FrameTime.Capacity);//no data
+
+                     char Buffer[64];
+                     //printf(Buffer, sizeof Buffer, "%f ms",  FrameTime.AverageTime());    
+                     ImGui::Text(Buffer);
+                     ImGui::End();
+                     //checkinf selectedclean up//
+
+
+
+
+                     ImGui::Begin("Profiler");
+                     static vector<float>* FrameTimes;
+                     static FrameMap* Snapshot;
+                     ImGui::SameLine();
+                     static bool LiveFlameGraph = true;
+                     ImGui::Checkbox("Live Flame Graph", &LiveFlameGraph);
+                     if (LiveFlameGraph)
                      {
-                        
+                         selectedFrame = -1;
                      }
+                     static int range[2] = { 0, 100 };
+
+                     if (FrameTimes && FrameTimes->size() > 100)
+                     {
+                         ImGui::SliderInt2("Frame Range", range, 0, FrameTimes->size());
+                         if (range[0] >= range[1])
+                             range[0] = range[1] - 1;
+                         /*ImGui::SliderInt("Frame Range", &range[0], 0, FrameTimes->size());
+                         if (range[0] <10)
+                             range[0] =10;*/
+                         vector<float> subData(FrameTimes->cbegin() + range[0], FrameTimes->cbegin() + range[1]);
+                         //vector<float> subData(FrameTimes->cbegin() + range[0]-10, FrameTimes->cbegin() + range[0]);
+
+                         int tempHistSelection = ImGui::MyPlotHistogram("Frame data", subData.data(), subData.size());
+                         if (tempHistSelection != -1)
+                         {
+                             LiveFlameGraph = false;
+                             selectedFrame = tempHistSelection;
+                         }
+                         ImRect rect = { ImGui::GetItemRectMin(), ImGui::GetItemRectMax() };
+                         if (rect.Contains(io->MousePos))
+                         {
+                             if (ImGui::IsMouseClicked(ImGuiMouseButton_Left))
+                             {
+
+                             }
+                         }
+                     }
+                     FrameMap& previousFrame = ProfilerSystem::Instance().GetLastFrameData();//empty
+                     if (!LiveFlameGraph && selectedFrame != -1)
+                     {
+                         previousFrame.clear();
+                         for (auto const [SampleName, samples] : *Snapshot)
+                         {
+                             previousFrame[SampleName].push_back(samples[range[0] + selectedFrame]);
+                         }
+                     }
+                     else
+                     {
+                         LiveFlameGraph = false;
+                     }
+                     //ImGui::PlotHistogram("FrameTimes")
+
+
+                     ImGui::LabelText("Frame Date Count", std::to_string(previousFrame.size()).c_str());
+
+
+
+                     //ImGui::LabelText("Graph Window Width", std::to_string(GraphWindowWidth).c_str());
+                     //ImGui::RenderFrame({ 10,20 }, { 100,50 }, ImGui::GetColorU32(ImGuiCol_FrameBg), true, GImGui->Style.FrameRounding);
+                     ImDrawList* drawlist = ImGui::GetCurrentWindow()->DrawList;
+                     ImVec2 canvas_p0 = ImGui::GetCursorScreenPos();//pos of screen top left
+                     ImVec2 canvas_sz = ImGui::GetContentRegionAvail();   // Resize canvas to what's available
+                     if (canvas_sz.x < 50.0f) canvas_sz.x = 50.0f;
+                     if (canvas_sz.y < 50.0f) canvas_sz.y = 50.0f;
+                     ImVec2 canvas_p1 = ImVec2(canvas_p0.x + canvas_sz.x, canvas_p0.y + canvas_sz.y);
+                     drawlist->PushClipRect(canvas_p0, canvas_p1, true);
+
+
+                     uint64_t totalframeTime = 0;
+                     vector<uint64_t> SampleTimes;
+                     vector<float> SampleWidths;
+                     vector<string> SampleNames;
+                     for (auto const& [SampleName, samples] : previousFrame)
+                     {
+                         totalframeTime += samples[0]->milliSecondsTaken + 1;
+                         SampleTimes.push_back(samples[0]->milliSecondsTaken + 1);
+                         SampleNames.push_back(SampleName);
+                     }
+
+                     float MinBlockWith = canvas_sz.x / totalframeTime;// GraphWindowWidth / totalframeTime;
+                     for (int i = 0; i < SampleTimes.size(); i++)
+                     {
+                         SampleWidths.push_back(SampleTimes[i] * MinBlockWith);
+                     }
+
+                     //ImGui::LabelText("Total window width", std::to_string(GraphWindowWidth).c_str());
+                     ImGui::LabelText("Total Frame Time", std::to_string(totalframeTime).c_str());
+                     ImGui::LabelText("Window Width / total frame Time", std::to_string(MinBlockWith).c_str());
+                     float TotalBlockWidthSoFar = 0;
+
+                     int sampleCount = previousFrame.size();
+                     //ImGui::SliderInt("Iterations", &sampleCount, 1, 10);
+                     //sampleCount = 2;
+                     //MinBlockWith = GraphWindowWidth / sampleCount;
+
+                     const ImU32 col_outline_base = ImGui::GetColorU32(ImGuiCol_PlotHistogram) & 0x7FFFFFFF;
+                     const ImU32 col_base = ImGui::GetColorU32(ImGuiCol_PlotHistogram) & 0x77FFFFFF;
+
+                     float f = 5.0f + 5.0f;
+
+                     for (int i = 0; i < sampleCount; i++)
+                     {
+                         float ThisBlockWidth = SampleWidths[i];
+                         //if (ThisBlockWidth == 0)
+                             //ThisBlockWidth = MinBlockWith;
+
+                         const ImVec2 minPos = ImVec2(canvas_p0.x + TotalBlockWidthSoFar, canvas_p0.y + 100);
+                         //float a = canvas_sz.x - (canvas_p1.x - (canvas_p1.x*i))
+                         const ImVec2 maxPos = ImVec2(canvas_p0.x + TotalBlockWidthSoFar + ThisBlockWidth, canvas_p0.y + 200);
+                         drawlist->AddRectFilled(
+                             minPos,
+                             maxPos,
+                             col_base,
+                             GImGui->Style.FrameRounding);
+
+                         drawlist->AddRect(minPos, maxPos, col_outline_base);
+
+                         ImGui::RenderText(ImVec2(minPos.x + 10, minPos.y + 10), SampleNames[i].c_str());
+                         ImGui::RenderText(ImVec2(minPos.x + 10, minPos.y + 20), std::to_string(SampleTimes[i] - 1).c_str());
+
+
+                         TotalBlockWidthSoFar += ThisBlockWidth;
+                     }
+
+                     drawlist->PopClipRect();
+                     ImGui::End();
+
+                     //checkinf selectedclean up//
+                     if (SelectedObject != nullptr)
+                     {
+                         BaseEntity* SelectedObject = nullptr;
+                     }
+
+
+                     ImGui::Render();
+                     ImGuiSDL::Render(ImGui::GetDrawData());
+                     if (SelectedObject != nullptr)
+                     {
+                         BaseEntity* SelectedObject = nullptr;
+                     }
+
                  }
              }
-             FrameMap& previousFrame = ProfilerSystem::Instance().GetLastFrameData();//empty
-             if (!LiveFlameGraph && selectedFrame != -1)
-             {
-                 previousFrame.clear();
-                 for (auto const [SampleName, samples] : *Snapshot)
-                 {
-                     previousFrame[SampleName].push_back(samples[range[0] + selectedFrame]);
-                 }
-             }
-             else
-             {
-                 LiveFlameGraph = false;
-             }
-             //ImGui::PlotHistogram("FrameTimes")
-            
-             
-                 ImGui::LabelText("Frame Date Count", std::to_string(previousFrame.size()).c_str());
-
-             
-             
-             //ImGui::LabelText("Graph Window Width", std::to_string(GraphWindowWidth).c_str());
-             //ImGui::RenderFrame({ 10,20 }, { 100,50 }, ImGui::GetColorU32(ImGuiCol_FrameBg), true, GImGui->Style.FrameRounding);
-             ImDrawList* drawlist = ImGui::GetCurrentWindow()->DrawList;
-             ImVec2 canvas_p0 = ImGui::GetCursorScreenPos();//pos of screen top left
-             ImVec2 canvas_sz = ImGui::GetContentRegionAvail();   // Resize canvas to what's available
-             if (canvas_sz.x < 50.0f) canvas_sz.x = 50.0f;
-             if (canvas_sz.y < 50.0f) canvas_sz.y = 50.0f;
-             ImVec2 canvas_p1 = ImVec2(canvas_p0.x + canvas_sz.x, canvas_p0.y + canvas_sz.y);
-             drawlist->PushClipRect(canvas_p0, canvas_p1, true);
-
-
-             uint64_t totalframeTime = 0;
-             vector<uint64_t> SampleTimes;
-             vector<float> SampleWidths;
-             vector<string> SampleNames;
-             for (auto const& [SampleName, samples] : previousFrame)
-             {
-                 totalframeTime += samples[0]->milliSecondsTaken + 1;
-                 SampleTimes.push_back(samples[0]->milliSecondsTaken + 1);
-                 SampleNames.push_back(SampleName);
-             }
-
-             float MinBlockWith = canvas_sz.x / totalframeTime;// GraphWindowWidth / totalframeTime;
-             for (int i = 0; i < SampleTimes.size(); i++)
-             {
-                 SampleWidths.push_back(SampleTimes[i] * MinBlockWith);
-             }
-
-             //ImGui::LabelText("Total window width", std::to_string(GraphWindowWidth).c_str());
-             ImGui::LabelText("Total Frame Time", std::to_string(totalframeTime).c_str());
-             ImGui::LabelText("Window Width / total frame Time", std::to_string(MinBlockWith).c_str());
-             float TotalBlockWidthSoFar = 0;
-
-             int sampleCount = previousFrame.size();
-             //ImGui::SliderInt("Iterations", &sampleCount, 1, 10);
-             //sampleCount = 2;
-             //MinBlockWith = GraphWindowWidth / sampleCount;
-
-             const ImU32 col_outline_base = ImGui::GetColorU32(ImGuiCol_PlotHistogram) & 0x7FFFFFFF;
-             const ImU32 col_base = ImGui::GetColorU32(ImGuiCol_PlotHistogram) & 0x77FFFFFF;
-
-             float f = 5.0f + 5.0f;
-
-             for (int i = 0; i < sampleCount; i++)
-             {
-                 float ThisBlockWidth = SampleWidths[i];
-                 //if (ThisBlockWidth == 0)
-                     //ThisBlockWidth = MinBlockWith;
-
-                 const ImVec2 minPos = ImVec2(canvas_p0.x + TotalBlockWidthSoFar, canvas_p0.y + 100);
-                 //float a = canvas_sz.x - (canvas_p1.x - (canvas_p1.x*i))
-                 const ImVec2 maxPos = ImVec2(canvas_p0.x + TotalBlockWidthSoFar + ThisBlockWidth, canvas_p0.y + 200);
-                 drawlist->AddRectFilled(
-                     minPos,
-                     maxPos,
-                     col_base,
-                     GImGui->Style.FrameRounding);
-
-                 drawlist->AddRect(minPos, maxPos, col_outline_base);
-
-                 ImGui::RenderText(ImVec2(minPos.x + 10, minPos.y + 10), SampleNames[i].c_str());
-                 ImGui::RenderText(ImVec2(minPos.x + 10, minPos.y + 20), std::to_string(SampleTimes[i] - 1).c_str());
-
-
-                 TotalBlockWidthSoFar += ThisBlockWidth;
-             }
-
-             drawlist->PopClipRect();
-                ImGui::End();
-
-             //checkinf selectedclean up//
-             if (SelectedObject != nullptr)
-             {
-                 BaseEntity* SelectedObject = nullptr;
-             }
-
-
-             ImGui::Render();
-             ImGuiSDL::Render(ImGui::GetDrawData());
-             if (SelectedObject != nullptr)
-             {
-                 BaseEntity* SelectedObject = nullptr;
-             }
-
-         }
      }
      else if (currentScene == GAMEOVER)
      {
@@ -622,7 +634,7 @@
          {
              isInPlay = false;
              currentScene = GAME;
-             
+
          }
          ImGui::End();
          ImGui::Begin(".");
@@ -633,6 +645,7 @@
 
          }
          ImGui::End();
+        
          ImGui::Render();
          ImGuiSDL::Render(ImGui::GetDrawData());
          
@@ -710,8 +723,8 @@
                  }
 
 
-                 score = +0.001f;
-                 scoretxt += std::to_string(score);
+                 score = score+1;
+                 scoretxt = std::to_string(score);
 
                  //collision check/////////////////////////////////////////////////////////////
                  for (int i = 0; i < Entitys.size(); i++)
@@ -781,6 +794,7 @@
      SDL_RenderPresent(m_Renderer);
 
      SDL_Delay(16);//milliseconds
+     ProfilerSystem::Instance().endFrame();
  }
  
 

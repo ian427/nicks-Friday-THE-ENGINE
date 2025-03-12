@@ -84,7 +84,7 @@ struct Profile
 		SetEnd();
 		timeprocess();
 
-		ProfilerSystem::Instance();//.storeProfiledata(Profilename, (1000 * Gettime()) / CLOCKS_PER_SEC);
+		ProfilerSystem::Instance().storeProfiledata(Profilename, (1000 * Gettime()) / CLOCKS_PER_SEC);
 
 	}
 
