@@ -3,7 +3,7 @@
 #include "Game.h"
 #include "Entity2.hpp" 
 
-//#include "Saveing.h"
+#include "Saveing.h"
 #include "Debug.h" //|4|
 #include "imgui.h"
 #include "backends/imgui_impl_sdl.h"
@@ -149,12 +149,20 @@
         Entitys[i]->Radius = 100;//TODO save bitmap size to plug in
     }
    */
+    std::vector<BaseEntity>load;
+    load = loadObjects("Save.txt");
+    for (int i = 0; i < load.size(); i++)
+    {
+        SavedObjects.push_back(new BaseEntity(load[i]));
+       
+    }
      sceneRoot = new BaseEntity(m_Renderer, "assets/Trigger.bmp", 0, 620, true,"sceenroot");
     for (int i = 0; i < Entitys.size(); i++)
     {
         sceneRoot->addToChildren(Entitys[i]);
     }
     ProfilerSystem::Instance().storeProfiledata("Start", 0.0f);
+
  }
 
 
@@ -349,8 +357,11 @@
                      //s->Transfrom.ParentSet(GameWindow::Instance().GetHirarcy());
                      SceanHierarchy.push_back(b);
                      sceneRoot->addToChildren(b);
-                     Entitys.push_back(b);
-                     
+                     //Entitys.push_back(b);
+                     SavedObjects.push_back(b);//DEMO use above for launch 
+                     //save
+                     saveObject(*b, "Save.txt", b->m_Renderer, b->phi, b->Radius, b->Map, b->BoxCollider, b->transform, b->ID, "Obj");
+
 
                      AssetMousDrag = nullptr;
                  }
@@ -622,6 +633,10 @@
                      }
 
                  }
+             }
+             for (int i = 0; SavedObjects.size() < i; i++)
+             {
+                 SavedObjects[i]->Draw();
              }
      }
      else if (currentScene == GAMEOVER)

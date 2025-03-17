@@ -44,6 +44,7 @@ private:
 		std::vector<Seed*>Collectables;
 		std::vector<Pipe*>Pipes;
 		std::vector<BaseEntity*>Entitys;
+		std::vector<BaseEntity*>SavedObjects;/// to show in editor test and demo only
 		std::vector<Bitmap*>content;///to be shown in to drag in
 		vector<BaseEntity*> SceanHierarchy;///added obj
 		UI* Celling;

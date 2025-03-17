@@ -50,7 +50,7 @@ protected:
 	 std::string ObjectName;
 
 	 //loading
-	 BaseEntity(Physics inphi, float inRadius, Bitmap* inMap, Collider* inBoxCollider, Transform intransform, int inID)
+	 BaseEntity(SDL_Renderer* rendererin, Physics inphi, float inRadius, Bitmap* inMap, Collider* inBoxCollider, Transform intransform, int inID,std::string* instri)
 	 {
 		 phi = inphi;
 		 Radius = inRadius;
@@ -58,6 +58,7 @@ protected:
 		 BoxCollider = inBoxCollider;
 		 transform = intransform;
 		 ID = inID;
+		 m_Renderer = rendererin;
 
 	 }
 	 //constructing
