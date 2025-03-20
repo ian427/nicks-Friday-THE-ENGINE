@@ -151,6 +151,7 @@
     <ClCompile Include="BitMaps.cpp" />
     <ClCompile Include="Components.cpp" />
     <ClCompile Include="Debug.cpp" />
+    <ClCompile Include="Entity3.cpp" />
     <ClCompile Include="EventHandler.cpp" />
     <ClCompile Include="MyEventTypes.hpp" />
     <ClCompile Include="Game.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="Components.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="Entity2.hpp" />
+    <ClInclude Include="Entity3.h" />
     <ClInclude Include="EventHandler.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="input.h" />

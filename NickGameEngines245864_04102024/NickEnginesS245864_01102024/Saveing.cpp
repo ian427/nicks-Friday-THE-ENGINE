@@ -1,13 +1,26 @@
 #include "Saveing.h"
-#include "Entity2.hpp"
+#include "Entity3.h"
+//#include <SDL.h>
+#include "BitMaps.h"
+#include "Transact.h"
+#include "Components.h"
+//#include <string>
+#include <sstream>
 
-
-void saveObject(const BaseEntity& obj, const std::string& filename, const SDL_Renderer* m_Renderer, Physics phi, float Radius, Bitmap* Map, Collider* BoxCollider, Transform transform, int ID, std::string ObjectName)
+ void Save::saveObject(const BaseEntity& obj, const std::string& filename)
 {
     std::ofstream file(filename, std::ios::app); // Append mode
     if (file.is_open()) 
     {
-        file << obj.m_Renderer << " " << obj.phi << " " << obj.Radius << " "  << obj.Map << " " << obj.BoxCollider << " " << obj.transform << " " << obj.ID << " " << obj.ObjectName << " " << "\n";
+        //convert object ot string 
+        //serialise to binary
+        float x = obj.transform.GetPosition().x;
+        float y = obj.transform.GetPosition().y;
+        float z = obj.transform.GetPosition().z;
+
+
+        file  << obj.Radius << ", "  << obj.Map->FileName <<", " << obj.ID << ", " << obj.ObjectName << " " <<x << ", " <<y << ", " <<z << ", " << std::endl;
+        
         file.close();
         std::cout << "Object saved to " << filename << std::endl;
     }
@@ -18,32 +31,47 @@ void saveObject(const BaseEntity& obj, const std::string& filename, const SDL_Re
 }
 
 
-std::vector<BaseEntity> loadObjects(const std::string& filename) {
+std::vector<BaseEntity> Save::loadObjects(const std::string& filename,SDL_Renderer* renderer)
+{
     std::vector<BaseEntity> object;
     std::ifstream file(filename);
-    BaseEntity basic;
-    if (file.is_open())
+
+    std::string str;
+
+    while (std::getline(file, str))
     {
-        Physics phi;//copy
         float Radius;
         Bitmap* Map;
-        Collider* BoxCollider;
-        Transform transform;//26,27 getting this transforms data not flappys
+
+        Transform* transform;//26,27 getting this transforms data not flappys
         int ID;
         std::string ObjectName;
+        int x, y ;
 
-        while (file) 
+
+        std::stringstream ss(str);
+        vector<string> result;
+
+        while (ss.good())
         {
-            //objects.push_back( basic(phi, Radius, Map, BoxCollider, transform, ID, ObjectName));
-            object.push_back(basic);
+            string substr;
+            getline(ss, substr, ',');
+            result.push_back(substr);
         }
-
-        file.close();
+        //split result into correct data type
+        //serilised as//|radius,0|bitmapfilename,1|ID,2|objName,3|x,4|y,5|z,6|
+        if(result.size() == 7 )
+        { 
+        Radius = std::stof( result[0]);
+        x = std::stoi(result[4]);
+        y = std::stoi(result[5]);
+        //z = std::stoi(result[6]); 
+        ID = std::stoi(result[2]);
+        BaseEntity basic(renderer, Radius, result[1], x,y, ID, result[4]);
+        object.push_back(basic);
+        }
+        //new object
     }
-    else
-    {
-        std::cerr << "Error: Could not open file for reading!\n";
-    }
-
+    file.close();
     return object;
 }

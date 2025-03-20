@@ -1,7 +1,7 @@
 #include <SDL.h>
 #include <iostream>
 #include "Game.h"
-#include "Entity2.hpp" 
+#include "Entity3.h" 
 
 #include "Saveing.h"
 #include "Debug.h" //|4|
@@ -11,6 +11,7 @@
 #include "imgui_internal.h"
 #include <filesystem>
 
+#include"BitMaps.h"
  Game::Game(EventSystem* eventSytem)
  {  
      srand(time(NULL));
@@ -149,13 +150,19 @@
         Entitys[i]->Radius = 100;//TODO save bitmap size to plug in
     }
    */
-    std::vector<BaseEntity>load;
-    load = loadObjects("Save.txt");
-    for (int i = 0; i < load.size(); i++)
+    /*
+    std::ifstream file("Save.txt");
+    if(file.good())
     {
-        SavedObjects.push_back(new BaseEntity(load[i]));
-       
+        std::vector<BaseEntity>load;
+        load = Save::loadObjects("Save.txt", m_Renderer);
+        for (int i = 0; i < load.size(); i++)
+        {
+            SavedObjects.push_back(new BaseEntity(load[i]));
+
+        }
     }
+    */
      sceneRoot = new BaseEntity(m_Renderer, "assets/Trigger.bmp", 0, 620, true,"sceenroot");
     for (int i = 0; i < Entitys.size(); i++)
     {
@@ -360,7 +367,7 @@
                      //Entitys.push_back(b);
                      SavedObjects.push_back(b);//DEMO use above for launch 
                      //save
-                     saveObject(*b, "Save.txt", b->m_Renderer, b->phi, b->Radius, b->Map, b->BoxCollider, b->transform, b->ID, "Obj");
+                     Save::saveObject(*b, "Save.txt");
 
 
                      AssetMousDrag = nullptr;

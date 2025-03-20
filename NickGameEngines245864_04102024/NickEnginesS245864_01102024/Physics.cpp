@@ -3,6 +3,7 @@
 
 #include "SDL.h"
 
+
 void Physics::ApplyForces(Transform& transform)
 {
     vec3 currentForce = vec3(0);
